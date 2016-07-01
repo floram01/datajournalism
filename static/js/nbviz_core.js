@@ -46,12 +46,6 @@
   //...
   };
 
-  nbviz.makeFilterAndDimensions = function(winnersData){
-    nbviz.filter=crossfilter(winnersData);
-    nbviz.filterByCountries();
-    nbviz.filterByCategory();
-  };
-
   nbviz.filterByCountries = function(countryNames) {
     nbviz.genderDim = nbviz.filter.dimension(function(o) {
       return o.gender;
@@ -62,6 +56,12 @@
     nbviz.countryDim = nbviz.filter.dimension(function(o) {
       return o.country;
     });
+  };
+
+  nbviz.makeFilterAndDimensions = function(winnersData){
+    nbviz.filter=crossfilter(winnersData);
+    nbviz.filterByCountries();
+    nbviz.filterByCategory();
   };
 
   nbviz.getDivByID = function(divID) {
@@ -80,14 +80,14 @@
     return dim
   };
 
-  nbviz.addSVGtoDiv = function(divID, _class, margin) {
+  nbviz.addSVGtoDiv = function(divID, graph, margin) {
     var dim = nbviz.getSVGDim(divID, margin);
 
     d3.select(divID).append("svg")
-    .attr('id','bar')
+    .attr('id',graph)
     .attr("width", dim.width + margin.left + margin.right)
     .attr("height", dim.height + margin.top + margin.bottom)
-    .append("g").classed(_class, true)
+    .append("g").classed(graph, true)
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
   };
 
@@ -109,10 +109,7 @@
     return yLinearScale
   };
 
-  nbviz.genAxis = function(svg, graph) {
-    var dim = nbviz.dim.barchart;
-    var padding = nbviz.padding.barchart;
-    var margin = nbviz.margin.barchart;
+  nbviz.genAxis = function(svg, dim, padding, margin, graph) {
     var yAxisPadding = margin.left - padding.left//how to avoid this? more complex than it need to be
     svg.append('g').attr('class','x axis ' + graph).attr("transform", "translate(" + 0 + "," + dim.height + ")"); 
     svg.append('g').attr('class','y axis ' + graph).attr("transform", "translate(" + yAxisPadding + "," + 0 + ")"); 
@@ -156,7 +153,7 @@
     // create axis
     var xAxis = d3.svg.axis().scale(rangeBandGen).orient("bottom");
     var yAxis = d3.svg.axis().scale(yLinearScale).orient('left').ticks(10);
-    nbviz.genAxis(svg, graph);
+    nbviz.genAxis(svg, dim, padding, margin, graph);
 
     // data- join
     var bars=svg.selectAll('rect').data(data)
