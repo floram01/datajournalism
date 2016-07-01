@@ -17,7 +17,7 @@
   nbviz.margin = {};// our main margin object
   nbviz.margin.barchart = {top:20, right:20, bottom:30, left:40};
   nbviz.padding = {};// our main margin object
-  nbviz.padding.barchart ={interbar:.1} 
+  nbviz.padding.barchart ={interbar:.1, left:20} 
   nbviz.dim = {};// our main dim object
   nbviz.CATEGORIES = ["Chemistry", "Economics", "Literature", "Peace","Physics", "Physiology or Medicine"];
   nbviz.categoryFill = function(category){
@@ -95,7 +95,7 @@
   nbviz.getRangeBandGen = function(data, dim, margin, padding) {
     var rangeBandGen = d3.scale.ordinal()
     .domain(d3.range(data.length))
-    .rangeRoundBands([margin.left, dim.width - margin.right], .1)
+    .rangeRoundBands([padding.left, dim.width], padding.interbar)
 
     return rangeBandGen
   };
@@ -111,9 +111,11 @@
 
   nbviz.genAxis = function(svg, graph) {
     var dim = nbviz.dim.barchart;
+    var padding = nbviz.padding.barchart;
     var margin = nbviz.margin.barchart;
+    var yAxisPadding = margin.left - padding.left//how to avoid this? more complex than it need to be
     svg.append('g').attr('class','x axis ' + graph).attr("transform", "translate(" + 0 + "," + dim.height + ")"); 
-    svg.append('g').attr('class','y axis ' + graph).attr("transform", "translate(" + margin.left + "," + 0 + ")");;
+    svg.append('g').attr('class','y axis ' + graph).attr("transform", "translate(" + yAxisPadding + "," + 0 + ")"); 
   };
 
   nbviz.updateAxis = function(data, xScale, yScale, xAxis, yAxis, svg, graph){
@@ -139,7 +141,7 @@
     var graph = 'bar'
 
     // add y scale
-    var padding = nbviz.padding.barchart.interbar;
+    var padding = nbviz.padding.barchart;
     var margin = nbviz.margin.barchart;
     
 
