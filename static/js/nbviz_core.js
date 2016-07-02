@@ -3,7 +3,6 @@
 //scripts
 
 (function(nbviz){
-  nbviz.test='abcd';
 
   nbviz.data = {}; // our main data object
   nbviz.valuePerCapita = 0; // metric flag
@@ -138,16 +137,20 @@
   nbviz.updateScales = function(data, graphContainer){
     // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
 
-    graphContainer.scales.xScale.domain( data.map(function(d){ return d.key; }) );
+    graphContainer.scales.xScale.domain( d3.range(data.length) );
     graphContainer.scales.yScale.domain([0, d3.max(data, function(d){
                                        return +d.value; })]);
+
+  }
+
+  nbviz.customXScale = function(data, graphContainer){
+    // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
+
+    graphContainer.scales.xScale.domain( data.map(function(d){ return d.key; }) );
+
   }
 
   nbviz.updateAxis = function(data, graphContainer){
-    // // A. Update scale domains with new data
-    nbviz.updateScales(data, graphContainer);
-
-    // B. Use the axes generators with the new scale domains
 
     graphContainer.svg.select('.x.axis.'+ graphContainer._class)
         .transition().duration(nbviz.TRANS_DURATION)
@@ -189,8 +192,7 @@
 
   nbviz.onDataChange = function() { 
       var data = nbviz.getCountryData();
-      debugger;
-      nbviz.buildBarChart(data,"#nobel-bar", "bar");
+      nbviz.updateBarchart(data,nbviz.barchart);
       // nbviz.updateMap(data);
       // nbviz.updateList(nbviz.countryDim.top(Infinity));
       // data = nestDataByYear(nbviz.countryDim.top(Infinity));
