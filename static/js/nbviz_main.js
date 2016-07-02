@@ -1,7 +1,7 @@
 var query_winners = 'winners?projection=' +
   JSON.stringify( {"mini_bio":0, "bio_image":0} );
-var query_test = 'full_data?where=' +
-  JSON.stringify( {"gender":"female"} );
+var query_test = 'full_data?projection=' +
+  JSON.stringify( {"mini_bio":0} );
 
 d3.queue()
   // .defer(d3.json, "static/data/world-110m.json") 
@@ -31,5 +31,5 @@ function ready(error, winnersData) {
   // nbviz.onDataChange();
 
   // Add barchart SVG to the DOM
-  nbviz.buildBarchart(nbviz.data.countryData, "#nobel-bar", "bar", nbviz.margin.barchart);
+  nbviz.buildBarchart(nbviz.data.countryData, nbviz.barchart);
 }

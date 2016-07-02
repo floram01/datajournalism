@@ -4,43 +4,44 @@
 
 (function(nbviz){
 
-  nbviz.buildBarchart = function(data, divID, _class) {
-    var graph = 'bar'
+  nbviz.buildBarchart = function(data, graphContainer) {
 
     // add y scale
-    var padding = nbviz.padding.barchart;
-    var margin = nbviz.margin.barchart;
+    var padding = graphContainer.padding;
+    var margin = graphContainer.margin;
     
 
-    nbviz.addSVGtoDiv(divID, _class,margin);
+    nbviz.addSVGtoDiv(graphContainer);
 
-    var dim = nbviz.dim.barchart;
-    var svg = d3.select("svg#bar");
-    var rangeBandGen = nbviz.getRangeBandGen(data, dim, margin, padding);
-    var yLinearScale = nbviz.yLinearScale(data, dim, margin);
-    var barWidth = rangeBandGen.rangeBand();
+    var dim = graphContainer.dim;
+    var svg = graphContainer.svg;
+
+    graphContainer.scales.xScale = nbviz.getRangeBandGen(data, graphContainer);
+    graphContainer.scales.yScale = nbviz.yLinearScale(data, graphContainer);
+    var barWidth = graphContainer.scales.xScale.rangeBand();
 
     // create axis
-    var xAxis = d3.svg.axis().scale(rangeBandGen).orient("bottom");
-    var yAxis = d3.svg.axis().scale(yLinearScale).orient('left').ticks(10);
-    nbviz.genAxis(svg, dim, padding, margin, graph);
+    graphContainer.axis.xAxis = d3.svg.axis().scale(graphContainer.scales.xScale).orient("bottom");
+    graphContainer.axis.yAxis = d3.svg.axis().scale(graphContainer.scales.yScale).orient('left').ticks(10);
+    nbviz.genAxis(graphContainer);
 
     // data- join
-    var bars=svg.selectAll('rect').data(data)
+    var bars=svg.selectAll('rect').data(data, function(d){return d.key;});
 
     // create bars for data points that are not yet bound to a DOM element
     bars.enter()
     .append('rect')
-    .classed(_class, true)
+    .classed(graphContainer._class, true)
 
     // update all bars that are bound to a DOM element
     bars
-    .attr('height', function(d){return dim.height - yLinearScale(d.value);})
+    .transition().duration(nbviz.TRANS_DURATION)
+    .attr('height', function(d){return dim.height - graphContainer.scales.yScale(d.value);})
     .attr('width', barWidth)
-    .attr('y', function(d){return yLinearScale(d.value);})
-    .attr('x', function(d,i){return rangeBandGen(i);});
+    .attr('y', function(d){return graphContainer.scales.yScale(d.value);})
+    .attr('x', function(d,i){return graphContainer.scales.xScale(i);});
     //update the axis
-    nbviz.updateAxis(data, rangeBandGen, yLinearScale, xAxis, yAxis, svg, graph);
+    nbviz.updateAxis(data, graphContainer);
 
     //remove bars that are not bound to data
     //improvement: translate before exiting (with transition)
