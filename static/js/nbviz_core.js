@@ -14,7 +14,7 @@
   $EVE_API = 'http://localhost:5000/api/';
 
   nbviz.barchart = {};// our main barchart object
-  nbviz.barchart.margin = {top:20, right:20, bottom:30, left:40};
+  nbviz.barchart.margin = {top:20, right:20, bottom:60, left:40};
   nbviz.barchart.padding ={interbar:.1, left:20} 
   nbviz.barchart.divID='#nobel-bar'
   nbviz.barchart.svgID='barchart'
@@ -193,6 +193,31 @@
 
     return data;
 };
+
+  nbviz.addFilter=function(options, locationID, resetValue){
+    _filter = d3.select('#' + locationID);
+
+    _filter
+      .selectAll('options')
+      .data(options)
+      .enter()
+      .append('option')
+      .attr('value', function(d){return d;})
+      .html(function(d){return d;});
+
+    _filter.on('change', function(d){
+
+      var category = d3.select(this).property('value');
+      if (category===resetValue){
+          nbviz.categoryDim.filter();
+        } else {
+          nbviz.categoryDim.filter(category);
+        };
+
+      nbviz.onDataChange();
+  });
+};
+
 
   nbviz.onDataChange = function() {
       var data = nbviz.getCountryData();

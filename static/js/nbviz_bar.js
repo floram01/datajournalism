@@ -51,7 +51,6 @@
     var svg=graphContainer.svg;
     var dim=graphContainer.dim;
     var barWidth = graphContainer.scales.xScale.rangeBand();
-
     nbviz.updateScales(data, graphContainer);
     var barWidth = graphContainer.scales.xScale.rangeBand();
 
