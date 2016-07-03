@@ -15,13 +15,22 @@ function ready(error, winnersData) {
   if(error){
       return console.warn(error);
   }
+  // A refacto, il manque encore une couche d'abstraction (dico associant les dims, les graphs, etc?)
 
+  //INIT with various custom functions
+  nbviz.filter = {} || nbviz.filter;
+  
+  // MAKE OUR FILTER AND ITS DIMENSIONS
+  nbviz.makeFilterAndDimensions(winnersData);
+  // add filters
+  nbviz.addFilter(winnersData, 'key', 'cat-select select', nbviz.categoryDim, nbviz.ALL_CATS);
+  nbviz.addFilter(winnersData, 'key', 'gender-select select', nbviz.genderDim, nbviz.ALL_GENDERS);
+  nbviz.addFilter(winnersData, 'key', 'country-select select', nbviz.countryDim, nbviz.ALL_COUNTRIES);
+  
   // STORE OUR COUNTRY-DATA DATASET
   nbviz.data.winnersData = winnersData;
   // STORE OUR COUNTRY-DATA DATASET
   // nbviz.data.countryData = countryData;
-  // MAKE OUR FILTER AND ITS DIMENSIONS
-  nbviz.makeFilterAndDimensions(winnersData);
   //GET BY COUNTRY DATA 
   nbviz.data.countryData=nbviz.getCountryData();
   // INITIALIZE MENU AND MAP
