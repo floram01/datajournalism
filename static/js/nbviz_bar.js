@@ -3,12 +3,13 @@
 //scripts
 
 (function(nbviz){
-
+//improvements: generalise more elements in core, factorise between build and update
   nbviz.buildBarchart = function(data, graphContainer) {
     // add y scale
     var padding = graphContainer.padding;
     var margin = graphContainer.margin;
     
+    nbviz.initialize(graphContainer);
 
     nbviz.addSVGtoDiv(graphContainer);
 
@@ -20,9 +21,8 @@
     var barWidth = graphContainer.scales.xScale.rangeBand();
 
     // create axis
-    graphContainer.axis.xAxis = d3.svg.axis().scale(graphContainer.scales.xScale).orient("bottom");
-    graphContainer.axis.yAxis = d3.svg.axis().scale(graphContainer.scales.yScale).orient('left').ticks(10);
-    nbviz.genAxis(graphContainer);
+
+    nbviz.genAxis(graphContainer)
 
     // data- join
     var bars=svg.selectAll('rect').data(data, function(d){return d.key;});
@@ -56,7 +56,7 @@
     var barWidth = graphContainer.scales.xScale.rangeBand();
 
     // data- join
-    var bars=svg.selectAll('rect').data(data, function(d){return d.key;});
+    var bars=svg.selectAll('rect').data(data);
     // create bars for data points that are not yet bound to a DOM element
     bars.enter()
     .append('rect')
@@ -70,11 +70,11 @@
     // .attr('x', function(d,i){return graphContainer.scales.xScale(i);});
     //update the axis
     nbviz.updateAxis(data, graphContainer);
-
     //remove bars that are not bound to data
     //improvement: translate before exiting (with transition)
     bars.exit()
     .remove
+
     nbviz.customXScale(data, graphContainer);
     nbviz.updateAxis(data, graphContainer);
   };

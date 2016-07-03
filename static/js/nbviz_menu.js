@@ -11,7 +11,7 @@
 
   catSelect.on('change', function(d){
     var category = d3.select(this).property('value');
-    nbviz.categoryDim.filter(category);
+    if(category===nbviz.ALL_CATS){nbviz.categoryDim.filter()}else{nbviz.categoryDim.filter(category)};
     nbviz.onDataChange();
   })
 

@@ -16,13 +16,10 @@
   nbviz.barchart = {};// our main barchart object
   nbviz.barchart.margin = {top:20, right:20, bottom:30, left:40};
   nbviz.barchart.padding ={interbar:.1, left:20} 
-  nbviz.barchart.scales={}
-  nbviz.barchart.axis={}
   nbviz.barchart.divID='#nobel-bar'
   nbviz.barchart.svgID='barchart'
   nbviz.barchart._class='barchart'
 
-  nbviz.dim = {};// our main dim object
   nbviz.ALL_CATS = 'All Categories';
   nbviz.CATEGORIES = ["Chemistry", "Economics", "Literature", "Peace","Physics", "Physiology or Medicine"];
   nbviz.TRANS_DURATION = 2000
@@ -51,6 +48,13 @@
 
   var nestDataByYear = function(entries) {          
   //...
+  };
+
+  nbviz.initialize = function(graphContainer) {          
+    graphContainer.svg = graphContainer.svg || {}
+    graphContainer.scales = graphContainer.scales || {} 
+    graphContainer.axis = graphContainer.axis || {} 
+    graphContainer.dim = graphContainer.dim || {} 
   };
 
   nbviz.makeFilterAndDimensions = function(winnersData){
@@ -129,6 +133,8 @@
     var svg = graphContainer.svg;
 
     var yAxisPadding = margin.left - padding.left//how to avoid this? more complex than it need to be
+    graphContainer.axis.xAxis = d3.svg.axis().scale(graphContainer.scales.xScale).orient("bottom");
+    graphContainer.axis.yAxis = d3.svg.axis().scale(graphContainer.scales.yScale).orient('left').ticks(10);
 
     svg.append('g').attr('class','x axis ' + graphContainer._class).attr("transform", "translate(" + 0 + "," + dim.height + ")"); 
     svg.append('g').attr('class','y axis ' + graphContainer._class).attr("transform", "translate(" + yAxisPadding + "," + 0 + ")"); 
@@ -136,7 +142,6 @@
 
   nbviz.updateScales = function(data, graphContainer){
     // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
-
     graphContainer.scales.xScale.domain( d3.range(data.length) );
     graphContainer.scales.yScale.domain([0, d3.max(data, function(d){
                                        return +d.value; })]);
@@ -147,7 +152,6 @@
     // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
 
     graphContainer.scales.xScale.domain( data.map(function(d){ return d.key; }) );
-
   }
 
   nbviz.updateAxis = function(data, graphContainer){
@@ -190,7 +194,7 @@
     return data;
 };
 
-  nbviz.onDataChange = function() { 
+  nbviz.onDataChange = function() {
       var data = nbviz.getCountryData();
       nbviz.updateBarchart(data,nbviz.barchart);
       // nbviz.updateMap(data);
