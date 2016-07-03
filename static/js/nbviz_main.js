@@ -20,12 +20,16 @@ function ready(error, winnersData) {
   //INIT with various custom functions
   nbviz.filter = {} || nbviz.filter;
   
-  // MAKE OUR FILTER AND ITS DIMENSIONS
+  // MAKE OUR FILTER AND ITS DIMENSIONS ==> improve abstraction
   nbviz.makeFilterAndDimensions(winnersData);
   // add filters
-  nbviz.addFilter(winnersData, 'key', 'cat-select select', nbviz.categoryDim, nbviz.ALL_CATS);
-  nbviz.addFilter(winnersData, 'key', 'gender-select select', nbviz.genderDim, nbviz.ALL_GENDERS);
-  nbviz.addFilter(winnersData, 'key', 'country-select select', nbviz.countryDim, nbviz.ALL_COUNTRIES);
+  nbviz.addAllFilters(
+    [
+      {data:winnersData, _id:'key', locationID:'cat-select select', filterTool:nbviz.categoryDim, resetValue:nbviz.ALL_CATS},
+      {data:winnersData, _id:'key', locationID:'gender-select select', filterTool:nbviz.genderDim, resetValue:nbviz.ALL_GENDERS},
+      {data:winnersData, _id:'key', locationID:'country-select select', filterTool:nbviz.countryDim, resetValue:nbviz.ALL_COUNTRIES}
+    ]
+  )
   
   // STORE OUR COUNTRY-DATA DATASET
   nbviz.data.winnersData = winnersData;

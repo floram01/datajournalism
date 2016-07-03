@@ -227,6 +227,12 @@
       nbviz.onDataChange();
   });
 };
+  
+  nbviz.addAllFilters = function(filters){
+    filters.forEach(function(o){
+      nbviz.addFilter(o.data, o._id, o.locationID, o.filterTool, o.resetValue);
+    });
+};
 
 
   nbviz.onDataChange = function() {
