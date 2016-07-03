@@ -22,6 +22,9 @@
 
   nbviz.ALL_CATS = 'All Categories';
   nbviz.CATEGORIES = ["Chemistry", "Economics", "Literature", "Peace","Physics", "Physiology or Medicine"];
+  nbviz.ALL_GENDERS = 'All'
+  nbviz.GENDERS = ['All', 'male', 'female', 'institutions']
+
   nbviz.TRANS_DURATION = 2000
   
   nbviz.categoryFill = function(category){
@@ -50,11 +53,12 @@
   //...
   };
 
-  nbviz.initialize = function(graphContainer) {          
-    graphContainer.svg = graphContainer.svg || {}
-    graphContainer.scales = graphContainer.scales || {} 
-    graphContainer.axis = graphContainer.axis || {} 
-    graphContainer.dim = graphContainer.dim || {} 
+  nbviz.initialize = function(graphContainer, data) {
+    graphContainer.svg = graphContainer.svg || {};
+    graphContainer.scales = graphContainer.scales || {};
+    graphContainer.axis = graphContainer.axis || {};
+    graphContainer.dim = graphContainer.dim || {};
+    nbviz.filter = nbviz.filter?{}:nbivz.makeFilterAndDimensions(graphContainer, data);
   };
 
   nbviz.makeFilterAndDimensions = function(winnersData){
@@ -194,9 +198,8 @@
     return data;
 };
 
-  nbviz.addFilter=function(options, locationID, resetValue){
+  nbviz.addFilter = function(options, locationID, filterTool, resetValue){
     _filter = d3.select('#' + locationID);
-
     _filter
       .selectAll('options')
       .data(options)
@@ -206,14 +209,12 @@
       .html(function(d){return d;});
 
     _filter.on('change', function(d){
-
       var category = d3.select(this).property('value');
       if (category===resetValue){
-          nbviz.categoryDim.filter();
+          filterTool.filter();
         } else {
-          nbviz.categoryDim.filter(category);
+          filterTool.filter(category);
         };
-
       nbviz.onDataChange();
   });
 };

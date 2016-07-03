@@ -8,8 +8,15 @@
     // add y scale
     var padding = graphContainer.padding;
     var margin = graphContainer.margin;
+
+    nbviz.initialize(graphContainer, data);
     
-    nbviz.initialize(graphContainer);
+    // add filters
+    var catList = [nbviz.ALL_CATS].concat(nbviz.CATEGORIES);
+    var catSelect = d3.select('#cat-select select');
+    // 3rd argument = resetValue, if no resetValue juste enter false
+    nbviz.addFilter(catList, 'cat-select select', nbviz.categoryDim, nbviz.ALL_CATS);
+    nbviz.addFilter(nbviz.GENDERS, 'gender-select select', nbviz.genderDim, nbviz.ALL_GENDERS);
 
     nbviz.addSVGtoDiv(graphContainer);
 
@@ -21,7 +28,6 @@
     var barWidth = graphContainer.scales.xScale.rangeBand();
 
     // create axis
-
     nbviz.genAxis(graphContainer)
 
     // data- join
