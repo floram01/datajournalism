@@ -20,6 +20,13 @@
   nbviz.barchart.svgID='barchart'
   nbviz.barchart._class='barchart'
 
+  nbviz.timeline = {};// our main barchart object
+  nbviz.barchart.margin = {top:20, right:20, bottom:60, left:40};
+  nbviz.barchart.padding ={interbar:.1, left:20} 
+  nbviz.barchart.divID='#nobel-bar'
+  nbviz.barchart.svgID='barchart'
+  nbviz.barchart._class='barchart'
+
   nbviz.ALL_CATS = 'All Categories';
   nbviz.ALL_GENDERS = 'All'
   nbviz.ALL_COUNTRIES='All Countries'
@@ -29,6 +36,17 @@
   nbviz.categoryFill = function(category){
     var i = nbviz.CATEGORIES.indexOf(category);
       return d3.hcl(i / nbviz.CATEGORIES.length * 360, 60, 70);
+  };
+
+  nbviz.initGraphContainer = function(name, margins, padding, divID, svgID, _class){
+    nbviz[name] = o = {};
+    o.margin = {top:margins.top, right:margins.right, bottom:margins.bottom};
+    o.padding = {interbar : padding.interbar, left : padding.left};
+    o.divID = divID;
+    o.svgID = svgID;
+    o._class = _class;
+
+    return o
   };
 
 // if items in data then we're dealing with a mongoDB object and we take its items
@@ -48,8 +66,17 @@
       });
   };
 
-  var nestDataByYear = function(entries) {          
-  //...
+  nbviz.nestDataByKey = function(entries, key) {          
+    nbviz.data[key] = data = d3.nest()
+    .key(function(w){return w[key]})
+    .entries(entries)
+
+    nbviz.data[key].min = d3.min(data, function(d){return d.key;});
+    nbviz.data[key].max = d3.max(data, function(d){return d.key;});
+    nbviz.data[key].range = d3.range(nbviz.data[key].min, nbviz.data[key].max);
+    nbviz.data[key].maxLength = d3.max(data, function(d){return d.values.length});
+
+    return data
   };
 
   nbviz.initialize = function(graphContainer, data) {

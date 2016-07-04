@@ -42,7 +42,11 @@ function ready(error, winnersData) {
   // nbviz.initMap(worldMap, countryNames);
   // TRIGGER UPDATE WITH FULL WINNERS' DATASET
   // nbviz.onDataChange();
-
   // Add barchart SVG to the DOM
   nbviz.buildBarchart(nbviz.data.countryData, nbviz.barchart);
+  //Add timeline
+  nbviz.buildTimeline(
+    nbviz.nestDataByKey(winnersData, 'year'),
+    nbviz.initGraphContainer('timeline', {top:20, right:20, bottom:60, left:40}, {interbar:.1, left:20}, '#nobel-time', 'timeline', 'timeline')
+  )
 }
