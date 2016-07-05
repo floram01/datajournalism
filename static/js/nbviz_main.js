@@ -25,9 +25,9 @@ function ready(error, winnersData) {
   // add filters
   nbviz.addAllFilters(
     [
-      {data:winnersData, _id:'key', locationID:'cat-select select', filterTool:nbviz.categoryDim, resetValue:nbviz.ALL_CATS},
-      {data:winnersData, _id:'key', locationID:'gender-select select', filterTool:nbviz.genderDim, resetValue:nbviz.ALL_GENDERS},
-      {data:winnersData, _id:'key', locationID:'country-select select', filterTool:nbviz.countryDim, resetValue:nbviz.ALL_COUNTRIES}
+      {data:winnersData, _id:'key', locationID:'cat-select select', filterTool:nbviz.categoryDim, resetValue:nbviz.ALL_CATS, name:'categories'},
+      {data:winnersData, _id:'key', locationID:'gender-select select', filterTool:nbviz.genderDim, resetValue:nbviz.ALL_GENDERS, name:'genders'},
+      {data:winnersData, _id:'key', locationID:'country-select select', filterTool:nbviz.countryDim, resetValue:nbviz.ALL_COUNTRIES, name:'countries'}
     ]
   )
   
@@ -45,8 +45,9 @@ function ready(error, winnersData) {
   // Add barchart SVG to the DOM
   nbviz.buildBarchart(nbviz.data.countryData, nbviz.barchart);
   //Add timeline
+  nbviz.initGraphContainer('timeline', {top:20, right:20, bottom:60, left:40}, {interbar:.1, left:20}, '#nobel-time', 'timeline', 'timeline')
   nbviz.buildTimeline(
-    nbviz.nestDataByKey(winnersData, 'year'),
-    nbviz.initGraphContainer('timeline', {top:20, right:20, bottom:60, left:40}, {interbar:.1, left:20}, '#nobel-time', 'timeline', 'timeline')
+    nbviz.nestDataByKey(winnersData, 'year', nbviz.timeline),
+    nbviz.timeline
   )
 }

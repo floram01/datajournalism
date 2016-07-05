@@ -34,17 +34,18 @@
   nbviz.TRANS_DURATION = 2000
   
   nbviz.categoryFill = function(category){
-    var i = nbviz.CATEGORIES.indexOf(category);
-      return d3.hcl(i / nbviz.CATEGORIES.length * 360, 60, 70);
+    var i = nbviz.categories.indexOf(category);
+      return d3.hcl(i / nbviz.categories.length * 360, 60, 70);
   };
 
   nbviz.initGraphContainer = function(name, margins, padding, divID, svgID, _class){
     nbviz[name] = o = {};
-    o.margin = {top:margins.top, right:margins.right, bottom:margins.bottom};
+    o.margin = {top:margins.top, right:margins.right, left:margins.left, bottom:margins.bottom};
     o.padding = {interbar : padding.interbar, left : padding.left};
     o.divID = divID;
     o.svgID = svgID;
     o._class = _class;
+    o
 
     return o
   };
@@ -66,16 +67,17 @@
       });
   };
 
-  nbviz.nestDataByKey = function(entries, key) {          
-    nbviz.data[key] = data = d3.nest()
+  nbviz.nestDataByKey = function(entries, key, graphContainer) {          
+    graphContainer.data = graphContainer.data || {};
+
+    graphContainer.data.main = data = d3.nest()
     .key(function(w){return w[key]})
     .entries(entries)
 
-    nbviz.data[key].min = d3.min(data, function(d){return d.key;});
-    nbviz.data[key].max = d3.max(data, function(d){return d.key;});
-    nbviz.data[key].range = d3.range(nbviz.data[key].min, nbviz.data[key].max);
-    nbviz.data[key].maxLength = d3.max(data, function(d){return d.values.length});
-
+    graphContainer.data.min = d3.min(data, function(d){return d.key;});
+    graphContainer.data.max = d3.max(data, function(d){return d.key;});
+    graphContainer.data.range = d3.range(graphContainer.data.min, graphContainer.data.max);
+    graphContainer.data.maxLength = d3.max(data, function(d){return d.values.length}) + 1;
     return data
   };
 
@@ -120,7 +122,6 @@
   nbviz.addSVGtoDiv = function(graphContainer) {
     nbviz.getDivByID(graphContainer)
     nbviz.getSVGDim(graphContainer)
-
     var dim = graphContainer.dim;
     var margin = graphContainer.margin;
     var divID = graphContainer.divID;
@@ -143,6 +144,27 @@
     .rangeRoundBands([padding.left, dim.width], padding.interbar)
 
     return rangeBandGen
+  };
+
+  nbviz.xRBTime = function(data, graphContainer) {
+    var dim = graphContainer.dim;
+    var padding = graphContainer.padding;
+    var xRBTime = d3.scale.ordinal()
+    .domain(graphContainer.data.range)
+    .rangeRoundBands([padding.left, dim.width], padding.interbar)
+
+    return xRBTime
+  };
+
+  nbviz.yRP = function(data, graphContainer) {
+    var dim = graphContainer.dim;
+    var padding = graphContainer.padding;
+
+    var yRP = d3.scale.ordinal()
+    .domain(d3.range(graphContainer.data.maxLength))
+    .rangeRoundPoints([dim.height, padding.bottom])
+
+    return yRP
   };
 
 //Généraliser yLinearScale à LinearScale 
@@ -168,6 +190,18 @@
 
     svg.append('g').attr('class','x axis ' + graphContainer._class).attr("transform", "translate(" + 0 + "," + dim.height + ")"); 
     svg.append('g').attr('class','y axis ' + graphContainer._class).attr("transform", "translate(" + yAxisPadding + "," + 0 + ")"); 
+  };
+
+  nbviz.customXTicks = function(graphContainer) {
+    var axis = graphContainer.axis.xAxis
+    var scale = graphContainer.scales.xScale
+    // var tickFreq=graphContainer.axis.xTicks 
+    var tickFreq=10
+    axis.tickValues(scale.domain().filter(
+                function(d,i){
+                  return !(d%tickFreq); 
+                })
+              );
   };
 
   nbviz.updateScales = function(data, graphContainer){
@@ -232,9 +266,12 @@
     return _options;
 };
 
-  nbviz.addFilter = function(data, _id, locationID, filterTool, resetValue){
+  nbviz.addFilter = function(data, _id, locationID, filterTool, resetValue, name){
+     
     _options=nbviz.listOptions(data, filterTool, _id, resetValue);
-
+    if(_options[0].includes('All')){_options.pop(0)};
+    nbviz[name] = _options;//à généraliser si pas de resetValue
+    debugger;
     _filter = d3.select('#' + locationID);
     _filter
       .selectAll('options')
@@ -257,8 +294,25 @@
   
   nbviz.addAllFilters = function(filters){
     filters.forEach(function(o){
-      nbviz.addFilter(o.data, o._id, o.locationID, o.filterTool, o.resetValue);
+      nbviz.addFilter(o.data, o._id, o.locationID, o.filterTool, o.resetValue, o.name);
     });
+};
+  
+  nbviz.addLegend = function(graphContainer){
+    graphContainer.legend = graphContainer.svg.append('g')
+        .attr('transform', "translate(10, 10)")
+        .attr('class', 'labels')
+        .selectAll('label').data(nbviz.categories)//à généraliser 
+        .enter().append('g')
+        .attr('transform', function(d, i) {
+            return "translate(0," + i * 10 + ")"; 
+        });
+};
+  
+  nbviz.circleLegend = function(graphContainer){
+    graphContainer.legend.append('circle')
+      .attr('fill', (nbviz.categoryFill)) 
+      .attr('r', graphContainer.scales.xScale.rangeBand()/2);
 };
 
 

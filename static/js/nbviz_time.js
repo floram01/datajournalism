@@ -5,7 +5,6 @@
 (function(nbviz){
 //improvements: generalise more elements in core, factorise between build and update
   nbviz.buildTimeline = function(data, graphContainer) {
-    debugger;
     // add y scale
     var padding = graphContainer.padding;
     var margin = graphContainer.margin;
@@ -17,14 +16,17 @@
     var dim = graphContainer.dim;
     var svg = graphContainer.svg;
 
-    graphContainer.scales.xScale = nbviz.getRangeBandGen(data, graphContainer);
+    graphContainer.scales.xScale = nbviz.xRBTime(data, graphContainer);
     graphContainer.scales.yScale = nbviz.yLinearScale(data, graphContainer);
-    var barWidth = graphContainer.scales.xScale.rangeBand();
-
     // create axis
-    nbviz.genAxis(graphContainer)
-
+    nbviz.genAxis(graphContainer);
+    nbviz.customXTicks(graphContainer);
+    
+    //add legend
+    nbviz.addLegend(graphContainer);
+    nbviz.circleLegend(graphContainer);
     // data- join
+    debugger;
     var bars=svg.selectAll('rect').data(data, function(d){return d.key;});
     // create bars for data points that are not yet bound to a DOM element
     bars.enter()
