@@ -4,19 +4,6 @@
 
 (function(nbviz){
 
-  nbviz.valuePerCapita = 0; // metric flag
-  nbviz.activeCountry = null;
-  nbviz.TRANS_DURATION = 1500; // length in ms for our transitions
-  nbviz.MAX_CENTROID_RADIUS = 30;
-  nbviz.MIN_CENTROID_RADIUS = 2;
-  nbviz.COLORS = {palegold:'#E6BE8A'}; // any named colors we use
-  $EVE_API = 'http://localhost:5000/api/';//adress where the servor api is serving the database
-
-  nbviz.ALL_CATS = 'All Categories';
-  nbviz.ALL_GENDERS = 'All'
-  nbviz.ALL_COUNTRIES='All Countries'
-
-
 // if items in data then we're dealing with a mongoDB object and we take its items
 // else we have a simple object and return it directly
   nbviz.getDataFromAPI = function(resource, callback){
@@ -75,19 +62,29 @@
 };
 
   // set up the dimensions of the crossfilter
-  nbviz.makeFilterAndDimensions = function(winnersData){
+  nbviz.makeFilterAndDimensions = function(winnersData, filters){
     nbviz.filter=crossfilter(winnersData);
-    
-    nbviz.categoryDim = nbviz.filter.dimension(function(o) {
-      return o.category;
-    });
-    nbviz.countryDim = nbviz.filter.dimension(function(o) {
-      return o.country;
-    });
-    nbviz.genderDim = nbviz.filter.dimension(function(o) {
-      return o.gender;
+    filters.forEach(function(f){
+      nbviz[f.dimension + 'Dim'] = nbviz.filter.dimension(function(o) {
+        return o[f.dimension];
+      });      
     });
   };
+
+  // // set up the dimensions of the crossfilter
+  // nbviz.makeFilterAndDimensions = function(winnersData){
+  //   nbviz.filter=crossfilter(winnersData);
+    
+  //   nbviz.categoryDim = nbviz.filter.dimension(function(o) {
+  //     return o.category;
+  //   });
+  //   nbviz.countryDim = nbviz.filter.dimension(function(o) {
+  //     return o.country;
+  //   });
+  //   nbviz.genderDim = nbviz.filter.dimension(function(o) {
+  //     return o.gender;
+  //   });
+  // };
 
 // based on a filterTool dimension crossfilter object extract the values of the dimension and add a resetValue
   nbviz.listOptions = function(data, filterTool, _id, resetValue) {

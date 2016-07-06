@@ -19,6 +19,7 @@
   };
 
   nbviz.initialize = function(graphContainer, data) {
+    graphContainer.filter = graphContainer.filter || {};
     graphContainer.svg = graphContainer.svg || {};
     graphContainer.scales = graphContainer.scales || {};
     graphContainer.axis = graphContainer.axis || {};

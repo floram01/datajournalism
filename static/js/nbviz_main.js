@@ -1,13 +1,8 @@
-var query_winners = 'winners?projection=' +
-  JSON.stringify( {"mini_bio":0, "bio_image":0} );
-var query_test = 'full_data?projection=' +
-  JSON.stringify( {"mini_bio":0} );
-
 d3.queue()
   // .defer(d3.json, "static/data/world-110m.json") 
   // .defer(d3.csv, "static/data/world-country-names-nobel.csv")
   // .defer(d3.json, "static/data/winning_country_data.json")
-  .defer(nbviz.getDataFromAPI, query_test) 
+  .defer(nbviz.getDataFromAPI, nbviz.FULL_DATA) 
   .await(ready);
 
 function ready(error, winnersData) {
@@ -15,21 +10,24 @@ function ready(error, winnersData) {
   if(error){
       return console.warn(error);
   }
-  // A refacto, il manque encore une couche d'abstraction (dico associant les dims, les graphs, etc?)
 
-  //INIT with various custom functions
-  nbviz.filter = {} || nbviz.filter;
-  
   // MAKE OUR FILTER AND ITS DIMENSIONS ==> improve abstraction
-  nbviz.makeFilterAndDimensions(winnersData);
   // add filters
+  var _filters=[
+    {locationID:'cat-select select', dimension:'category', resetValue:nbviz.ALL_CATS},
+    {locationID:'gender-select select', dimension:'gender', resetValue:nbviz.ALL_GENDERS},
+    {locationID:'country-select select', dimension:'country', resetValue:nbviz.ALL_COUNTRIES}
+  ];
+
+  nbviz.makeFilterAndDimensions(winnersData, _filters);
+
   nbviz.addAllFilters(
     [
       {data:winnersData, _id:'key', locationID:'cat-select select', filterTool:nbviz.categoryDim, resetValue:nbviz.ALL_CATS, name:'categories'},
       {data:winnersData, _id:'key', locationID:'gender-select select', filterTool:nbviz.genderDim, resetValue:nbviz.ALL_GENDERS, name:'genders'},
       {data:winnersData, _id:'key', locationID:'country-select select', filterTool:nbviz.countryDim, resetValue:nbviz.ALL_COUNTRIES, name:'countries'}
     ]
-  )
+  );
   
   //GET BY COUNTRY DATA 
   // INITIALIZE MENU AND MAP

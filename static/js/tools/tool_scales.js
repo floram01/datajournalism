@@ -4,7 +4,6 @@
 
 (function(nbviz){
 
-
 // Ajouter toutes les autres scales susceptibles d'être utilisées au fur et à mesure
   nbviz.xRangeBand = function(data, graphContainer) {
     var dim = graphContainer.dim;
