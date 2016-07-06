@@ -5,6 +5,7 @@
 (function(nbviz){
 //improvements: generalise more elements in core, factorise between build and update
   nbviz.buildBarchart = function(data, graphContainer) {
+    nbviz.addDataInfo(data, 'key', graphContainer);
     // add y scale
     var padding = graphContainer.padding;
     var margin = graphContainer.margin;
@@ -16,7 +17,9 @@
     var dim = graphContainer.dim;
     var svg = graphContainer.svg;
 
-    graphContainer.scales.xScale = nbviz.getRangeBandGen(data, graphContainer);
+    // graphContainer.data ={}; //créer une fonction qui calcule ces éléments?
+    // graphContainer.data.range = d3.range(data.length);
+    graphContainer.scales.xScale = nbviz.xRangeBand(data, graphContainer);
     graphContainer.scales.yScale = nbviz.yLinearScale(data, graphContainer);
     var barWidth = graphContainer.scales.xScale.rangeBand();
 
@@ -38,7 +41,8 @@
     .attr('x', function(d,i){return graphContainer.scales.xScale(i);});
     //update the axis
     nbviz.customXScale(data, graphContainer);
-    nbviz.updateAxis(data, graphContainer);
+    nbviz.updateXAxis(data, graphContainer);
+    nbviz.updateYAxis(data, graphContainer);
     //remove bars that are not bound to data
     //improvement: translate before exiting (with transition)
     bars.exit()
@@ -67,14 +71,16 @@
     .attr('y', function(d){return graphContainer.scales.yScale(d.value);})
     // .attr('x', function(d,i){return graphContainer.scales.xScale(i);});
     //update the axis
-    nbviz.updateAxis(data, graphContainer);
+    nbviz.updateXAxis(data, graphContainer);
+    nbviz.updateYAxis(data, graphContainer);
     //remove bars that are not bound to data
     //improvement: translate before exiting (with transition)
     bars.exit()
-    .remove
+    .remove;
 
     nbviz.customXScale(data, graphContainer);
-    nbviz.updateAxis(data, graphContainer);
+    nbviz.updateXAxis(data, graphContainer);
+    nbviz.updateYAxis(data, graphContainer);
   };
 
 }(window.nbviz=window.nbviz || {}));

@@ -81,6 +81,17 @@
     return data
   };
 
+//range à généraliser en fonction des besoins identifiés au fur et à mesure
+  nbviz.addDataInfo = function(data, key, graphContainer) {          
+    graphContainer.data = graphContainer.data || {};
+
+    graphContainer.data.min = d3.min(data, function(d){return d[key];});
+    graphContainer.data.max = d3.max(data, function(d){return d[key];});
+    graphContainer.data.range = d3.range(data.length);
+    
+    return data
+  };
+
   nbviz.initialize = function(graphContainer, data) {
     graphContainer.svg = graphContainer.svg || {};
     graphContainer.scales = graphContainer.scales || {};
@@ -103,11 +114,13 @@
     });
   };
 
+// get the graphContainer div bounding rect
   nbviz.getDivByID = function(graphContainer) {
     var chartHolder=d3.select(graphContainer.divID);
     graphContainer.boundingRect = chartHolder.node().getBoundingClientRect();
   };
 
+// set the chart dimensions based on the div dimensions - margins
   nbviz.getSVGDim = function(graphContainer) {
     var boundingRect = graphContainer.boundingRect;
     var margin = graphContainer.margin;
@@ -119,6 +132,7 @@
     graphContainer.dim = dim;
   };
 
+//add the svg based on the div dimensions (chart dimensions + margins) 
   nbviz.addSVGtoDiv = function(graphContainer) {
     nbviz.getDivByID(graphContainer)
     nbviz.getSVGDim(graphContainer)
@@ -135,31 +149,20 @@
   };
 
 // Ajouter toutes les autres scales susceptibles d'être utilisées au fur et à mesure
-  nbviz.getRangeBandGen = function(data, graphContainer) {
+  nbviz.xRangeBand = function(data, graphContainer) {
     var dim = graphContainer.dim;
     var padding = graphContainer.padding;
 
     var rangeBandGen = d3.scale.ordinal()
-    .domain(d3.range(data.length))
+    .domain(graphContainer.data.range)
     .rangeRoundBands([padding.left, dim.width], padding.interbar)
 
     return rangeBandGen
   };
 
-  nbviz.xRBTime = function(data, graphContainer) {
-    var dim = graphContainer.dim;
-    var padding = graphContainer.padding;
-    var xRBTime = d3.scale.ordinal()
-    .domain(graphContainer.data.range)
-    .rangeRoundBands([padding.left, dim.width], padding.interbar)
-
-    return xRBTime
-  };
-
   nbviz.yRP = function(data, graphContainer) {
     var dim = graphContainer.dim;
     var padding = graphContainer.padding;
-    debugger;
     var yRP = d3.scale.ordinal()
     .domain(d3.range(graphContainer.data.maxLength))
     .rangeRoundPoints([dim.height, padding.bottom])
@@ -191,10 +194,11 @@
   };
 
   nbviz.customXTicks = function(graphContainer) {
-    var axis = graphContainer.axis.xAxis
-    var scale = graphContainer.scales.xScale
+    var axis = graphContainer.axis.xAxis;
+    var scale = graphContainer.scales.xScale;
     // var tickFreq=graphContainer.axis.xTicks 
-    var tickFreq=10
+    var tickFreq=10;
+    
     axis.tickValues(scale.domain().filter(
                 function(d,i){
                   return !(d%tickFreq); 
@@ -208,15 +212,15 @@
     graphContainer.scales.yScale.domain([0, d3.max(data, function(d){
                                        return +d.value; })]);
 
-  }
+  };
 
   nbviz.customXScale = function(data, graphContainer){
     // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
 
     graphContainer.scales.xScale.domain( data.map(function(d){ return d.key; }) );
-  }
+  };
 
-  nbviz.updateAxis = function(data, graphContainer){
+  nbviz.updateXAxis = function(data, graphContainer){
 
     graphContainer.svg.select('.x.axis.'+ graphContainer._class)
         .transition().duration(nbviz.TRANS_DURATION)
@@ -226,11 +230,13 @@
         .attr("dx", "-.8em")
         .attr("dy", ".15em")
         .attr("transform", "rotate(-65)");
+  };
 
+  nbviz.updateYAxis = function(data, graphContainer){
     graphContainer.svg.select('.y.axis.'+ graphContainer._class)
         .transition().duration(nbviz.TRANS_DURATION)
         .call(graphContainer.axis.yAxis);
-  }
+  };
 
   nbviz.getCountryData = function() {
     var countryGroups = nbviz.countryDim.group().all(); 
@@ -267,8 +273,9 @@
   nbviz.addFilter = function(data, _id, locationID, filterTool, resetValue, name){
      
     _options=nbviz.listOptions(data, filterTool, _id, resetValue);
-    if(_options[0].includes('All')){_options.pop(0)};
-    nbviz[name] = _options;//à généraliser si pas de resetValue
+    if(_options[0].includes('All')){_options.pop(0)};//à généraliser a priori resetValue contient All pas top
+    nbviz[name] = _options;
+    
     _filter = d3.select('#' + locationID);
     _filter
       .selectAll('options')
@@ -308,6 +315,7 @@
   
   nbviz.circleLegend = function(graphContainer){
     graphContainer.legend.append('circle')
+      .attr('class', 'legend') 
       .attr('fill', (nbviz.categoryFill)) 
       .attr('r', graphContainer.scales.xScale.rangeBand()/2);
 };
@@ -327,8 +335,8 @@
       nbviz.updateBarchart(data,nbviz.barchart);
       // nbviz.updateMap(data);
       // nbviz.updateList(nbviz.countryDim.top(Infinity));
-      // data = nestDataByYear(nbviz.countryDim.top(Infinity));
-      // nbviz.updateTimeChart(data);
+      data = nbviz.nestDataByKey(nbviz.countryDim.top(Infinity), 'year', nbviz.timeline);
+      nbviz.updateTimeline(data, nbviz.timeline);
   };
 
 }(window.nbviz=window.nbviz || {}));

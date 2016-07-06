@@ -16,11 +16,12 @@
     var dim = graphContainer.dim;
     var svg = graphContainer.svg;
 
-    graphContainer.scales.xScale = nbviz.xRBTime(data, graphContainer);
+    graphContainer.scales.xScale = nbviz.xRangeBand(data, graphContainer);
     graphContainer.scales.yScale = nbviz.yRP(data, graphContainer);
     // create axis
     nbviz.genAxis(graphContainer);
     nbviz.customXTicks(graphContainer);
+    nbviz.updateXAxis(data, graphContainer);
     
     //add legend
     nbviz.addLegend(graphContainer);
@@ -34,7 +35,10 @@
   nbviz.updateTimeline = function(data, graphContainer) {
     var svg=graphContainer.svg;
     var dim=graphContainer.dim;
-    graphContainer.yearsLabels = svg.selectAll(".year")
+    graphContainer.yearsLabels = svg
+            .append('g')
+            .attr('id','years')
+            .selectAll(".year")
             .data(data, function(d) {
                 return d.key; 
             });
@@ -48,29 +52,34 @@
 
     graphContainer.yearsLabels.exit().remove();
 
-    graphContainer.winnersBubbles = graphContainer.yearsLabels.selectAll(".winner")
+    graphContainer.winnersBubbles = graphContainer.yearsLabels
+        .selectAll(".winner")
         .data(function(d) { 
             return d.values;
         }, function(d) {
             return d.name;
         });
 
-    graphContainer.winnersBubbles.enter().append('circle')
+    graphContainer.winnersBubbles.enter()
+    .append('circle')
     .classed('winner', true)
     .attr('fill', function(d) {
         return nbviz.categoryFill(d.category); 
     })
-    .attr('cx', graphContainer.scales.xScale.rangeBand()/2) 
+    .attr('cx', graphContainer.scales.xScale.rangeBand()/2)
+    .attr('cy', graphContainer.dim.height + graphContainer.margin.bottom)
     .attr('r', graphContainer.scales.xScale.rangeBand()/2);
 
-    graphContainer.winnersBubbles.attr('cy', function(d, i) {
-            if (i in graphContainer.scales.yScale.domain()){
+    graphContainer.winnersBubbles
+    .transition().duration(2000)
+    .attr('cy', function(d, i) {
                 return graphContainer.scales.yScale(i);
-            }else{debugger;}
-             
-        });
+            });
 
-    graphContainer.winnersBubbles.exit().remove();
+    graphContainer.winnersBubbles.exit()
+    .transition().duration(2000)
+    .attr('cy', graphContainer.dim.height + graphContainer.margin.bottom )
+    .remove();
 };
 
 }(window.nbviz=window.nbviz || {}));

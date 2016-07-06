@@ -45,7 +45,7 @@ function ready(error, winnersData) {
   // Add barchart SVG to the DOM
   nbviz.buildBarchart(nbviz.data.countryData, nbviz.barchart);
   //Add timeline
-  nbviz.initGraphContainer('timeline', {top:20, right:20, bottom:60, left:40}, {interbar:.1, left:20, bottom:20}, '#nobel-time', 'timeline', 'timeline')
+  nbviz.initGraphContainer('timeline', {top:20, right:20, bottom:40, left:20}, {interbar:.1, left:20, bottom:20}, '#nobel-time', 'timeline', 'timeline')
   nbviz.buildTimeline(
     nbviz.nestDataByKey(winnersData, 'year', nbviz.timeline),
     nbviz.timeline
