@@ -208,10 +208,11 @@
 
   nbviz.updateScales = function(data, graphContainer){
     // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
-    graphContainer.scales.xScale.domain( d3.range(data.length) );
+    debugger;
+    graphContainer.scales.xScale.domain( graphContainer.data.range );
     graphContainer.scales.yScale.domain([0, d3.max(data, function(d){
-                                       return +d.value; })]);
-
+                                       return + d.value; })]);
+    debugger;
   };
 
   nbviz.customXScale = function(data, graphContainer){
@@ -242,23 +243,11 @@
     var countryGroups = nbviz.countryDim.group().all(); 
 
     // make main data-ball
-    var data = countryGroups.map( function(c) { 
-        // var cData = nbviz.data.countryData[c.key]; 
-        var value = c.value;
-        // if per-capita value then divide by pop. size
-        // if(nbviz.valuePerCapita){
-        //     value = value / cData.population; 
-        // }
-        return {
-            key: c.key, // e.g. Japan
-            value: value, // e.g. 19 (prizes)
-            // code: cData.alpha3Code, // e.g. JPN
-        };
-    })
+    var data = countryGroups
         .sort(function(a, b) { 
             return b.value - a.value; // descending
         });
-
+        data=data.filter(function(d){return d.value > 0});
     return data;
 };
 
