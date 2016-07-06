@@ -139,6 +139,17 @@
     });
 };
 
+  nbviz.onDataChange = function() {
+      var data = nbviz.getCountryData();
+      nbviz.updateBarchart(data,nbviz.barchart);
+      // nbviz.updateMap(data);
+      // nbviz.updateList(nbviz.countryDim.top(Infinity));
+      data = nbviz.nestDataByKey(nbviz.countryDim.top(Infinity), 'year', nbviz.timeline);
+      nbviz.updateTimeline(data, nbviz.timeline);
+  };
+
+
+
 
 
 // -----------------------------------------------------General---------------------------------------------
@@ -239,7 +250,7 @@
     return rangeBandGen
   };
 
-  nbviz.yRP = function(data, graphContainer) {
+  nbviz.yRoundPoints = function(data, graphContainer) {
     var dim = graphContainer.dim;
     var padding = graphContainer.padding;
     var yRP = d3.scale.ordinal()
@@ -248,7 +259,6 @@
     return yRP
   };
 
-//Généraliser yLinearScale à LinearScale 
   nbviz.yLinearScale = function(data, graphContainer) {
     var dim = graphContainer.dim;
     var margin = graphContainer.margin;
@@ -300,11 +310,9 @@
     svg.append('g').attr('class','y axis ' + graphContainer._class).attr("transform", "translate(" + yAxisPadding + "," + 0 + ")"); 
   };
 
-  nbviz.customXTicks = function(graphContainer) {
+  nbviz.customXTicks = function(graphContainer, tickFreq) {
     var axis = graphContainer.axis.xAxis;
     var scale = graphContainer.scales.xScale;
-    // var tickFreq=graphContainer.axis.xTicks 
-    var tickFreq=10;
     
     axis.tickValues(scale.domain().filter(
                 function(d,i){
@@ -330,7 +338,12 @@
         .transition().duration(nbviz.TRANS_DURATION)
         .call(graphContainer.axis.yAxis);
   };
-  
+
+
+// ------------------------------------------------Legend--------------------------------------
+
+
+
   nbviz.addLegend = function(graphContainer){
     var _options = nbviz.categories;//à généraliser a priori resetValue contient All pas top
     _options.shift(0);
@@ -359,15 +372,5 @@
     .attr('dy', '0.4em')
     .attr('x', 10);
 };
-
-
-  nbviz.onDataChange = function() {
-      var data = nbviz.getCountryData();
-      nbviz.updateBarchart(data,nbviz.barchart);
-      // nbviz.updateMap(data);
-      // nbviz.updateList(nbviz.countryDim.top(Infinity));
-      data = nbviz.nestDataByKey(nbviz.countryDim.top(Infinity), 'year', nbviz.timeline);
-      nbviz.updateTimeline(data, nbviz.timeline);
-  };
 
 }(window.nbviz=window.nbviz || {}));

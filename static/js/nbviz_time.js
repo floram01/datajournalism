@@ -17,10 +17,10 @@
     var svg = graphContainer.svg;
 
     graphContainer.scales.xScale = nbviz.xRangeBand(data, graphContainer);
-    graphContainer.scales.yScale = nbviz.yRP(data, graphContainer);
+    graphContainer.scales.yScale = nbviz.yRoundPoints(data, graphContainer);
     // create axis
     nbviz.genAxis(graphContainer);
-    nbviz.customXTicks(graphContainer);
+    nbviz.customXTicks(graphContainer, 10);
     nbviz.updateXAxis(data, graphContainer);
     
     //add legend

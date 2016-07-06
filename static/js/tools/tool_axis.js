@@ -1,0 +1,51 @@
+// applique immediatement une fonction à window.nbviz ou créé cet objet
+// la fonction associe à nbvz des helper functions, des variables, etc. qui seront partagés entre tous les 
+//scripts
+
+(function(nbviz){
+
+
+  nbviz.genAxis = function(graphContainer) {
+    var dim = graphContainer.dim;
+    var margin = graphContainer.margin;
+    var padding = graphContainer.padding;
+    var svg = graphContainer.svg;
+
+    var yAxisPadding = margin.left - padding.left//how to avoid this? more complex than it need to be
+    graphContainer.axis.xAxis = d3.svg.axis().scale(graphContainer.scales.xScale).orient("bottom");
+    graphContainer.axis.yAxis = d3.svg.axis().scale(graphContainer.scales.yScale).orient('left').ticks(10);
+
+    svg.append('g').attr('class','x axis ' + graphContainer._class).attr("transform", "translate(" + 0 + "," + dim.height + ")"); 
+    svg.append('g').attr('class','y axis ' + graphContainer._class).attr("transform", "translate(" + yAxisPadding + "," + 0 + ")"); 
+  };
+
+  nbviz.customXTicks = function(graphContainer, tickFreq) {
+    var axis = graphContainer.axis.xAxis;
+    var scale = graphContainer.scales.xScale;
+    
+    axis.tickValues(scale.domain().filter(
+                function(d,i){
+                  return !(d%tickFreq); 
+                })
+              );
+  };
+
+  nbviz.updateXAxis = function(data, graphContainer){
+
+    graphContainer.svg.select('.x.axis.'+ graphContainer._class)
+        .transition().duration(nbviz.TRANS_DURATION)
+        .call(graphContainer.axis.xAxis) 
+        .selectAll("text") 
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-65)");
+  };
+
+  nbviz.updateYAxis = function(data, graphContainer){
+    graphContainer.svg.select('.y.axis.'+ graphContainer._class)
+        .transition().duration(nbviz.TRANS_DURATION)
+        .call(graphContainer.axis.yAxis);
+  };
+
+}(window.nbviz=window.nbviz || {}));
