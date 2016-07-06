@@ -61,36 +61,11 @@
     return data;
 };
 
-  // set up the dimensions of the crossfilter
-  nbviz.makeFilterAndDimensions = function(winnersData, filters){
-    nbviz.filter=crossfilter(winnersData);
-    filters.forEach(function(f){
-      nbviz[f.dimension + 'Dim'] = nbviz.filter.dimension(function(o) {
-        return o[f.dimension];
-      });      
-    });
-  };
-
-  // // set up the dimensions of the crossfilter
-  // nbviz.makeFilterAndDimensions = function(winnersData){
-  //   nbviz.filter=crossfilter(winnersData);
-    
-  //   nbviz.categoryDim = nbviz.filter.dimension(function(o) {
-  //     return o.category;
-  //   });
-  //   nbviz.countryDim = nbviz.filter.dimension(function(o) {
-  //     return o.country;
-  //   });
-  //   nbviz.genderDim = nbviz.filter.dimension(function(o) {
-  //     return o.gender;
-  //   });
-  // };
-
 // based on a filterTool dimension crossfilter object extract the values of the dimension and add a resetValue
-  nbviz.listOptions = function(data, filterTool, _id, resetValue) {
+  nbviz.listOptions = function(data, filterTool, resetValue) {
     _options=[resetValue];
     filterTool.group().all().forEach(function(o){
-        _options.push(o[_id]);
+        _options.push(o.key);
     });
     return _options;
 };
@@ -98,13 +73,12 @@
 // populate a filter (locationID) with the values linked to a filterTool
 // use listOption
 // use onDataChange
-  nbviz.addFilter = function(data, _id, locationID, filterTool, resetValue, name){
-     
-    _options=nbviz.listOptions(data, filterTool, _id, resetValue);
+  nbviz.addFilter = function(data, filterParams){
+    _options=nbviz.listOptions(data, filterParams.filterTool, filterParams.resetValue);
     // if(_options[0].includes('All')){_options.shift(0)};//à généraliser a priori resetValue contient All pas top
-    nbviz[name] = _options;
+    nbviz[filterParams.dimension + 'Values'] = _options;
     
-    _filter = d3.select('#' + locationID);
+    _filter = d3.select('#' + filterParams.locationID);
     _filter
       .selectAll('options')
       .data(_options)
@@ -115,21 +89,25 @@
 
     _filter.on('change', function(d){
       var category = d3.select(this).property('value');
-      if (category===resetValue){
-          filterTool.filter();
+      if (category===filterParams.resetValue){
+          filterParams.filterTool.filter();
         } else {
-          filterTool.filter(category);
+          filterParams.filterTool.filter(category);
         };
       nbviz.onDataChange();
   });
 };
-  // iter though an array offilters object
- // {data:, _id:'key' of the crossfilter dimension object, locationID:'cssID select', filterTool:crossfilterDimensionObject, resetValue:nbviz.myCatResetValue, name:'myName'},
-  nbviz.addAllFilters = function(filters){
-    filters.forEach(function(o){
-      nbviz.addFilter(o.data, o._id, o.locationID, o.filterTool, o.resetValue, o.name);
+
+  // set up the dimensions of the crossfilter
+  nbviz.makeFilterAndDimensions = function(winnersData, filters){
+    nbviz.filter=crossfilter(winnersData);
+    filters.forEach(function(f){
+      f.filterTool = nbviz[f.dimension + 'Dim'] = nbviz.filter.dimension(function(o) {
+        return o[f.dimension];
+      });
+      nbviz.addFilter(winnersData, f);      
     });
-};
+  };
 
   nbviz.onDataChange = function() {
       var data = nbviz.getCountryData();

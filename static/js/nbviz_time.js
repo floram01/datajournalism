@@ -24,7 +24,7 @@
     nbviz.updateXAxis(data, graphContainer);
     
     //add legend
-    nbviz.addLegend(graphContainer);
+    nbviz.addLegend(graphContainer, 'category');
     nbviz.circleLegend(graphContainer);
     nbviz.textLegend(graphContainer);
     // data- join

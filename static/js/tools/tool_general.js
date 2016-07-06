@@ -29,8 +29,8 @@
   
   //return a color based on the index of an element in an array
   nbviz.categoryFill = function(category){
-    var i = nbviz.categories.indexOf(category);
-      return d3.hcl(i / nbviz.categories.length * 360, 60, 70);
+    var i = nbviz.categoryValues.indexOf(category);
+      return d3.hcl(i / nbviz.categoryValues.length * 360, 60, 70);
   };
 
 // get the graphContainer div bounding rect

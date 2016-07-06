@@ -13,21 +13,7 @@ function ready(error, winnersData) {
 
   // MAKE OUR FILTER AND ITS DIMENSIONS ==> improve abstraction
   // add filters
-  var _filters=[
-    {locationID:'cat-select select', dimension:'category', resetValue:nbviz.ALL_CATS},
-    {locationID:'gender-select select', dimension:'gender', resetValue:nbviz.ALL_GENDERS},
-    {locationID:'country-select select', dimension:'country', resetValue:nbviz.ALL_COUNTRIES}
-  ];
-
-  nbviz.makeFilterAndDimensions(winnersData, _filters);
-
-  nbviz.addAllFilters(
-    [
-      {data:winnersData, _id:'key', locationID:'cat-select select', filterTool:nbviz.categoryDim, resetValue:nbviz.ALL_CATS, name:'categories'},
-      {data:winnersData, _id:'key', locationID:'gender-select select', filterTool:nbviz.genderDim, resetValue:nbviz.ALL_GENDERS, name:'genders'},
-      {data:winnersData, _id:'key', locationID:'country-select select', filterTool:nbviz.countryDim, resetValue:nbviz.ALL_COUNTRIES, name:'countries'}
-    ]
-  );
+  nbviz.makeFilterAndDimensions(winnersData, nbviz.FILTERS);
   
   //GET BY COUNTRY DATA 
   // INITIALIZE MENU AND MAP
@@ -37,6 +23,7 @@ function ready(error, winnersData) {
   // nbviz.onDataChange();
   // Add barchart SVG to the DOM  
   
+  //change this so that it mainly goes in parameters
   nbviz.initGraphContainer(
     'barchart', {top:20, right:20, bottom:60, left:40}, {interbar:.1, left:20, bottom:20}, '#nobel-bar', 'barchart', 'barchart'
   );

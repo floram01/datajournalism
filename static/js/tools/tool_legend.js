@@ -4,13 +4,13 @@
 
 (function(nbviz){
 
-  nbviz.addLegend = function(graphContainer){
-    var _options = nbviz.categories;//à généraliser a priori resetValue contient All pas top
+  nbviz.addLegend = function(graphContainer, dimensionName){
+    var _options = nbviz[dimensionName + 'Values'];//à généraliser a priori resetValue contient All pas top
     _options.shift(0);
     graphContainer.legend = graphContainer.svg.append('g')
         .attr('transform', "translate(10, 10)")
         .attr('class', 'labels')
-        .selectAll('label').data(nbviz.categories)//à généraliser, notamment le shift
+        .selectAll('label').data(_options)//à généraliser, notamment le shift
         .enter().append('g')
         .attr('transform', function(d, i) {
             return "translate(0," + i * 10 + ")"; 
