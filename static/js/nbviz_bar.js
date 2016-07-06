@@ -74,10 +74,6 @@
     .attr('y', function(d){return graphContainer.scales.yScale(d.value);})
     .attr('x', function(d,i){return graphContainer.scales.xScale(i);});
     
-    //update the axis
-    nbviz.updateXAxis(data, graphContainer);
-    nbviz.updateYAxis(data, graphContainer);
-    
     //remove bars that are not bound to data
     //improvement: translate before exiting (with transition)
     bars.exit()

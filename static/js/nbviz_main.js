@@ -31,23 +31,28 @@ function ready(error, winnersData) {
     ]
   )
   
-  // STORE OUR COUNTRY-DATA DATASET
-  nbviz.data.winnersData = winnersData;
-  // STORE OUR COUNTRY-DATA DATASET
-  // nbviz.data.countryData = countryData;
   //GET BY COUNTRY DATA 
-  nbviz.data.countryData=nbviz.getCountryData();
   // INITIALIZE MENU AND MAP
   // nbviz.initMenu();
   // nbviz.initMap(worldMap, countryNames);
   // TRIGGER UPDATE WITH FULL WINNERS' DATASET
   // nbviz.onDataChange();
-  // Add barchart SVG to the DOM
-  nbviz.buildBarchart(nbviz.data.countryData, nbviz.barchart);
+  // Add barchart SVG to the DOM  
+  
+  nbviz.initGraphContainer(
+    'barchart', {top:20, right:20, bottom:60, left:40}, {interbar:.1, left:20, bottom:20}, '#nobel-bar', 'barchart', 'barchart'
+  );
+  nbviz.buildBarchart(
+    nbviz.getCountryData(),
+    nbviz.barchart
+  );
   //Add timeline
-  nbviz.initGraphContainer('timeline', {top:20, right:20, bottom:40, left:20}, {interbar:.1, left:20, bottom:20}, '#nobel-time', 'timeline', 'timeline')
+  
+  nbviz.initGraphContainer(
+    'timeline', {top:20, right:20, bottom:40, left:20}, {interbar:.1, left:20, bottom:20}, '#nobel-time', 'timeline', 'timeline'
+    );
   nbviz.buildTimeline(
     nbviz.nestDataByKey(winnersData, 'year', nbviz.timeline),
     nbviz.timeline
-  )
+  );
 }

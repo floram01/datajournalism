@@ -4,51 +4,18 @@
 
 (function(nbviz){
 
-  nbviz.data = {}; // our main data object
   nbviz.valuePerCapita = 0; // metric flag
   nbviz.activeCountry = null;
   nbviz.TRANS_DURATION = 1500; // length in ms for our transitions
   nbviz.MAX_CENTROID_RADIUS = 30;
   nbviz.MIN_CENTROID_RADIUS = 2;
   nbviz.COLORS = {palegold:'#E6BE8A'}; // any named colors we use
-  $EVE_API = 'http://localhost:5000/api/';
-
-  nbviz.barchart = {};// our main barchart object
-  nbviz.barchart.margin = {top:20, right:20, bottom:60, left:40};
-  nbviz.barchart.padding ={interbar:.1, left:20} 
-  nbviz.barchart.divID='#nobel-bar'
-  nbviz.barchart.svgID='barchart'
-  nbviz.barchart._class='barchart'
-
-  nbviz.timeline = {};// our main barchart object
-  nbviz.barchart.margin = {top:20, right:20, bottom:60, left:40};
-  nbviz.barchart.padding ={interbar:.1, left:20} 
-  nbviz.barchart.divID='#nobel-bar'
-  nbviz.barchart.svgID='barchart'
-  nbviz.barchart._class='barchart'
+  $EVE_API = 'http://localhost:5000/api/';//adress where the servor api is serving the database
 
   nbviz.ALL_CATS = 'All Categories';
   nbviz.ALL_GENDERS = 'All'
   nbviz.ALL_COUNTRIES='All Countries'
 
-  nbviz.TRANS_DURATION = 2000
-  
-  nbviz.categoryFill = function(category){
-    var i = nbviz.categories.indexOf(category);
-      return d3.hcl(i / nbviz.categories.length * 360, 60, 70);
-  };
-
-  nbviz.initGraphContainer = function(name, margins, padding, divID, svgID, _class){
-    nbviz[name] = o = {};
-    o.margin = {top:margins.top, right:margins.right, left:margins.left, bottom:margins.bottom};
-    o.padding = {interbar : padding.interbar, left : padding.left, bottom : padding.bottom};
-    o.divID = divID;
-    o.svgID = svgID;
-    o._class = _class;
-    o
-
-    return o
-  };
 
 // if items in data then we're dealing with a mongoDB object and we take its items
 // else we have a simple object and return it directly
@@ -58,21 +25,28 @@
           callback(null, data._items); 
         }
         else{
-            callback(null, data);
+          callback(null, data);
         }
 
         if(error){
-            return callback(error);
+          return callback(error);
         }
       });
   };
 
+
+
+  // -----------------------------------DATA------------------------------------------------------
+
+
+  // nest data (entries) sharing same dimension 'key'
+  // build or update a data object in graphContainer containing the nested data and some parameters
   nbviz.nestDataByKey = function(entries, key, graphContainer) {          
     graphContainer.data = graphContainer.data || {};
 
     graphContainer.data.main = data = d3.nest()
     .key(function(w){return w[key]})
-    .entries(entries)
+    .entries(entries);
 
     graphContainer.data.min = d3.min(data, function(d){return d.key;});
     graphContainer.data.max = d3.max(data, function(d){return d.key;});
@@ -92,14 +66,20 @@
     return data
   };
 
-  nbviz.initialize = function(graphContainer, data) {
-    graphContainer.svg = graphContainer.svg || {};
-    graphContainer.scales = graphContainer.scales || {};
-    graphContainer.axis = graphContainer.axis || {};
-    graphContainer.dim = graphContainer.dim || {};
-    
-  };
+// sort the data grouped by country and drop countries with value of 0
+  nbviz.getCountryData = function() {
+    var countryGroups = nbviz.countryDim.group().all(); 
 
+    // make main data-ball
+    var data = countryGroups
+        .sort(function(a, b) { 
+            return b.value - a.value; // descending
+        });
+        data=data.filter(function(d){return d.value > 0});
+    return data;
+};
+
+  // set up the dimensions of the crossfilter
   nbviz.makeFilterAndDimensions = function(winnersData){
     nbviz.filter=crossfilter(winnersData);
     
@@ -113,6 +93,93 @@
       return o.gender;
     });
   };
+
+// based on a filterTool dimension crossfilter object extract the values of the dimension and add a resetValue
+  nbviz.listOptions = function(data, filterTool, _id, resetValue) {
+    _options=[resetValue];
+    filterTool.group().all().forEach(function(o){
+        _options.push(o[_id]);
+    });
+    return _options;
+};
+
+// populate a filter (locationID) with the values linked to a filterTool
+// use listOption
+// use onDataChange
+  nbviz.addFilter = function(data, _id, locationID, filterTool, resetValue, name){
+     
+    _options=nbviz.listOptions(data, filterTool, _id, resetValue);
+    // if(_options[0].includes('All')){_options.shift(0)};//à généraliser a priori resetValue contient All pas top
+    nbviz[name] = _options;
+    
+    _filter = d3.select('#' + locationID);
+    _filter
+      .selectAll('options')
+      .data(_options)
+      .enter()
+      .append('option')
+      .attr('value', function(d){return d;})
+      .html(function(d){return d;});
+
+    _filter.on('change', function(d){
+      var category = d3.select(this).property('value');
+      if (category===resetValue){
+          filterTool.filter();
+        } else {
+          filterTool.filter(category);
+        };
+      nbviz.onDataChange();
+  });
+};
+  // iter though an array offilters object
+ // {data:, _id:'key' of the crossfilter dimension object, locationID:'cssID select', filterTool:crossfilterDimensionObject, resetValue:nbviz.myCatResetValue, name:'myName'},
+  nbviz.addAllFilters = function(filters){
+    filters.forEach(function(o){
+      nbviz.addFilter(o.data, o._id, o.locationID, o.filterTool, o.resetValue, o.name);
+    });
+};
+
+
+
+// -----------------------------------------------------General---------------------------------------------
+
+
+
+
+  // build a graphContainer object with name "name" and corresponding parameters
+  //margins and padding are objects, other parameters are strings
+  nbviz.initGraphContainer = function(name, margins, padding, divID, svgID, _class){
+    nbviz[name] = o = {};
+    o.margin = {top:margins.top, right:margins.right, left:margins.left, bottom:margins.bottom};
+    o.padding = {interbar : padding.interbar, left : padding.left, bottom : padding.bottom};
+    o.divID = divID;
+    o.svgID = svgID;
+    o._class = _class;
+    o
+
+    return o
+  };
+
+  nbviz.initialize = function(graphContainer, data) {
+    graphContainer.svg = graphContainer.svg || {};
+    graphContainer.scales = graphContainer.scales || {};
+    graphContainer.axis = graphContainer.axis || {};
+    graphContainer.dim = graphContainer.dim || {};
+    
+  };
+  
+  //return a color based on the index of an element in an array
+  nbviz.categoryFill = function(category){
+    var i = nbviz.categories.indexOf(category);
+      return d3.hcl(i / nbviz.categories.length * 360, 60, 70);
+  };
+
+
+
+
+// -----------------------------------------Build SVG and chart container with appropriate margins------------
+
+
 
 // get the graphContainer div bounding rect
   nbviz.getDivByID = function(graphContainer) {
@@ -148,6 +215,18 @@
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
   };
 
+
+
+
+
+// ---------------------------------------Scales------------------------------------
+
+
+
+
+
+
+
 // Ajouter toutes les autres scales susceptibles d'être utilisées au fur et à mesure
   nbviz.xRangeBand = function(data, graphContainer) {
     var dim = graphContainer.dim;
@@ -179,6 +258,34 @@
     return yLinearScale
   };
 
+  nbviz.updateScales = function(data, graphContainer){
+    // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
+    graphContainer.scales.xScale.domain( graphContainer.data.range );
+    graphContainer.scales.yScale.domain([0, d3.max(data, function(d){
+                                       return + d.value; })]);
+  };
+
+  nbviz.customXScale = function(data, graphContainer){
+    // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
+
+    graphContainer.scales.xScale.domain( data.map(function(d){ return d.key; }) );
+  };
+
+
+
+
+
+
+// ---------------------------------------------------------Axis--------------------------------------------
+
+
+
+
+
+
+
+
+
   nbviz.genAxis = function(graphContainer) {
     var dim = graphContainer.dim;
     var margin = graphContainer.margin;
@@ -206,21 +313,6 @@
               );
   };
 
-  nbviz.updateScales = function(data, graphContainer){
-    // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
-    debugger;
-    graphContainer.scales.xScale.domain( graphContainer.data.range );
-    graphContainer.scales.yScale.domain([0, d3.max(data, function(d){
-                                       return + d.value; })]);
-    debugger;
-  };
-
-  nbviz.customXScale = function(data, graphContainer){
-    // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
-
-    graphContainer.scales.xScale.domain( data.map(function(d){ return d.key; }) );
-  };
-
   nbviz.updateXAxis = function(data, graphContainer){
 
     graphContainer.svg.select('.x.axis.'+ graphContainer._class)
@@ -238,64 +330,14 @@
         .transition().duration(nbviz.TRANS_DURATION)
         .call(graphContainer.axis.yAxis);
   };
-
-  nbviz.getCountryData = function() {
-    var countryGroups = nbviz.countryDim.group().all(); 
-
-    // make main data-ball
-    var data = countryGroups
-        .sort(function(a, b) { 
-            return b.value - a.value; // descending
-        });
-        data=data.filter(function(d){return d.value > 0});
-    return data;
-};
-
-  nbviz.listOptions = function(data, filterTool, _id, resetValue) {
-    _options=[resetValue];
-    filterTool.group().all().forEach(function(o){
-        _options.push(o[_id]);
-    });
-    return _options;
-};
-
-  nbviz.addFilter = function(data, _id, locationID, filterTool, resetValue, name){
-     
-    _options=nbviz.listOptions(data, filterTool, _id, resetValue);
-    if(_options[0].includes('All')){_options.pop(0)};//à généraliser a priori resetValue contient All pas top
-    nbviz[name] = _options;
-    
-    _filter = d3.select('#' + locationID);
-    _filter
-      .selectAll('options')
-      .data(_options)
-      .enter()
-      .append('option')
-      .attr('value', function(d){return d;})
-      .html(function(d){return d;});
-
-    _filter.on('change', function(d){
-      var category = d3.select(this).property('value');
-      if (category===resetValue){
-          filterTool.filter();
-        } else {
-          filterTool.filter(category);
-        };
-      nbviz.onDataChange();
-  });
-};
-  
-  nbviz.addAllFilters = function(filters){
-    filters.forEach(function(o){
-      nbviz.addFilter(o.data, o._id, o.locationID, o.filterTool, o.resetValue, o.name);
-    });
-};
   
   nbviz.addLegend = function(graphContainer){
+    var _options = nbviz.categories;//à généraliser a priori resetValue contient All pas top
+    _options.shift(0);
     graphContainer.legend = graphContainer.svg.append('g')
         .attr('transform', "translate(10, 10)")
         .attr('class', 'labels')
-        .selectAll('label').data(nbviz.categories)//à généraliser 
+        .selectAll('label').data(nbviz.categories)//à généraliser, notamment le shift
         .enter().append('g')
         .attr('transform', function(d, i) {
             return "translate(0," + i * 10 + ")"; 
