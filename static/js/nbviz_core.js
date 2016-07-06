@@ -41,7 +41,7 @@
   nbviz.initGraphContainer = function(name, margins, padding, divID, svgID, _class){
     nbviz[name] = o = {};
     o.margin = {top:margins.top, right:margins.right, left:margins.left, bottom:margins.bottom};
-    o.padding = {interbar : padding.interbar, left : padding.left};
+    o.padding = {interbar : padding.interbar, left : padding.left, bottom : padding.bottom};
     o.divID = divID;
     o.svgID = svgID;
     o._class = _class;
@@ -76,7 +76,7 @@
 
     graphContainer.data.min = d3.min(data, function(d){return d.key;});
     graphContainer.data.max = d3.max(data, function(d){return d.key;});
-    graphContainer.data.range = d3.range(graphContainer.data.min, graphContainer.data.max);
+    graphContainer.data.range = d3.range(+ graphContainer.data.min, + graphContainer.data.max + 1);
     graphContainer.data.maxLength = d3.max(data, function(d){return d.values.length}) + 1;
     return data
   };
@@ -159,11 +159,10 @@
   nbviz.yRP = function(data, graphContainer) {
     var dim = graphContainer.dim;
     var padding = graphContainer.padding;
-
+    debugger;
     var yRP = d3.scale.ordinal()
     .domain(d3.range(graphContainer.data.maxLength))
     .rangeRoundPoints([dim.height, padding.bottom])
-
     return yRP
   };
 
@@ -171,7 +170,6 @@
   nbviz.yLinearScale = function(data, graphContainer) {
     var dim = graphContainer.dim;
     var margin = graphContainer.margin;
-
     var yLinearScale = d3.scale.linear()
     .domain([0, d3.max(data, function(d){return d.value;})])
     .rangeRound([dim.height, margin.bottom])
@@ -271,7 +269,6 @@
     _options=nbviz.listOptions(data, filterTool, _id, resetValue);
     if(_options[0].includes('All')){_options.pop(0)};
     nbviz[name] = _options;//à généraliser si pas de resetValue
-    debugger;
     _filter = d3.select('#' + locationID);
     _filter
       .selectAll('options')
@@ -313,6 +310,15 @@
     graphContainer.legend.append('circle')
       .attr('fill', (nbviz.categoryFill)) 
       .attr('r', graphContainer.scales.xScale.rangeBand()/2);
+};
+  
+  nbviz.textLegend = function(graphContainer){
+    graphContainer.legend.append('text')
+    .text(function(d) {
+        return d;
+    })
+    .attr('dy', '0.4em')
+    .attr('x', 10);
 };
 
 

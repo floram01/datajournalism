@@ -17,7 +17,7 @@
     var svg = graphContainer.svg;
 
     graphContainer.scales.xScale = nbviz.xRBTime(data, graphContainer);
-    graphContainer.scales.yScale = nbviz.yLinearScale(data, graphContainer);
+    graphContainer.scales.yScale = nbviz.yRP(data, graphContainer);
     // create axis
     nbviz.genAxis(graphContainer);
     nbviz.customXTicks(graphContainer);
@@ -25,59 +25,52 @@
     //add legend
     nbviz.addLegend(graphContainer);
     nbviz.circleLegend(graphContainer);
+    nbviz.textLegend(graphContainer);
     // data- join
-    debugger;
-    var bars=svg.selectAll('rect').data(data, function(d){return d.key;});
-    // create bars for data points that are not yet bound to a DOM element
-    bars.enter()
-    .append('rect')
-    .classed(graphContainer._class, true)
-    // update all bars that are bound to a DOM element
-    bars
-    .transition().duration(nbviz.TRANS_DURATION)
-    .attr('height', function(d){return dim.height - graphContainer.scales.yScale(d.value);})
-    .attr('width', barWidth)
-    .attr('y', function(d){return graphContainer.scales.yScale(d.value);})
-    .attr('x', function(d,i){return graphContainer.scales.xScale(i);});
-    //update the axis
-    nbviz.customXScale(data, graphContainer);
-    nbviz.updateAxis(data, graphContainer);
-    //remove bars that are not bound to data
-    //improvement: translate before exiting (with transition)
-    bars.exit()
-    .remove
+    nbviz.updateTimeline(data,graphContainer);
 
-  };
+};
 
-  nbviz.updateBarchart = function(data, graphContainer) {
+  nbviz.updateTimeline = function(data, graphContainer) {
     var svg=graphContainer.svg;
     var dim=graphContainer.dim;
-    var barWidth = graphContainer.scales.xScale.rangeBand();
-    nbviz.updateScales(data, graphContainer);
-    var barWidth = graphContainer.scales.xScale.rangeBand();
+    graphContainer.yearsLabels = svg.selectAll(".year")
+            .data(data, function(d) {
+                return d.key; 
+            });
 
-    // data- join
-    var bars=svg.selectAll('rect').data(data);
-    // create bars for data points that are not yet bound to a DOM element
-    bars.enter()
-    .append('rect')
-    .classed(graphContainer._class, true)
-    // update all bars that are bound to a DOM element
-    bars
-    .transition().duration(nbviz.TRANS_DURATION)
-    .attr('height', function(d){return dim.height - graphContainer.scales.yScale(d.value);})
-    .attr('width', barWidth)
-    .attr('y', function(d){return graphContainer.scales.yScale(d.value);})
-    // .attr('x', function(d,i){return graphContainer.scales.xScale(i);});
-    //update the axis
-    nbviz.updateAxis(data, graphContainer);
-    //remove bars that are not bound to data
-    //improvement: translate before exiting (with transition)
-    bars.exit()
-    .remove
+    graphContainer.yearsLabels.enter().append('g')
+        .classed('year', true)
+        .attr('name', function(d) { return d.key;})
+        .attr("transform", function(year) {
+            return "translate(" + graphContainer.scales.xScale(+year.key) + ",0)";
+        });
 
-    nbviz.customXScale(data, graphContainer);
-    nbviz.updateAxis(data, graphContainer);
-  };
+    graphContainer.yearsLabels.exit().remove();
+
+    graphContainer.winnersBubbles = graphContainer.yearsLabels.selectAll(".winner")
+        .data(function(d) { 
+            return d.values;
+        }, function(d) {
+            return d.name;
+        });
+
+    graphContainer.winnersBubbles.enter().append('circle')
+    .classed('winner', true)
+    .attr('fill', function(d) {
+        return nbviz.categoryFill(d.category); 
+    })
+    .attr('cx', graphContainer.scales.xScale.rangeBand()/2) 
+    .attr('r', graphContainer.scales.xScale.rangeBand()/2);
+
+    graphContainer.winnersBubbles.attr('cy', function(d, i) {
+            if (i in graphContainer.scales.yScale.domain()){
+                return graphContainer.scales.yScale(i);
+            }else{debugger;}
+             
+        });
+
+    graphContainer.winnersBubbles.exit().remove();
+};
 
 }(window.nbviz=window.nbviz || {}));

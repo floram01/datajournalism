@@ -91,3 +91,7 @@ a:hover {
     stroke: #000;
     shape-rendering: crispEdges;
 }
+
+ .labels text{
+    font-size: 12px;
+ }
