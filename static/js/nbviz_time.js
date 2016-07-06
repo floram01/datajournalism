@@ -36,8 +36,8 @@
     var svg=graphContainer.svg;
     var dim=graphContainer.dim;
     graphContainer.yearsLabels = svg
-            .append('g')
-            .attr('id','years')
+            // .append('g')
+            // .attr('id','years');
             .selectAll(".year")
             .data(data, function(d) {
                 return d.key; 
@@ -47,10 +47,18 @@
         .classed('year', true)
         .attr('name', function(d) { return d.key;})
         .attr("transform", function(year) {
+            return "translate(" + graphContainer.scales.xScale(+year.key) + "," +graphContainer.dim.height + graphContainer.margin.bottom*2 + ")";
+        })
+        .transition().duration(nbviz.TRANS_DURATION)
+        .attr("transform", function(year) {
             return "translate(" + graphContainer.scales.xScale(+year.key) + ",0)";
         });
 
-    graphContainer.yearsLabels.exit().remove();
+    graphContainer.yearsLabels.exit().transition().duration(nbviz.TRANS_DURATION)
+    .attr("transform", function(year) {
+        return "translate(" + 0 + "," + graphContainer.dim.height + graphContainer.margin.bottom*2 + ")";
+    })
+    .remove();
 
     graphContainer.winnersBubbles = graphContainer.yearsLabels
         .selectAll(".winner")
@@ -67,18 +75,18 @@
         return nbviz.categoryFill(d.category); 
     })
     .attr('cx', graphContainer.scales.xScale.rangeBand()/2)
-    .attr('cy', graphContainer.dim.height + graphContainer.margin.bottom)
+    .attr('cy', graphContainer.dim.height + graphContainer.margin.bottom*2)
     .attr('r', graphContainer.scales.xScale.rangeBand()/2);
 
     graphContainer.winnersBubbles
-    .transition().duration(2000)
+    .transition().duration(nbviz.TRANS_DURATION)
     .attr('cy', function(d, i) {
                 return graphContainer.scales.yScale(i);
             });
 
     graphContainer.winnersBubbles.exit()
-    .transition().duration(2000)
-    .attr('cy', graphContainer.dim.height + graphContainer.margin.bottom )
+    .transition().duration(nbviz.TRANS_DURATION)
+    .attr('cy', graphContainer.dim.height + graphContainer.margin.bottom*2 )
     .remove();
 };
 

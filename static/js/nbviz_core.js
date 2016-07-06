@@ -7,7 +7,7 @@
   nbviz.data = {}; // our main data object
   nbviz.valuePerCapita = 0; // metric flag
   nbviz.activeCountry = null;
-  nbviz.TRANS_DURATION = 2000; // length in ms for our transitions
+  nbviz.TRANS_DURATION = 1500; // length in ms for our transitions
   nbviz.MAX_CENTROID_RADIUS = 30;
   nbviz.MIN_CENTROID_RADIUS = 2;
   nbviz.COLORS = {palegold:'#E6BE8A'}; // any named colors we use
