@@ -44,7 +44,7 @@
   nbviz.customXScale = function(data, graphContainer){
     // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
 
-    graphContainer.scales.xScale.domain( data.map(function(d){ return d.key; }) );
+    graphContainer.scales.xScale.domain( data.map(function(d){ return d[graphContainer._key]; }) );
   };
 
 

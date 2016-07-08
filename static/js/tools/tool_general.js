@@ -6,15 +6,15 @@
 
   // build a graphContainer object with name "name" and corresponding parameters
   //margins and padding are objects, other parameters are strings
-  nbviz.initGraphContainer = function(name, margins, padding, divID, svgID, _class){
-    nbviz[name] = o = {};
-    o.margin = {top:margins.top, right:margins.right, left:margins.left, bottom:margins.bottom};
-    o.padding = {interbar : padding.interbar, left : padding.left, bottom : padding.bottom};
-    o.divID = divID;
-    o.svgID = svgID;
-    o._class = _class;
-    o
-
+  nbviz.initGraphContainer = function(chart){
+    nbviz[chart._id] = o = {};
+    o.margin = {top:chart.margins.top, right:chart.margins.right, left:chart.margins.left, bottom:chart.margins.bottom};
+    o.padding = {interbar : chart.padding.interbar, left : chart.padding.left, bottom : chart.padding.bottom};
+    o.divID = chart.divID;
+    o.svgID = chart._id;
+    o._class = chart._id;
+    o._key = chart._key;
+    o.xTicksFreq = chart.xTicksFreq||1;
     return o
   };
 

@@ -19,13 +19,14 @@
     svg.append('g').attr('class','y axis ' + graphContainer._class).attr("transform", "translate(" + yAxisPadding + "," + 0 + ")"); 
   };
 
-  nbviz.customXTicks = function(graphContainer, tickFreq) {
+//generalize to customTicks?Or add customYTicks
+  nbviz.customXTicks = function(graphContainer) {
     var axis = graphContainer.axis.xAxis;
     var scale = graphContainer.scales.xScale;
     
     axis.tickValues(scale.domain().filter(
                 function(d,i){
-                  return !(d%tickFreq); 
+                  return !(d%graphContainer.xTicksFreq); 
                 })
               );
   };

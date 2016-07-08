@@ -6,71 +6,72 @@
 //improvements: generalise more elements in core, factorise between build and update
   nbviz.buildTimeline = function(data, graphContainer) {
     // add y scale
-    var padding = graphContainer.padding;
-    var margin = graphContainer.margin;
 
     nbviz.initialize(graphContainer, data);
-
     nbviz.addSVGtoDiv(graphContainer);
-
-    var dim = graphContainer.dim;
-    var svg = graphContainer.svg;
 
     graphContainer.scales.xScale = nbviz.xRangeBand(data, graphContainer);
     graphContainer.scales.yScale = nbviz.yRoundPoints(data, graphContainer);
+    
     // create axis
     nbviz.genAxis(graphContainer);
-    nbviz.customXTicks(graphContainer, 10);
+    nbviz.customXTicks(graphContainer);
     nbviz.updateXAxis(data, graphContainer);
     
     //add legend
     nbviz.addLegend(graphContainer, 'category');
     nbviz.circleLegend(graphContainer);
     nbviz.textLegend(graphContainer);
+    
     // data- join
     nbviz.updateTimeline(data,graphContainer);
 
 };
 
   nbviz.updateTimeline = function(data, graphContainer) {
-    var svg=graphContainer.svg;
-    var dim=graphContainer.dim;
-    graphContainer.yearsLabels = svg
+    //replace key by graphContainer.key
+    var svg = graphContainer.svg;
+    var dim = graphContainer.dim;
+    var _key = graphContainer._key;
+
+    graphContainer.xTime = svg
             // .append('g')
             // .attr('id','years');
-            .selectAll(".year")
+            .selectAll(".xTime")
             .data(data, function(d) {
-                return d.key; 
+                return d[_key]; 
             });
 
-    graphContainer.yearsLabels.enter().append('g')
-        .classed('year', true)
-        .attr('name', function(d) { return d.key;})
-        .attr("transform", function(year) {
-            return "translate(" + graphContainer.scales.xScale(+year.key) + "," +graphContainer.dim.height + graphContainer.margin.bottom*2 + ")";
+    graphContainer.xTime.enter().append('g')
+        .classed('xTime', true)
+        .attr('name', function(d) { return d[_key];})
+        .attr("transform", function(time) {
+            return "translate(" + graphContainer.scales.xScale(+time[_key]) + "," +graphContainer.dim.height + graphContainer.margin.bottom*2 + ")";
         })
         .transition().duration(nbviz.TRANS_DURATION)
-        .attr("transform", function(year) {
-            return "translate(" + graphContainer.scales.xScale(+year.key) + ",0)";
+        .attr("transform", function(time) {
+            return "translate(" + graphContainer.scales.xScale(+time[_key]) + ",0)";
         });
 
-    graphContainer.yearsLabels.exit().transition().duration(nbviz.TRANS_DURATION)
-    .attr("transform", function(year) {
+    graphContainer.xTime.exit().transition().duration(nbviz.TRANS_DURATION)
+    .attr("transform", function(time) {
         return "translate(" + 0 + "," + graphContainer.dim.height + graphContainer.margin.bottom*2 + ")";
     })
     .remove();
 
-    graphContainer.winnersBubbles = graphContainer.yearsLabels
-        .selectAll(".winner")
+// A generaliser values and name
+    graphContainer.bubbles = graphContainer.xTime
+        .selectAll(".bubbleTime")
         .data(function(d) { 
             return d.values;
         }, function(d) {
             return d.name;
         });
 
-    graphContainer.winnersBubbles.enter()
+// A generaliser category
+    graphContainer.bubbles.enter()
     .append('circle')
-    .classed('winner', true)
+    .classed('bubbleTime', true)
     .attr('fill', function(d) {
         return nbviz.categoryFill(d.category); 
     })
@@ -78,13 +79,13 @@
     .attr('cy', graphContainer.dim.height + graphContainer.margin.bottom*2)
     .attr('r', graphContainer.scales.xScale.rangeBand()/2);
 
-    graphContainer.winnersBubbles
+    graphContainer.bubbles
     .transition().duration(nbviz.TRANS_DURATION)
     .attr('cy', function(d, i) {
                 return graphContainer.scales.yScale(i);
             });
 
-    graphContainer.winnersBubbles.exit()
+    graphContainer.bubbles.exit()
     .transition().duration(nbviz.TRANS_DURATION)
     .attr('cy', graphContainer.dim.height + graphContainer.margin.bottom*2 )
     .remove();

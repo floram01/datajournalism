@@ -51,7 +51,6 @@
 // sort the data grouped by country and drop countries with value of 0
   nbviz.getCountryData = function() {
     var countryGroups = nbviz.countryDim.group().all(); 
-
     // make main data-ball
     var data = countryGroups
         .sort(function(a, b) { 
@@ -108,7 +107,8 @@
       nbviz.addFilter(winnersData, f);      
     });
   };
-
+// to generalize iterating through all the graphs and updating the data, the data getter function has to be linked to 
+//the graphContainer itself
   nbviz.onDataChange = function() {
       var data = nbviz.getCountryData();
       nbviz.updateBarchart(data,nbviz.barchart);

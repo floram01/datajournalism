@@ -16,7 +16,7 @@
             return "translate(0," + i * 10 + ")"; 
         });
 };
-  
+  // fill à généraliser, nbviz.categoryFill ne dépend pas du graphContainer et n'est pas un param d'add legend
   nbviz.circleLegend = function(graphContainer){
     graphContainer.legend.append('circle')
       .attr('class', 'legend') 

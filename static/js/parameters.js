@@ -23,7 +23,22 @@
     {locationID:'country-select select', dimension:'country', resetValue:nbviz.ALL_COUNTRIES}
   ];
 
-  nbviz.BARCHART = 
+  nbviz.BARCHART = {
+    _id:'barchart',
+    margins: {top:20, right:20, bottom:60, left:40},
+    padding: {interbar:.1, left:20, bottom:20},
+    divID: '#nobel-bar',
+    _key:'key'
+  };
+
+  nbviz.TIMELINE = {
+    _id:'timeline',
+    margins: {top:20, right:20, bottom:40, left:20},
+    padding: {interbar:.1, left:20, bottom:20},
+    divID: '#nobel-time',
+    xTicksFreq:'10',
+    _key:'key'
+  }; 
 
 
 }(window.nbviz=window.nbviz || {}));

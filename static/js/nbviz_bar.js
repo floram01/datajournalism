@@ -7,8 +7,8 @@
   nbviz.buildBarchart = function(data, graphContainer) {
     nbviz.addDataInfo(data, 'key', graphContainer);
     // add y scale
-    var padding = graphContainer.padding;
-    var margin = graphContainer.margin;
+    // var padding = graphContainer.padding;
+    // var margin = graphContainer.margin;
 
     nbviz.initialize(graphContainer, data);
 
@@ -24,7 +24,9 @@
     var barWidth = graphContainer.scales.xScale.rangeBand();
 
     // create axis
-    nbviz.genAxis(graphContainer)
+    nbviz.genAxis(graphContainer);
+
+    // nbviz.updateBarchart(data, graphContainer);
 
     // data- join
     var bars=svg.selectAll('rect').data(data, function(d){return d.key;});
@@ -40,7 +42,7 @@
     .attr('y', function(d){return graphContainer.scales.yScale(d.value);})
     .attr('x', function(d,i){return graphContainer.scales.xScale(i);});
     //update the axis
-    nbviz.customXScale(data, graphContainer);
+    nbviz.customXScale(data, graphContainer,'key');
     nbviz.updateXAxis(data, graphContainer);
     nbviz.updateYAxis(data, graphContainer);
     //remove bars that are not bound to data
@@ -60,11 +62,13 @@
     var barWidth = graphContainer.scales.xScale.rangeBand();
     
     // data- join
-    var bars=svg.selectAll('rect').data(data);
+    // provoque toujours bug au moment de l'update?
+    var bars=svg.selectAll('rect').data(data, function(d){return d[graphContainer._key];});
+
     // create bars for data points that are not yet bound to a DOM element
     bars.enter()
     .append('rect')
-    .classed(graphContainer._class, true)
+    .classed(graphContainer._class, true);
     
     // update all bars that are bound to a DOM element
     bars
