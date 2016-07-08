@@ -20,7 +20,7 @@
     </div>
     <!-- 3. THE PLACEHOLDERS FOR OUR VISUAL COMPONENTS  -->
     <div id="nbviz">
-  <!-- BEGIN MENU BAR -->
+  <!-- BEGIN MENU BAR a factoriser dans une fonction avec params filtres -->
   <div id="nobel-menu">
     <div id="cat-select">
       Category
@@ -134,17 +134,18 @@
     <script src="static/lib/d3.js"></script>
     <script src="static/lib/d3-queue.js"></script>
     <script src="static/lib/crossfilter.js"></script>
-    <!-- THE JAVASCRIPT TOOLS -->
-    <script src="static/js/tools/tool_data.js"></script>
-    <script src="static/js/tools/tool_general.js"></script>
-    <script src="static/js/tools/tool_scales.js"></script>
-    <script src="static/js/tools/tool_axis.js"></script>
-    <script src="static/js/tools/tool_legend.js"></script>
     <!-- THE JAVASCRIPT FOR OUR NOBEL ELEMENTS -->
-    <!-- <script src="static/js/nbviz_core.js"></script> -->
+    <!-- THE JAVASCRIPT DATA TOOLS -->
+    <script src="static/js/tools/data.js"></script>
+    <!-- THE JAVASCRIPT FOR OUR NOBEL ELEMENTS -->
     <script src="static/js/parameters.js"></script>
-    <script src="static/js/nbviz_map.js"></script>
-    <script src="static/js/nbviz_bar.js"></script>
-    <script src="static/js/nbviz_time.js"></script>
-    <script src="static/js/nbviz_main.js"></script>
+    <!-- THE JAVASCRIPT TOOLS -->
+    <script src="static/js/tools/general.js"></script>
+    <script src="static/js/tools/scales.js"></script>
+    <script src="static/js/tools/axis.js"></script>
+    <script src="static/js/tools/legend.js"></script>
+    <script src="static/js/tools/map.js"></script>
+    <script src="static/js/tools/barchart.js"></script>
+    <script src="static/js/tools/timeline.js"></script>
+    <script src="static/js/tools/main.js"></script>
 </body>

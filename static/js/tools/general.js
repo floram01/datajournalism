@@ -15,6 +15,12 @@
     o._class = chart._id;
     o._key = chart._key;
     o.xTicksFreq = chart.xTicksFreq||1;
+    o.timeID = chart.timeID||null;
+    o.groupID = chart.groupID||null;
+    o._type = chart._type;
+    o.dataGetter = chart.dataGetter;
+    o.dataGetterParams = chart.dataGetterParams||{};
+
     return o
   };
 

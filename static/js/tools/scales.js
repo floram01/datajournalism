@@ -8,9 +8,10 @@
   nbviz.xRangeBand = function(data, graphContainer) {
     var dim = graphContainer.dim;
     var padding = graphContainer.padding;
+    var _range = graphContainer.data.valueRange || graphContainer.data.pointRange
 
     var rangeBandGen = d3.scale.ordinal()
-    .domain(graphContainer.data.range)
+    .domain(_range)
     .rangeRoundBands([padding.left, dim.width], padding.interbar)
 
     return rangeBandGen
@@ -20,7 +21,7 @@
     var dim = graphContainer.dim;
     var padding = graphContainer.padding;
     var yRP = d3.scale.ordinal()
-    .domain(d3.range(graphContainer.data.maxLength))
+    .domain(d3.range(graphContainer.data.maxGroupLength))
     .rangeRoundPoints([dim.height, padding.bottom])
     return yRP
   };
@@ -36,7 +37,7 @@
 
   nbviz.updateScales = function(data, graphContainer){
     // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
-    graphContainer.scales.xScale.domain( graphContainer.data.range );
+    graphContainer.scales.xScale.domain( graphContainer.data.valueRange || graphContainer.data.pointRange );
     graphContainer.scales.yScale.domain([0, d3.max(data, function(d){
                                        return + d.value; })]);
   };

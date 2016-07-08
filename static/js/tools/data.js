@@ -23,40 +23,50 @@
 
   // nest data (entries) sharing same dimension 'key'
   // build or update a data object in graphContainer containing the nested data and some parameters
-  nbviz.nestDataByKey = function(entries, key, graphContainer) {          
-    graphContainer.data = graphContainer.data || {};
+  nbviz.nestDataByKey = function(graphContainer) {          
+    var _dim = graphContainer.dataGetterParams.groupDim;
+    var entries = nbviz[_dim + 'Dim'].top(Infinity);
+    var _key = graphContainer.timeID;
 
-    graphContainer.data.main = data = d3.nest()
-    .key(function(w){return w[key]})
+    var data = d3.nest()
+    .key(function(w){return w[_key]})
     .entries(entries);
 
-    graphContainer.data.min = d3.min(data, function(d){return d.key;});
-    graphContainer.data.max = d3.max(data, function(d){return d.key;});
-    graphContainer.data.range = d3.range(+ graphContainer.data.min, + graphContainer.data.max + 1);
-    graphContainer.data.maxLength = d3.max(data, function(d){return d.values.length}) + 1;
     return data
   };
 
 //range à généraliser en fonction des besoins identifiés au fur et à mesure
-  nbviz.addDataInfo = function(data, key, graphContainer) {          
+  nbviz.addDataBarchartInfo = function(data, graphContainer) {          
     graphContainer.data = graphContainer.data || {};
-
-    graphContainer.data.min = d3.min(data, function(d){return d[key];});
-    graphContainer.data.max = d3.max(data, function(d){return d[key];});
-    graphContainer.data.range = d3.range(data.length);
+    graphContainer.data.pointRange = d3.range(data.length);
     
     return data
   };
 
-// sort the data grouped by country and drop countries with value of 0
-  nbviz.getCountryData = function() {
-    var countryGroups = nbviz.countryDim.group().all(); 
-    // make main data-ball
-    var data = countryGroups
+//range à généraliser en fonction des besoins identifiés au fur et à mesure
+  nbviz.addDataTimelineInfo = function(data, graphContainer) {          
+    graphContainer.data = graphContainer.data || {};
+
+    var groupID = graphContainer.groupID;
+    var _key = graphContainer._key;
+
+    graphContainer.data.valueRange = d3.range(
+      + d3.min(data, function(d){return d[_key];}),
+      + d3.max(data, function(d){return d[_key];}) + 1
+       );
+    graphContainer.data.maxGroupLength = d3.max(data, function(d){return d[groupID].length}) + 1;
+    
+    return data
+  };
+
+// add a case with no grouping i.e. if groupDim is null: just sort and filter
+  nbviz.groupBy = function(graphContainer) {
+    var _dim = graphContainer.dataGetterParams.groupDim;
+    var data = nbviz[_dim + 'Dim'].group().all()
         .sort(function(a, b) { 
             return b.value - a.value; // descending
-        });
-        data=data.filter(function(d){return d.value > 0});
+        })
+        .filter(function(d){return d.value > 0});
     return data;
 };
 
@@ -110,12 +120,10 @@
 // to generalize iterating through all the graphs and updating the data, the data getter function has to be linked to 
 //the graphContainer itself
   nbviz.onDataChange = function() {
-      var data = nbviz.getCountryData();
-      nbviz.updateBarchart(data,nbviz.barchart);
+      nbviz.updateBarchart(nbviz.barchart);
       // nbviz.updateMap(data);
       // nbviz.updateList(nbviz.countryDim.top(Infinity));
-      data = nbviz.nestDataByKey(nbviz.countryDim.top(Infinity), 'year', nbviz.timeline);
-      nbviz.updateTimeline(data, nbviz.timeline);
+      nbviz.updateTimeline(nbviz.timeline);
   };
 
 }(window.nbviz=window.nbviz || {}));

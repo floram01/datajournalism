@@ -4,9 +4,10 @@
 
 (function(nbviz){
 //improvements: generalise more elements in core, factorise between build and update
-  nbviz.buildTimeline = function(data, graphContainer) {
+  nbviz.buildTimeline = function(graphContainer) {
     // add y scale
-
+    var data = graphContainer.dataGetter(graphContainer);
+    nbviz['addData'+ graphContainer._type + 'Info'](data, graphContainer);
     nbviz.initialize(graphContainer, data);
     nbviz.addSVGtoDiv(graphContainer);
 
@@ -24,16 +25,16 @@
     nbviz.textLegend(graphContainer);
     
     // data- join
-    nbviz.updateTimeline(data,graphContainer);
+    nbviz.updateTimeline(graphContainer);
 
 };
 
-  nbviz.updateTimeline = function(data, graphContainer) {
-    //replace key by graphContainer.key
+  nbviz.updateTimeline = function(graphContainer) {
+    var data = graphContainer.dataGetter(graphContainer);
     var svg = graphContainer.svg;
     var dim = graphContainer.dim;
     var _key = graphContainer._key;
-
+    nbviz.addDataTimelineInfo(data, graphContainer);
     graphContainer.xTime = svg
             // .append('g')
             // .attr('id','years');
