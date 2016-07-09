@@ -41,7 +41,7 @@
 
 // get the graphContainer div bounding rect
   nbviz.getDivByID = function(graphContainer) {
-    var chartHolder=d3.select(graphContainer.divID);
+    var chartHolder=d3.select('#' + graphContainer.divID);
     graphContainer.boundingRect = chartHolder.node().getBoundingClientRect();
   };
 
@@ -49,11 +49,9 @@
   nbviz.getSVGDim = function(graphContainer) {
     var boundingRect = graphContainer.boundingRect;
     var margin = graphContainer.margin;
-
     var dim = {}
     dim.width = boundingRect.width - margin.left - margin.right
     dim.height = boundingRect.height - margin.top - margin.bottom
-    
     graphContainer.dim = dim;
   };
 
@@ -63,7 +61,7 @@
     nbviz.getSVGDim(graphContainer)
     var dim = graphContainer.dim;
     var margin = graphContainer.margin;
-    var divID = graphContainer.divID;
+    var divID = '#' + graphContainer.divID;
     
     graphContainer.svg = d3.select(divID).append("svg")
     .attr('id',graphContainer.svgID)

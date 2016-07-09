@@ -83,11 +83,17 @@
 // use listOption
 // use onDataChange
   nbviz.addFilter = function(data, filterParams){
+    // d3.select('#menu')
+    // .append('div')
+    // .attr('id', filterParams.dimension + '-select')
+    // .text(filterParams.name)
+    // .append('select');
+
     _options=nbviz.listOptions(data, filterParams.filterTool, filterParams.resetValue);
     // if(_options[0].includes('All')){_options.shift(0)};//à généraliser a priori resetValue contient All pas top
     nbviz[filterParams.dimension + 'Values'] = _options;
     
-    _filter = d3.select('#' + filterParams.locationID);
+    _filter = d3.select('#' + filterParams.dimension + '-select select');
     _filter
       .selectAll('options')
       .data(_options)

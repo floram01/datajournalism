@@ -15,10 +15,15 @@
   $EVE_API = 'http://localhost:5000/api/';//adress where the servor api is serving the database
   nbviz.FULL_DATA = 'full_data'
 
+  nbviz.STORY = {
+    title :' Visualising the Nobel Prize',
+    _info : 'Placeholder for info',
+  }
+
   nbviz.FILTERS = [
-    {locationID:'cat-select select', dimension:'category', resetValue:'All Categories'},
-    {locationID:'gender-select select', dimension:'gender', resetValue:'All'},
-    {locationID:'country-select select', dimension:'country', resetValue:'All Countries'}
+    {locationID:'category-select select', name:'Category',dimension:'category', resetValue:'All Categories'},
+    {locationID:'gender-select select', name:'Gender', dimension:'gender', resetValue:'All'},
+    {locationID:'country-select select', name:'Country', dimension:'country', resetValue:'All Countries'}
   ];
 
   nbviz.CHARTS = [
@@ -27,10 +32,11 @@
       _id:'barchart',
       margins: {top:20, right:20, bottom:60, left:40},
       padding: {interbar:.1, left:20, bottom:20},
-      divID: '#nobel-bar',
+      divID: 'nobel-bar',
       _key:'key',
       dataGetter:nbviz.groupBy,
-      dataGetterParams:{groupDim:'country'}
+      dataGetterParams:{groupDim:'country'},
+      dim:{top:'560px', height:'240px',width:'700px',left:'0px'}
     }
   ,
     {
@@ -38,13 +44,14 @@
       _id:'timeline',
       margins: {top:20, right:20, bottom:40, left:20},
       padding: {interbar:.1, left:20, bottom:20},
-      divID: '#nobel-time',
+      divID: 'nobel-time',
       xTicksFreq:'10',
       _key:'key',
       timeID:'year',
       groupID:'values',
       dataGetter:nbviz.nestDataByKey,
-      dataGetterParams:{groupDim:'category'}
+      dataGetterParams:{groupDim:'category'},
+      dim:{top:'0px', height:'200px',width:'100%',left:'0px'}
     } 
   ];
 
