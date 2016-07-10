@@ -6,8 +6,8 @@
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background: #fefefe;
-    width: 1000px;
-    margin: 0 auto; /* top and bottom 0, left and right auto */
+    /*width: 1000px;*/
+    margin: 0 0;  top and bottom 0, left and right auto 
 }
 
 a:link {
@@ -39,9 +39,9 @@ a:hover {
 }
 
 #nbviz {
-    position: relative;
-    width: 100%;
-    margin: 10%;
+    /*position: relative;*/
+    /*width: 100%;*/
+/*    margin: 10%;*/
 }
 
 #chart {
@@ -78,10 +78,16 @@ a:hover {
     opacity:.7;
  }
 
+.comment-container{
+    background-color: #eeeeee;
+    left:25%;
+}
 
+.comment{
+    font-size:12px;
+    text-align: center;
 
-
-
+}
 
 
 

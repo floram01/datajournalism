@@ -7,7 +7,8 @@
   // build a graphContainer object with name "name" and corresponding parameters
   //margins and padding are objects, other parameters are strings
   nbviz.initGraphContainer = function(chart){
-    nbviz[chart._id] = o = {};
+    nbviz.charts = nbviz.charts || [];
+    var o = {};
     o.margin = {top:chart.margins.top, right:chart.margins.right, left:chart.margins.left, bottom:chart.margins.bottom};
     o.padding = {interbar : chart.padding.interbar, left : chart.padding.left, bottom : chart.padding.bottom};
     o.divID = chart.divID;
@@ -21,6 +22,7 @@
     o.dataGetter = chart.dataGetter;
     o.dataGetterParams = chart.dataGetterParams||{};
 
+    nbviz.charts.push(o)
     return o
   };
 
@@ -42,6 +44,7 @@
 // get the graphContainer div bounding rect
   nbviz.getDivByID = function(graphContainer) {
     var chartHolder=d3.select('#' + graphContainer.divID);
+
     graphContainer.boundingRect = chartHolder.node().getBoundingClientRect();
   };
 
@@ -54,6 +57,37 @@
     dim.height = boundingRect.height - margin.top - margin.bottom
     graphContainer.dim = dim;
   };
+
+//add the svg based on the div dimensions (chart dimensions + margins) 
+  nbviz.addSVGtoDiv = function(graphContainer) {
+    nbviz.getDivByID(graphContainer);
+    nbviz.getSVGDim(graphContainer);
+    var dim = graphContainer.dim;
+    var margin = graphContainer.margin;
+    var divID = '#' + graphContainer.divID;
+    
+    graphContainer.svg = d3.select(divID).append("svg")
+    .attr('id',graphContainer.svgID)
+    .attr("width", dim.width + margin.left + margin.right)
+    .attr("height", dim.height + margin.top + margin.bottom);
+
+    graphContainer.svg
+    .append("g").classed(graphContainer._class, true)
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  };
+
+//add the svg based on the div dimensions (chart dimensions + margins) 
+  // nbviz.updateSVG = function(graphContainer) {
+  //   nbviz.getDivByID(graphContainer);
+  //   nbviz.getSVGDim(graphContainer);
+  //   var dim = graphContainer.dim;
+  //   var margin = graphContainer.margin;
+  //   var divID = '#' + graphContainer.divID;
+    
+  //   graphContainer.svg = d3.select(graphContainer.svgID)
+  //   .attr("width", dim.width + margin.left + margin.right)
+  //   .attr("height", dim.height + margin.top + margin.bottom);
+  // };
 
 //add the svg based on the div dimensions (chart dimensions + margins) 
   nbviz.addSVGtoDiv = function(graphContainer) {

@@ -126,10 +126,9 @@
 // to generalize iterating through all the graphs and updating the data, the data getter function has to be linked to 
 //the graphContainer itself
   nbviz.onDataChange = function() {
-      nbviz.updateBarchart(nbviz.barchart);
-      // nbviz.updateMap(data);
-      // nbviz.updateList(nbviz.countryDim.top(Infinity));
-      nbviz.updateTimeline(nbviz.timeline);
+      nbviz.charts.forEach(function(chart){
+        nbviz['update'+chart._type](chart);
+    });
   };
 
 }(window.nbviz=window.nbviz || {}));

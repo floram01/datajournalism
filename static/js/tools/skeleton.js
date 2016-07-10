@@ -19,7 +19,10 @@
   nbviz.FILTERS.forEach(function(f){
     d3.select('#menu')
     .append('div')
-    .attr('id', f.dimension + '-select')
+    .attr({
+      'id': f.dimension + '-select',
+      'class':'col-md-4'
+    })
     .text(f.name)
     .append('select')
   })
@@ -28,15 +31,25 @@
   nbviz.CHARTS.forEach(function(f){
     d3.select('#chart-holder')
     .append('div')
-    .attr('id',f.divID)
+    .attr({
+      'class':f.dim.width,
+      'id':f.divID
+    })
     .style({
       'position':'relative',
-      'top':f.dim.top,
-      'left':f.dim.left,
-      'height':f.dim.height,
-      'width':f.dim.width
-    })
+      'height':f.dim.height
+    });
+
   });
+
+  // nbviz.resize = function(d){
+  //   nbviz.charts.forEach(function(chart){
+  //     nbviz.updateSVG(chart);
+  //     nbviz['update' + chart._type](chart);
+  //   })
+  // };
+
+  window.addEventListener('resize', nbviz.resize);
 
 }(window.nbviz=window.nbviz || {}));
 

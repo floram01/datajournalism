@@ -36,7 +36,7 @@
       _key:'key',
       dataGetter:nbviz.groupBy,
       dataGetterParams:{groupDim:'country'},
-      dim:{top:'560px', height:'240px',width:'700px',left:'0px'}
+      dim:{height:'240px',width:"col-md-8"}
     }
   ,
     {
@@ -51,7 +51,7 @@
       groupID:'values',
       dataGetter:nbviz.nestDataByKey,
       dataGetterParams:{groupDim:'category'},
-      dim:{top:'0px', height:'200px',width:'100%',left:'0px'}
+      dim:{height:'240px',width:"col-md-12"}
     } 
   ];
 

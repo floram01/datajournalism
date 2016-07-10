@@ -13,11 +13,10 @@ function ready(error, data) {
 
   nbviz.makeFilterAndDimensions(data, nbviz.FILTERS);
   
-  nbviz.CHARTS.forEach(function(chartParams){
+  nbviz.CHARTS.forEach(function(chartParams, i){
     nbviz.initGraphContainer(chartParams);
     nbviz['build' + chartParams._type](
-      nbviz[chartParams._id]
+      nbviz.charts[i]
       )
-      
   })
 };

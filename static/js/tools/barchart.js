@@ -31,7 +31,10 @@
     var dim=graphContainer.dim;
     
     nbviz.addDataBarchartInfo(data, graphContainer);
-    nbviz.updateScales(data, graphContainer);
+    nbviz.updateDomainXRangeBand(data, graphContainer);
+    nbviz.updateRangeXRangeBand(data, graphContainer);
+    nbviz.updateDomainYLinearScale(data, graphContainer);
+    nbviz.updateRangeYLinearScale(data, graphContainer);
 
     var barWidth = graphContainer.scales.xScale.rangeBand();
     

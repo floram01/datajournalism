@@ -35,6 +35,9 @@
     var dim = graphContainer.dim;
     var _key = graphContainer._key;
     nbviz.addDataTimelineInfo(data, graphContainer);
+    nbviz.updateRangeYRoundPoints(data, graphContainer);
+    nbviz.updateRangeXRangeBand(data, graphContainer);
+
     graphContainer.xTime = svg
             // .append('g')
             // .attr('id','years');
