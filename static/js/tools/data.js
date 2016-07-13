@@ -6,8 +6,8 @@
 
 // if items in data then we're dealing with a mongoDB object and we take its items
 // else we have a simple object and return it directly
-  nbviz.getDataFromAPI = function(resource, callback){
-      d3.json($EVE_API + resource, function(error, data) {
+  nbviz.getDataFromAPI = function(params, callback){
+      d3.json($EVE_API + params.resource, function(error, data) {
         if('_items' in data){ 
           callback(null, data._items); 
         }
@@ -18,6 +18,16 @@
         if(error){
           return callback(error);
         }
+      });
+  };
+  
+  nbviz.getDataFromJSON = function(params, callback){
+      d3.json(params.file, function(error, data) {    
+        if(error){
+          return callback(error);
+        } else {
+          callback(null, data);
+        };
       });
   };
 

@@ -26,6 +26,13 @@
     {locationID:'country-select select', name:'Country', dimension:'country', resetValue:'All Countries'}
   ];
 
+  nbviz.DATA_PROVIDER= {
+    getterFunction:nbviz.getDataFromJSON,
+    params:{
+      file:'/static/data/full_data_records.json'
+    }
+  };
+
   nbviz.CHARTS = [
     {
       _type:'Barchart',
