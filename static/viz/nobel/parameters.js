@@ -47,6 +47,20 @@
     }
   ,
     {
+      _type:'Table',
+      _id:'table',
+      margins: {top:0, right:0, bottom:0, left:0},
+      padding: {interbar:0, left:0, bottom:0},
+      divID: 'nobel-table',
+      dataGetter:nbviz.allDataSortedByKey,
+      dataGetterParams:{groupDim:'category'},
+      _key:'year',
+      dim:{height:'240px',width:"col-md-4"},
+      tableTitle:'List of selected nobel winners',
+      tableColumns:['year','category','name']
+    } 
+  ,
+    {
       _type:'Timeline',
       _id:'timeline',
       margins: {top:20, right:20, bottom:40, left:20},

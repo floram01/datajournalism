@@ -29,7 +29,6 @@
     var data = graphContainer.dataGetter(graphContainer);
     var svg=graphContainer.svg;
     var dim=graphContainer.dim;
-    
     nbviz.addDataBarchartInfo(data, graphContainer);
     nbviz.updateDomainXRangeBand(data, graphContainer);
     nbviz.updateRangeXRangeBand(data, graphContainer);

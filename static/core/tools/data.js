@@ -45,6 +45,26 @@
     return data
   };
 
+// add a case with no grouping i.e. if groupDim is null: just sort and filter
+  nbviz.groupBy = function(graphContainer) {
+    var _dim = graphContainer.dataGetterParams.groupDim;
+    var data = nbviz[_dim + 'Dim'].group().all()
+        .sort(function(a, b) { 
+            return b.value - a.value; // descending
+        })
+        .filter(function(d){return d.value > 0});
+    return data;
+};
+
+// add a case with no grouping i.e. if groupDim is null: just sort and filter
+  nbviz.allDataSortedByKey = function(graphContainer) {
+    var _dim = graphContainer.dataGetterParams.groupDim;
+    var data = nbviz[_dim + 'Dim'].top(Infinity).sort(function(a, b) {
+      return +b[graphContainer._key] - +a[graphContainer._key];
+    });
+    return data;
+};
+
 //range à généraliser en fonction des besoins identifiés au fur et à mesure
   nbviz.addDataBarchartInfo = function(data, graphContainer) {          
     graphContainer.data = graphContainer.data || {};
@@ -68,17 +88,6 @@
     
     return data
   };
-
-// add a case with no grouping i.e. if groupDim is null: just sort and filter
-  nbviz.groupBy = function(graphContainer) {
-    var _dim = graphContainer.dataGetterParams.groupDim;
-    var data = nbviz[_dim + 'Dim'].group().all()
-        .sort(function(a, b) { 
-            return b.value - a.value; // descending
-        })
-        .filter(function(d){return d.value > 0});
-    return data;
-};
 
 // based on a filterTool dimension crossfilter object extract the values of the dimension and add a resetValue
   nbviz.listOptions = function(data, filterTool, resetValue) {
