@@ -1,3 +1,3 @@
 # datajournalism
 
-blabla
+run using $ python viz.py
