@@ -11,17 +11,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-        <link rel="stylesheet" href="static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="static/core/css/bootstrap.min.css">
         <style>
             body {
                 padding-top: 50px;
                 padding-bottom: 20px;
             }
         </style>
-        <link rel="stylesheet" href="static/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="static/css/main.css">
+        <link rel="stylesheet" href="static/core/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="static/core/css/main.css">
 
-        <script src="static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <script src="static/core/lib/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -81,30 +81,39 @@
       </footer>
     </div> <!-- /container -->       
         <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script> -->
-        <script>window.jQuery || document.write('<script src="static/js/vendor/jquery-1.11.2.js"><\/script>')</script>
+        <script>window.jQuery || document.write('<script src="static/core/lib/jquery-1.11.2.js"><\/script>')</script>
 
-        <script src="static/js/vendor/bootstrap.min.js"></script>
+        <script src="static/core/lib/bootstrap.min.js"></script>
         <!-- 4. THE JAVASCRIPT FILES -->
         <!-- THIRD-PARTY JAVASCRIPT LIBRARIES, MAINLY D3  --> 
         <!-- <script src="//code.jQuery.com/jQuery-1.11.0.min.js"></script> -->
-        <script src="static/lib/d3.js"></script>
-        <script src="static/lib/d3-queue.js"></script>
-        <script src="static/lib/crossfilter.js"></script>
+        <script src="static/core/lib/d3.js"></script>
+        <script src="static/core/lib/d3-queue.js"></script>
+        <script src="static/core/lib/crossfilter.js"></script>
         <!-- THE JAVASCRIPT FOR OUR NOBEL ELEMENTS -->
         <!-- THE JAVASCRIPT DATA TOOLS -->
-        <script src="static/js/tools/data.js"></script>
-        <!-- THE JAVASCRIPT FOR OUR NOBEL ELEMENTS -->
-        <script src="static/js/parameters.js"></script>
+        <script src="static/core/tools/data.js"></script>
+
+
+
+
+        <!-- Change only this line to the file that contains your project parameters -->
+        <script src="static/viz/nobel/parameters.js"></script>
+
+
+
+
+
         <!-- THE JAVASCRIPT TOOLS -->
-        <script src="static/js/tools/skeleton.js"></script>
-        <script src="static/js/tools/general.js"></script>
-        <script src="static/js/tools/scales.js"></script>
-        <script src="static/js/tools/axis.js"></script>
-        <script src="static/js/tools/legend.js"></script>
-        <script src="static/js/tools/map.js"></script>
-        <script src="static/js/tools/barchart.js"></script>
-        <script src="static/js/tools/timeline.js"></script>
-        <script src="static/js/tools/main.js"></script>
+        <script src="static/core/tools/skeleton.js"></script>
+        <script src="static/core/tools/general.js"></script>
+        <script src="static/core/tools/scales.js"></script>
+        <script src="static/core/tools/axis.js"></script>
+        <script src="static/core/tools/legend.js"></script>
+        <script src="static/core/tools/map.js"></script>
+        <script src="static/core/tools/barchart.js"></script>
+        <script src="static/core/tools/timeline.js"></script>
+        <script src="static/core/tools/main.js"></script>
 
     </body>
 </html>

@@ -29,7 +29,7 @@
   nbviz.DATA_PROVIDER= {
     getterFunction:nbviz.getDataFromJSON,
     params:{
-      file:'/static/data/full_data_records.json'
+      file:'static/viz/nobel/full_data_records.json'
     }
   };
 
