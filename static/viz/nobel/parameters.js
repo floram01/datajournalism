@@ -74,6 +74,18 @@
       dataGetterParams:{groupDim:'category'},
       dim:{height:'240px',width:"col-md-12"}
     } 
+  ,
+    {
+      _type:'VerticalBarchart',
+      _id:'verticalBarchart',
+      margins: {top:20, right:20, bottom:20, left:60},
+      padding: {interbar:.1, left:5, bottom:20, legend:5},
+      divID: 'nobel-vBar',
+      _key:'key',
+      dataGetter:nbviz.groupBy,
+      dataGetterParams:{groupDim:'category'},
+      dim:{height:'240px',width:"col-md-6"}
+    }
   ];
 
 }(window.nbviz=window.nbviz || {}));

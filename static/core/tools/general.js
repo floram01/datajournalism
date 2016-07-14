@@ -10,7 +10,7 @@
     nbviz.charts = nbviz.charts || [];
     var o = {};
     o.margin = {top:chart.margins.top, right:chart.margins.right, left:chart.margins.left, bottom:chart.margins.bottom};
-    o.padding = {interbar : chart.padding.interbar, left : chart.padding.left, bottom : chart.padding.bottom};
+    o.padding = {interbar : chart.padding.interbar, left : chart.padding.left, bottom : chart.padding.bottom, legend : chart.padding.legend};
     o.divID = chart.divID;
     o.svgID = chart._id;
     o._class = chart._id;

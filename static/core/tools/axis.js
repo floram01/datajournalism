@@ -5,6 +5,29 @@
 (function(nbviz){
 
 
+  nbviz.genXAxis = function(graphContainer) {
+    var dim = graphContainer.dim;
+    var margin = graphContainer.margin;
+    var padding = graphContainer.padding;
+    var svg = graphContainer.svg;
+
+    graphContainer.axis.xAxis = d3.svg.axis().scale(graphContainer.scales.xScale).orient("bottom");
+
+    svg.append('g').attr('class','x axis ' + graphContainer._class).attr("transform", "translate(" + 0 + "," + dim.height + ")"); 
+  };
+
+  nbviz.genYAxis = function(graphContainer) {
+    var dim = graphContainer.dim;
+    var margin = graphContainer.margin;
+    var padding = graphContainer.padding;
+    var svg = graphContainer.svg;
+
+    var yAxisPadding = margin.left - padding.left//how to avoid this? more complex than it need to be
+    graphContainer.axis.yAxis = d3.svg.axis().scale(graphContainer.scales.yScale).orient('left').ticks(10);
+
+    svg.append('g').attr('class','y axis ' + graphContainer._class).attr("transform", "translate(" + yAxisPadding + "," + 0 + ")"); 
+  };
+
   nbviz.genAxis = function(graphContainer) {
     var dim = graphContainer.dim;
     var margin = graphContainer.margin;

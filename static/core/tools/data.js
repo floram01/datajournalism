@@ -74,6 +74,14 @@
   };
 
 //range à généraliser en fonction des besoins identifiés au fur et à mesure
+  nbviz.addDataVerticalBarchartInfo = function(data, graphContainer) {          
+    graphContainer.data = graphContainer.data || {};
+    graphContainer.data.pointRange = d3.range(data.length);
+    
+    return data
+  };
+
+//range à généraliser en fonction des besoins identifiés au fur et à mesure
   nbviz.addDataTimelineInfo = function(data, graphContainer) {          
     graphContainer.data = graphContainer.data || {};
 
