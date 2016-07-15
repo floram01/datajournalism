@@ -4,7 +4,7 @@
 
 (function(nbviz){
 //improvements: generalise more elements in core, factorise between build and update
-  nbviz.buildVerticalBarchart = function(graphContainer) {
+  nbviz.buildHorizontalBarchart = function(graphContainer) {
     var data = graphContainer.dataGetter(graphContainer);
     nbviz['addData'+ graphContainer._type + 'Info'](data, graphContainer);
     nbviz.initialize(graphContainer, data);
@@ -25,7 +25,7 @@
 
   };
 
-  nbviz.updateVerticalBarchart = function(graphContainer) {
+  nbviz.updateHorizontalBarchart = function(graphContainer) {
     var data = graphContainer.dataGetter(graphContainer);
     var svg = graphContainer.svg;
     var dim = graphContainer.dim;

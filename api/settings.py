@@ -23,7 +23,18 @@ DOMAIN = {
         'image_urls':{'type':'list'},
         # 'date_of_birth':{'type':'string'}
      }
-}}
+ }
+,
+'heatmap':{
+    'schema':{              
+        'country':{'type':'string'},
+        'year':{'type': 'string'},
+        'x_index':{'type':'integer'},
+        'y_index':{'type':'integer'},
+        # 'date_of_birth':{'type':'string'}
+     }
+ }
+}
 
 # HATEOAS=False
 #False to display all results at once (vs number of results per page)

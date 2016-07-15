@@ -76,8 +76,8 @@
     } 
   ,
     {
-      _type:'VerticalBarchart',
-      _id:'verticalBarchart',
+      _type:'HorizontalBarchart',
+      _id:'horizontalBarchart',
       margins: {top:20, right:20, bottom:20, left:60},
       padding: {interbar:.1, left:5, bottom:20, legend:5},
       divID: 'nobel-vBar',
