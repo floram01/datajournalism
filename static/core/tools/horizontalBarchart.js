@@ -21,7 +21,7 @@
     // create axis
     nbviz.genYAxis(graphContainer);
 
-    nbviz.updateVerticalBarchart(graphContainer);
+    nbviz.updateHorizontalBarchart(graphContainer);
 
   };
 

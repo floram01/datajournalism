@@ -8,7 +8,7 @@
   nbviz.xRangeBand = function(data, graphContainer) {
     var dim = graphContainer.dim;
     var padding = graphContainer.padding;
-    var _range = graphContainer.data.valueRange || graphContainer.data.pointRange
+    var _range = graphContainer.data.valueRange || graphContainer.data.pointRange || graphContainer.data.xRange
 
     var rangeBandGen = d3.scale.ordinal()
     .domain(_range)
@@ -20,12 +20,11 @@
   nbviz.yRangeBand = function(data, graphContainer) {
     var dim = graphContainer.dim;
     var padding = graphContainer.padding;
-    var _range = graphContainer.data.valueRange || graphContainer.data.pointRange
+    var _range = graphContainer.data.valueRange || graphContainer.data.pointRange || graphContainer.data.yRange
 
     var rangeBandGen = d3.scale.ordinal()
     .domain(_range)
     .rangeRoundBands([padding.bottom, dim.height], padding.interbar)
-
     return rangeBandGen
   };
 
@@ -35,7 +34,7 @@
     var margin = graphContainer.margin;
     var padding = graphContainer.padding;
 
-    graphContainer.scales.xScale.domain( graphContainer.data.valueRange || graphContainer.data.pointRange );
+    graphContainer.scales.xScale.domain( graphContainer.data.valueRange || graphContainer.data.pointRange || graphContainer.data.xRange );
   };
 
   nbviz.updateDomainYRangeBand = function(data, graphContainer){
@@ -44,7 +43,7 @@
     var margin = graphContainer.margin;
     var padding = graphContainer.padding;
 
-    graphContainer.scales.yScale.domain( graphContainer.data.valueRange || graphContainer.data.pointRange );
+    graphContainer.scales.yScale.domain( graphContainer.data.valueRange || graphContainer.data.pointRange || graphContainer.data.yRange );
   };
 
   nbviz.updateRangeXRangeBand = function(data, graphContainer){

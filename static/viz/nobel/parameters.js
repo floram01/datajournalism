@@ -86,6 +86,22 @@
       dataGetterParams:{groupDim:'category'},
       dim:{height:'240px',width:"col-md-6"}
     }
+  ,
+    {
+      _type:'Heatmap',
+      _id:'heatmap',
+      margins: {top:20, right:20, bottom:20, left:60},
+      padding: {interbar:.05, left:5, bottom:20, legend:5},
+      divID: 'nobel-heatmap',
+      _value:'my_value',
+      xDimension:'year',
+      yDimension:'country',
+      xIndex:'x_index',
+      yIndex:'y_index',
+      // dataGetter:nbviz.groupBy,
+      // dataGetterParams:{groupDim:'category'},
+      dim:{height:'500px',width:"col-md-12"}
+    }
   ];
 
 }(window.nbviz=window.nbviz || {}));

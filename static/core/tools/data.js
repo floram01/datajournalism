@@ -74,7 +74,7 @@
   };
 
 //range à généraliser en fonction des besoins identifiés au fur et à mesure
-  nbviz.addDataVerticalBarchartInfo = function(data, graphContainer) {          
+  nbviz.addDataHorizontalBarchartInfo = function(data, graphContainer) {          
     graphContainer.data = graphContainer.data || {};
     graphContainer.data.pointRange = d3.range(data.length);
     
@@ -94,6 +94,17 @@
        );
     graphContainer.data.maxGroupLength = d3.max(data, function(d){return d[groupID].length}) + 1;
     
+    return data
+  };
+
+//range à généraliser en fonction des besoins identifiés au fur et à mesure
+  nbviz.addDataHeatmapInfo = function(data, graphContainer) {          
+    graphContainer.data = graphContainer.data || {};
+
+    graphContainer.data.min = d3.min(data, function(d){return + d[graphContainer._value];});
+    graphContainer.data.max = d3.max(data, function(d){return + d[graphContainer._value];});
+    graphContainer.data.xRange = d3.range(0, d3.max(data, function(d){return + d[graphContainer.xIndex];}) + 1);
+    graphContainer.data.yRange = d3.range(0, d3.max(data, function(d){return + d[graphContainer.yIndex];}) + 1);
     return data
   };
 
@@ -150,6 +161,7 @@
       nbviz.addFilter(winnersData, f);      
     });
   };
+
 // to generalize iterating through all the graphs and updating the data, the data getter function has to be linked to 
 //the graphContainer itself
   nbviz.onDataChange = function() {

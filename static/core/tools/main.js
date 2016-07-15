@@ -12,13 +12,14 @@ d3.queue()
 
 // d3.json('/static/data/full_data_records.json', function(json){debugger;});
 
-function ready(error, data_heatmap, data_csv) {
+function ready(error, data_heatmap, data) {
  // LOG ANY ERROR TO CONSOLE
   if(error){
       return console.warn(error);
   }
 
-  debugger;
+  nbviz.STATIC_DATA = {};
+  nbviz.STATIC_DATA.heatmap = data_heatmap;
 
   nbviz.makeFilterAndDimensions(data, nbviz.FILTERS);
   

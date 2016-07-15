@@ -24,6 +24,11 @@
     o.dataGetterParams = chart.dataGetterParams||{};
     o.tableTitle = chart.tableTitle||{};
     o.tableColumns = chart.tableColumns||{};
+    o._value = chart._value||{};
+    o.xDimension = chart.xDimension||{};
+    o.yDimension = chart.yDimension||{};
+    o.xIndex = chart.xIndex||{};
+    o.yIndex = chart.yIndex||{};
 
     nbviz.charts.push(o)
     return o
