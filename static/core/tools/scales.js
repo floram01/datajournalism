@@ -9,10 +9,11 @@
     var dim = graphContainer.dim;
     var padding = graphContainer.padding;
     var _range = graphContainer.data.valueRange || graphContainer.data.pointRange || graphContainer.data.xRange
+    var bandwith = dim.width/_range.length
 
     var rangeBandGen = d3.scale.ordinal()
     .domain(_range)
-    .rangeRoundBands([padding.left, dim.width], padding.interbar)
+    .rangeRoundBands([bandwith + padding.left, dim.width - bandwith], padding.interbar)
 
     return rangeBandGen
   };
@@ -52,7 +53,7 @@
     var margin = graphContainer.margin;
     var padding = graphContainer.padding;
 
-    graphContainer.scales.xScale.rangeRoundBands([padding.bottom, dim.width], padding.interbar);
+    graphContainer.scales.xScale.rangeRoundBands([padding.left, dim.width], padding.interbar);
   };
 
   nbviz.yRoundPoints = function(data, graphContainer) {
@@ -88,7 +89,7 @@
     var margin = graphContainer.margin;
     var yLinearScale = d3.scale.linear()
     .domain([0, d3.max(data, function(d){return d.value;})])
-    .rangeRound([dim.height, margin.bottom])
+    .rangeRound([dim.height, margin.top])
     return yLinearScale
   };
 
@@ -112,7 +113,7 @@
     var margin = graphContainer.margin;
     var padding = graphContainer.padding;
 
-    graphContainer.scales.yScale.rangeRound([dim.height, margin.bottom]);
+    graphContainer.scales.yScale.rangeRound([dim.height, margin.top]);
   };
 
   nbviz.customXScale = function(data, graphContainer){
@@ -122,7 +123,17 @@
 
   nbviz.customYScale = function(data, graphContainer){
     // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
-    graphContainer.scales.yScale.domain( data.map(function(d){ return d[graphContainer._key]; }) );
+    graphContainer.scales.yScale.domain( data.map(function(d){ return d[graphContainer._yKey]; }) );
+  };
+
+  nbviz.customGroupedYScale = function(data, graphContainer){
+    // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
+    var preparedData = crossfilter(data);
+    var dimension = preparedData.dimension(function(o){return o[graphContainer._yKey]});
+    var groupedSum = dimension.group().reduceSum(function(o){return o[graphContainer._value]});
+    var sortedDimension = groupedSum.top(Infinity);
+
+    graphContainer.scales.yScale.domain( sortedDimension.map(function(d){ return d.key; }) );
   };
 
 

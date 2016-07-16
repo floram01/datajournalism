@@ -15,6 +15,8 @@
     o.svgID = chart._id;
     o._class = chart._id;
     o._key = chart._key;
+    o._yKey = chart._yKey;
+    o._xKey = chart._xKey;
     o.xTicksFreq = chart.xTicksFreq||1;
     o.timeID = chart.timeID||null;
     o.groupID = chart.groupID||null;
@@ -98,19 +100,19 @@
   // };
 
 //add the svg based on the div dimensions (chart dimensions + margins) 
-  nbviz.addSVGtoDiv = function(graphContainer) {
-    nbviz.getDivByID(graphContainer)
-    nbviz.getSVGDim(graphContainer)
-    var dim = graphContainer.dim;
-    var margin = graphContainer.margin;
-    var divID = '#' + graphContainer.divID;
+  // nbviz.addSVGtoDiv = function(graphContainer) {
+  //   nbviz.getDivByID(graphContainer)
+  //   nbviz.getSVGDim(graphContainer)
+  //   var dim = graphContainer.dim;
+  //   var margin = graphContainer.margin;
+  //   var divID = '#' + graphContainer.divID;
     
-    graphContainer.svg = d3.select(divID).append("svg")
-    .attr('id',graphContainer.svgID)
-    .attr("width", dim.width + margin.left + margin.right)
-    .attr("height", dim.height + margin.top + margin.bottom)
-    .append("g").classed(graphContainer._class, true)
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-  };
+  //   graphContainer.svg = d3.select(divID).append("svg")
+  //   .attr('id',graphContainer.svgID)
+  //   .attr("width", dim.width + margin.left + margin.right)
+  //   .attr("height", dim.height + margin.top + margin.bottom)
+  //   .append("g").classed(graphContainer._class, true)
+  //   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  // };
   
 }(window.nbviz=window.nbviz || {}));

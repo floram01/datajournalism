@@ -13,7 +13,7 @@
 
     graphContainer.axis.xAxis = d3.svg.axis().scale(graphContainer.scales.xScale).orient("bottom");
 
-    svg.append('g').attr('class','x axis ' + graphContainer._class).attr("transform", "translate(" + 0 + "," + dim.height + ")"); 
+    svg.select('g.'+ graphContainer._class).append('g').attr('class','x axis ' + graphContainer._class).attr("transform", "translate(" + 0 + "," + dim.height + ")"); 
   };
 
   nbviz.genYAxis = function(graphContainer) {
@@ -25,7 +25,7 @@
     var yAxisPadding = margin.left - padding.left//how to avoid this? more complex than it need to be
     graphContainer.axis.yAxis = d3.svg.axis().scale(graphContainer.scales.yScale).orient('left').ticks(10);
 
-    svg.append('g').attr('class','y axis ' + graphContainer._class).attr("transform", "translate(" + yAxisPadding + "," + 0 + ")"); 
+    svg.select('g.'+ graphContainer._class).append('g').attr('class','y axis ' + graphContainer._class).attr("transform", "translate(" + yAxisPadding + "," + 0 + ")"); 
   };
 
   nbviz.genAxis = function(graphContainer) {
@@ -38,8 +38,8 @@
     graphContainer.axis.xAxis = d3.svg.axis().scale(graphContainer.scales.xScale).orient("bottom");
     graphContainer.axis.yAxis = d3.svg.axis().scale(graphContainer.scales.yScale).orient('left').ticks(10);
 
-    svg.append('g').attr('class','x axis ' + graphContainer._class).attr("transform", "translate(" + 0 + "," + dim.height + ")"); 
-    svg.append('g').attr('class','y axis ' + graphContainer._class).attr("transform", "translate(" + yAxisPadding + "," + 0 + ")"); 
+    svg.select('g.'+ graphContainer._class).append('g').attr('class','x axis ' + graphContainer._class).attr("transform", "translate(" + 0 + "," + dim.height + ")"); 
+    svg.select('g.'+ graphContainer._class).append('g').attr('class','y axis ' + graphContainer._class).attr("transform", "translate(" + yAxisPadding + "," + 0 + ")"); 
   };
 
 //generalize to customTicks?Or add customYTicks
@@ -54,6 +54,8 @@
               );
   };
 
+// prendre en compte une possiblité de personnalisation...
+// arriver à tt garder en une fonction ou passer à 2?
   nbviz.updateXAxis = function(data, graphContainer){
 
     graphContainer.svg.select('.x.axis.'+ graphContainer._class)

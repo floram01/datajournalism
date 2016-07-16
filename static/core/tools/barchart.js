@@ -39,7 +39,7 @@
     
     // data- join
     // provoque toujours bug au moment de l'update?
-    var bars=svg.selectAll('rect').data(data, function(d){return d[graphContainer._key];});
+    var bars=svg.select('g.'+ graphContainer._class).selectAll('rect').data(data, function(d){return d[graphContainer._key];});
 
     // create bars for data points that are not yet bound to a DOM element
     bars.enter()

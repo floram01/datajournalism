@@ -27,7 +27,7 @@
     nbviz.genAxis(graphContainer);
 
     // nbviz.updateBarchart(graphContainer);
-    var cards = svg.selectAll(".cards")
+    var cards = svg.select('g.'+ graphContainer._class).selectAll(".cards")
     .data(data, function(d) {return d.country+':'+d.year;});
 
     // cards.append("title");
@@ -47,6 +47,10 @@
     // cards.select("title").text(function(d) { return d.value; });
 
     // cards.exit().remove();
+    nbviz.customGroupedYScale(data, graphContainer);
+    nbviz.customXScale(data, graphContainer);
+    nbviz.updateYAxis(data, graphContainer);
+    nbviz.updateXAxis(data, graphContainer);
   };
 
   nbviz.updateHeatmap = function(graphContainer) {

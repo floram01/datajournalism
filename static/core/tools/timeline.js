@@ -39,6 +39,7 @@
     nbviz.updateRangeXRangeBand(data, graphContainer);
 
     graphContainer.xTime = svg
+            .select('g.'+ graphContainer._class)
             // .append('g')
             // .attr('id','years');
             .selectAll(".xTime")
@@ -50,7 +51,7 @@
         .classed('xTime', true)
         .attr('name', function(d) { return d[_key];})
         .attr("transform", function(time) {
-            return "translate(" + graphContainer.scales.xScale(+time[_key]) + "," +graphContainer.dim.height + graphContainer.margin.bottom*2 + ")";
+            return "translate(" + graphContainer.scales.xScale(+time[_key]) + "," +graphContainer.dim.height + graphContainer.margin.bottom * 2+ ")";
         })
         .transition().duration(nbviz.TRANS_DURATION)
         .attr("transform", function(time) {

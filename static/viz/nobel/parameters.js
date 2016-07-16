@@ -37,8 +37,8 @@
     {
       _type:'Barchart',
       _id:'barchart',
-      margins: {top:20, right:20, bottom:60, left:40},
-      padding: {interbar:.1, left:20, bottom:20},
+      margins: {top:10, right:20, bottom:85, left:20},
+      padding: {interbar:.1, left:10, bottom:10},
       divID: 'nobel-bar',
       _key:'key',
       dataGetter:nbviz.groupBy,
@@ -64,7 +64,7 @@
       _type:'Timeline',
       _id:'timeline',
       margins: {top:20, right:20, bottom:40, left:20},
-      padding: {interbar:.1, left:20, bottom:20},
+      padding: {interbar:.1, left:0, bottom:0},
       divID: 'nobel-time',
       xTicksFreq:'10',
       _key:'key',
@@ -82,6 +82,7 @@
       padding: {interbar:.1, left:5, bottom:20, legend:5},
       divID: 'nobel-vBar',
       _key:'key',
+      _yKey:'key',
       dataGetter:nbviz.groupBy,
       dataGetterParams:{groupDim:'category'},
       dim:{height:'240px',width:"col-md-6"}
@@ -90,8 +91,10 @@
     {
       _type:'Heatmap',
       _id:'heatmap',
-      margins: {top:20, right:20, bottom:20, left:60},
-      padding: {interbar:.05, left:5, bottom:20, legend:5},
+      _key:'year',
+      _yKey:'country',
+      margins: {top:20, right:20, bottom:60, left:40},
+      padding: {interbar:.05, left:0, bottom:20, legend:0},
       divID: 'nobel-heatmap',
       _value:'my_value',
       xDimension:'year',
@@ -100,7 +103,7 @@
       yIndex:'y_index',
       // dataGetter:nbviz.groupBy,
       // dataGetterParams:{groupDim:'category'},
-      dim:{height:'500px',width:"col-md-12"}
+      dim:{height:'500px',width:"col-md-6"}
     }
   ];
 
