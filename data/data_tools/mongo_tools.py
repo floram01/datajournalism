@@ -37,6 +37,12 @@ def insert_scrapped_in_mongo():
         dataframe_to_mongo(df, DATABASE,file['collection_name'], erase=True)
         logger.info('insertion sucessful in db' + DATABASE + ' of collection: ' + file['collection_name'])
 
+def insert_country_maping():
+    from data_params import DATABASE
+
+    df = pd.read_csv('country_code.csv')
+    dataframe_to_mongo(df, DATABASE,'country_mapper', erase=True)
+
 def get_mongo_database(db_name, host='localhost',
                        port=27017, username=None, password=None):
     """
