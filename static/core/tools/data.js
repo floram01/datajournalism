@@ -6,6 +6,18 @@
 
 // if items in data then we're dealing with a mongoDB object and we take its items
 // else we have a simple object and return it directly
+  nbviz.prepareDataSets = function(params){
+    nbviz.DATASTORE = nbviz.DATASTORE || {}
+    params.forEach(function(param){
+       param.getterFunction(param.source)
+    })
+  };
+
+  nbviz.prepareDataSet = function(param, callback){
+    nbviz.DATASTORE = nbviz.DATASTORE || {}
+    nbviz.DATASTORE[param.name] = param.getterFunction(param, callback)
+  };
+
   nbviz.getDataFromAPI = function(params, callback){
       d3.json($EVE_API + params.resource, function(error, data) {
         if('_items' in data){ 
@@ -22,7 +34,18 @@
   };
   
   nbviz.getDataFromJSON = function(params, callback){
-      d3.json(params.file, function(error, data) {    
+      d3.json(params.source, function(error, data) {    
+        if(error){
+          return callback(error);
+        } else {
+          nbviz.DATASTORE[params.name] = data;
+          callback(null, data);
+        };
+      });
+  };
+
+  nbviz.getDataFromCSV = function(params, callback){
+      d3.csv(params.file, function(error, data) {    
         if(error){
           return callback(error);
         } else {

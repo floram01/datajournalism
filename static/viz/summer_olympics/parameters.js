@@ -26,11 +26,28 @@
     {locationID:'country-select select', name:'Country', dimension:'country', resetValue:'All Countries'}
   ];
 
-  nbviz.DATA_PROVIDER= {
+  nbviz.OLD_DATA_PROVIDER= {
     getterFunction:nbviz.getDataFromJSON,
     params:{
-      file:'static/viz/nobel/full_data_records.json'
+      file:'static/viz/summer_olympics/full_data_records.json'
     }
+  };
+
+  nbviz.DATA_PROVIDER= {
+    getterFunction:nbviz.prepareDatasets,
+    params:[
+      {
+        name:'fullData',
+        source:'static/viz/summer_olympics/full_data_records.json',
+        getterFunction:nbviz.getDataFromJSON
+      }
+    // ,
+    //   {
+    //     name:'franceFullData',
+    //     source:'static/viz/nobel/france_best_discipline.csv',
+    //     getterFunction:'nbviz.getDataFromCSV'
+    //   }
+    ]
   };
 
   nbviz.CHARTS = [
@@ -101,7 +118,7 @@
       yDimension:'country',
       xIndex:'x_index',
       yIndex:'y_index',
-      // dataGetter:nbviz.groupBy,
+      dataGetter:nbviz.staticData,
       // dataGetterParams:{groupDim:'category'},
       dim:{height:'500px',width:"col-md-6"}
     }
