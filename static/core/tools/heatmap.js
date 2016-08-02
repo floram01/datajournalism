@@ -5,7 +5,7 @@
 (function(nbviz){
 //improvements: generalise more elements in core, factorise between build and update
   nbviz.buildHeatmap = function(graphContainer) {
-    var data = nbviz.STATIC_DATA.heatmap;
+    var data = graphContainer.dataGetter(graphContainer);
     nbviz['addData'+ graphContainer._type + 'Info'](data, graphContainer);
     nbviz.initialize(graphContainer, data);
 

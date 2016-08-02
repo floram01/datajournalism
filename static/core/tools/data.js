@@ -6,13 +6,6 @@
 
 // if items in data then we're dealing with a mongoDB object and we take its items
 // else we have a simple object and return it directly
-  nbviz.prepareDataSets = function(params){
-    nbviz.DATASTORE = nbviz.DATASTORE || {}
-    params.forEach(function(param){
-       param.getterFunction(param.source)
-    })
-  };
-
   nbviz.prepareDataSet = function(param, callback){
     nbviz.DATASTORE = nbviz.DATASTORE || {}
     nbviz.DATASTORE[param.name] = param.getterFunction(param, callback)
@@ -45,13 +38,19 @@
   };
 
   nbviz.getDataFromCSV = function(params, callback){
-      d3.csv(params.file, function(error, data) {    
+      d3.csv(params.source, function(error, data) {    
         if(error){
           return callback(error);
         } else {
+          nbviz.DATASTORE[params.name] = data;
           callback(null, data);
         };
       });
+  };
+
+  nbviz.fullData = function(graphContainer) {          
+    var data = nbviz.DATASTORE[graphContainer.domain]
+    return data
   };
 
   // nest data (entries) sharing same dimension 'key'

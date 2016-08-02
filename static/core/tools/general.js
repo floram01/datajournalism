@@ -31,6 +31,8 @@
     o.yDimension = chart.yDimension||{};
     o.xIndex = chart.xIndex||{};
     o.yIndex = chart.yIndex||{};
+    o.domain = chart.domain;
+    o.format = chart.format;
 
     nbviz.charts.push(o)
     return o

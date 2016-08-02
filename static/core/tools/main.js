@@ -8,7 +8,7 @@ nbviz.DATA_PROVIDER.params.forEach(function(param){
   q.defer(nbviz.prepareDataSet, param)
 })
 
-  q.defer(d3.csv, 'static/viz/summer_olympics/data_heatmap.csv') 
+  // q.defer(d3.csv, 'static/viz/summer_olympics/data_heatmap.csv') 
  
   q.awaitAll(ready);
 
@@ -19,10 +19,10 @@ function ready(error, data) {
   if(error){
       return console.warn(error);
   }
-  nbviz.STATIC_DATA = {};
-  nbviz.STATIC_DATA.heatmap = data[1];
+  // nbviz.STATIC_DATA = {};
+  // nbviz.STATIC_DATA.heatmap = data[1];
 
-  nbviz.makeFilterAndDimensions(nbviz.DATASTORE.fullData, nbviz.FILTERS);
+  // nbviz.makeFilterAndDimensions(nbviz.DATASTORE.fullData, nbviz.FILTERS);
   
   nbviz.CHARTS.forEach(function(chartParams, i){
     nbviz.initGraphContainer(chartParams);

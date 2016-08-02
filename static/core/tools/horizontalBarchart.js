@@ -30,6 +30,9 @@
     var svg = graphContainer.svg;
     var dim = graphContainer.dim;
 
+    // move elsewhere in data part
+    var my_format = d3.format(graphContainer.format)
+
     nbviz.addDataBarchartInfo(data, graphContainer);
     nbviz.updateDomainYRangeBand(data, graphContainer);
     nbviz.updateDomainXLinearScale(data, graphContainer);
@@ -66,13 +69,14 @@
     legend
     .transition().duration(nbviz.TRANS_DURATION)
     .attr({
-        'y' : function(d,i){return graphContainer.scales.yScale(i) + barWidth/2;},
+        'y' : function(d,i){return graphContainer.scales.yScale(i) + barWidth*3/4;},
         'x' : function(d){
             return graphContainer.scales.xScale(d.value) + graphContainer.margin.left - graphContainer.padding.legend;
         },
-        'text-anchor' : 'end'
+        'text-anchor' : 'end',
+        'vertical-align':'bottom'
     })  
-    .text(function(d){return d.value})
+    .text(function(d){return my_format(d.value)})
     .attr({
         'fill':'white',
         'font-size':'12px'
@@ -82,6 +86,10 @@
 
     nbviz.customYScale(data, graphContainer);
     nbviz.updateYAxis(data, graphContainer);
+
+    // find another way to do it
+    d3.select('.'+ graphContainer._class+ ' path').attr({'display':'none'})
+    d3.selectAll('.'+ graphContainer._class+ ' line').attr({'display':'none'})
   };
 
 }(window.nbviz=window.nbviz || {}));
