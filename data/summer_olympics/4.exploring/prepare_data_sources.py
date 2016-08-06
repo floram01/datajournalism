@@ -48,16 +48,24 @@ def france_best_disciplines():
   france_medal_count_recent = france_medal_count[france_medal_count.Edition>1988]
   df_medal_count_recent = df_medal_count[df_medal_count.Edition>1988]
   
-  france_recent_pct = france_medal_count_recent.groupby(['Discipline']).size()/\
-  df_medal_count_recent.groupby(['Discipline']).size()
+  france_recent_pct = france_medal_count_recent.groupby(['Gender','Discipline']).size()/\
+  df_medal_count_recent.groupby(['Gender','Discipline']).size()
+
+  france_recent_pct_total = france_medal_count_recent.groupby(['Discipline']).size()/\
+  df_medal_count_recent.groupby(['Discipline']).size()  
   df_france_best_disciplines = france_recent_pct.sort_values(ascending=False).reset_index().rename(columns={0:'value'})
-  df_france_best_disciplines = df_france_best_disciplines.loc[:9,:] 
-  df_france_best_disciplines.Discipline = df_france_best_disciplines.Discipline.replace(french_trad)
+  df_france_best_disciplines_total = france_recent_pct_total.sort_values(ascending=False).reset_index().rename(columns={0:'value'})
+  df_france_best_disciplines_total['Gender']='All'
+
+  
+  df_france_best_disciplines = pd.concat([df_france_best_disciplines, df_france_best_disciplines_total])  
+  # df_france_best_disciplines = df_france_best_disciplines.loc[:9,:] 
+  # df_france_best_disciplines.Discipline = df_france_best_disciplines.Discipline.replace(french_trad)
 
   logger.info('inserting df with shape: ' + str(df_france_best_disciplines.shape))
   #dataframe_to_mongo(df_france_best_disciplines, DATABASE, 'france_best_disciplines', erase=True)
   #logger.info('insertion sucessful in db' + DATABASE + ' of collection: ' + 'df_france_best_disciplines')
-  df_france_best_disciplines.to_json('../../static/viz/summer_olympics/france_best_disciplines.json', orient='records')    
+  df_france_best_disciplines.to_json('../../static/viz/summer_olympics/france_best_disciplines_total.json', orient='records')    
 
 def france_best_disciplines_men():
   from data_params import DATABASE, PROJECT

@@ -34,6 +34,8 @@
     o.domain = chart.domain;
     o.format = chart.format;
     o.title = chart.title;
+    o.source = chart.source;
+    o.source = chart.source;
 
     nbviz.charts.push(o)
     return o
@@ -89,33 +91,16 @@
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
   };
 
-//add the svg based on the div dimensions (chart dimensions + margins) 
-  // nbviz.updateSVG = function(graphContainer) {
-  //   nbviz.getDivByID(graphContainer);
-  //   nbviz.getSVGDim(graphContainer);
-  //   var dim = graphContainer.dim;
-  //   var margin = graphContainer.margin;
-  //   var divID = '#' + graphContainer.divID;
-    
-  //   graphContainer.svg = d3.select(graphContainer.svgID)
-  //   .attr("width", dim.width + margin.left + margin.right)
-  //   .attr("height", dim.height + margin.top + margin.bottom);
-  // };
+// add the title, comment and sources
+  nbviz.buildStory = function(){
+    d3.select('#title-container').append('text').text(nbviz.STORY.title)
+    d3.select('#comment-container').append('text').text(nbviz.STORY.comment)
+    d3.select('#sources').append('text').text(nbviz.STORY.sources)
+  };
 
-//add the svg based on the div dimensions (chart dimensions + margins) 
-  // nbviz.addSVGtoDiv = function(graphContainer) {
-  //   nbviz.getDivByID(graphContainer)
-  //   nbviz.getSVGDim(graphContainer)
-  //   var dim = graphContainer.dim;
-  //   var margin = graphContainer.margin;
-  //   var divID = '#' + graphContainer.divID;
-    
-  //   graphContainer.svg = d3.select(divID).append("svg")
-  //   .attr('id',graphContainer.svgID)
-  //   .attr("width", dim.width + margin.left + margin.right)
-  //   .attr("height", dim.height + margin.top + margin.bottom)
-  //   .append("g").classed(graphContainer._class, true)
-  //   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-  // };
+  nbviz.addText = function(){
+    d3.select('#main-text').append('text').text(nbviz.DATASTORE[nbviz.TEXT.domain]['0'].content);
+  };
+
   
 }(window.nbviz=window.nbviz || {}));

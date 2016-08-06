@@ -46,7 +46,7 @@ a:hover {
 
 #chart-holder {
     width: 100%;
-    height:900px;
+    height:100%;
     position: relative;
 }
 
@@ -73,7 +73,7 @@ a:hover {
  }
 
 .comment-container{
-    background-color: #eeeeee;
+    // background-color: #eeeeee;
     left:25%;
 }
 
@@ -96,37 +96,58 @@ text {
 }
 
 #global-container{
-    background-color:#E8FFFF;
+    // background-color:#E8FFFF;
     max-width:800px;
     max-height: 300px
 }
 
-#title-container{
-    background-color:#FFD2D2;
-    font-family:'roboto';
+#title-container {
+    // background-color:#FFD2D2;
     height:30px;
-    font-size: 18px;
-    text-align: center:
-
+    text-align: center;
+    background-color:#F3C600;
 }
 
-#comment-container{
-    background-color:#FFE79F;
-    font-family:'georgia';
+#title-container text{
+    font-family:'montserrat';
+    font-size: 18px;
+    text-align: center;
+    color: white; 
+}
+
+#comment-container {
+    // background-color:#FFE79F;
     height:30px;
+    text-align: left:
+}
+
+#comment-container text{
+    font-family:'roboto';
     font-size: 13px;
     text-align: left:
 }
 
 #nbviz:{
-    background-color:#CFFFCD
+    // background-color:#CFFFCD
 }
 
 #menu:{
-    background-color:#FF6FEA
+    // background-color:#FF6FEA
 }
 
+#sources {
+    text-align:center
+}
 
+#sources text{
+    font-style:italic
+}
+
+#main-text {
+    margin-top:10px;
+    text-align:justify;
+    font-family: georgia
+}
 
 
 

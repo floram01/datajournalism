@@ -86,6 +86,20 @@
     });
     return data;
 };
+// add a case with no grouping i.e. if groupDim is null: just sort and filter
+  nbviz.myGetter = function(graphContainer) {
+    var _dim = graphContainer.dataGetterParams.groupDim;
+    var top = graphContainer.dataGetterParams.top;
+    var top_num = graphContainer.dataGetterParams.top_num;
+
+    var data = nbviz[_dim + 'Dim'].top(Infinity).sort(function(a, b) {
+      if (top){
+        return +b[graphContainer._value] - +a[graphContainer._value];
+      }else {return +b[graphContainer._value] - +a[graphContainer._value];}
+    });
+
+    return data.slice(0,top_num);
+};
 
 //range à généraliser en fonction des besoins identifiés au fur et à mesure
   nbviz.addDataBarchartInfo = function(data, graphContainer) {          
@@ -132,7 +146,8 @@
 
 // based on a filterTool dimension crossfilter object extract the values of the dimension and add a resetValue
   nbviz.listOptions = function(data, filterTool, resetValue) {
-    _options=[resetValue];
+    // _options=[resetValue];
+    var _options = [];
     filterTool.group().all().forEach(function(o){
         _options.push(o.key);
     });
@@ -148,7 +163,6 @@
     // .attr('id', filterParams.dimension + '-select')
     // .text(filterParams.name)
     // .append('select');
-
     _options=nbviz.listOptions(data, filterParams.filterTool, filterParams.resetValue);
     // if(_options[0].includes('All')){_options.shift(0)};//à généraliser a priori resetValue contient All pas top
     nbviz[filterParams.dimension + 'Values'] = _options;
@@ -162,14 +176,20 @@
       .attr('value', function(d){return d;})
       .html(function(d){return d;});
 
+    filterParams.filterTool.filter(filterParams.defaultValue);
+
     _filter.on('change', function(d){
       var category = d3.select(this).property('value');
-      if (category===filterParams.resetValue){
-          filterParams.filterTool.filter();
-        } else {
-          filterParams.filterTool.filter(category);
-        };
+      // if (category===filterParams.resetValue){
+      //     filterParams.filterTool.filter();
+      //   } else {
+      //     filterParams.filterTool.filter(category);
+      //   };
+      filterParams.filterTool.filter(category);
       nbviz.onDataChange();
+
+      // select the default value
+
   });
 };
 
@@ -180,7 +200,8 @@
       f.filterTool = nbviz[f.dimension + 'Dim'] = nbviz.filter.dimension(function(o) {
         return o[f.dimension];
       });
-      nbviz.addFilter(winnersData, f);      
+      nbviz.addFilter(winnersData, f);
+
     });
   };
 

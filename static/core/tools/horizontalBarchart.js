@@ -79,7 +79,7 @@
     })  
     .text(function(d){return my_format(d.value)})
     .attr({
-        'fill':'white',
+        // 'fill':'white',
         'font-size':'12px'
     })
 

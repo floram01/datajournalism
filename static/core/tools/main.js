@@ -21,13 +21,14 @@ function ready(error, data) {
   }
   // nbviz.STATIC_DATA = {};
   // nbviz.STATIC_DATA.heatmap = data[1];
-
-  // nbviz.makeFilterAndDimensions(nbviz.DATASTORE.fullData, nbviz.FILTERS);
-  
+  nbviz.makeFilterAndDimensions(nbviz.DATASTORE.fullData, nbviz.FILTERS);
+  // add title etc.
+  nbviz.buildStory();
   nbviz.CHARTS.forEach(function(chartParams, i){
     nbviz.initGraphContainer(chartParams);
     nbviz['build' + chartParams._type](
       nbviz.charts[i]
       )
-  })
+  });
+  nbviz.addText();
 };

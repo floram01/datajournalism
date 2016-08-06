@@ -140,7 +140,7 @@
       _yKey:'Discipline',
       domain:'france_best_disciplines',
       dim:{height:'240px',width:"col-md-4"},
-      format:'.1%'
+      format:'.0%'
     }
   ,
     {
@@ -154,7 +154,7 @@
       _yKey:'Discipline',
       domain:'france_best_disciplines_women',
       dim:{height:'240px',width:"col-md-4"},
-      format:'.1%'
+      format:'.0%'
     }
   ,
     {
@@ -168,7 +168,7 @@
       _yKey:'Discipline',
       domain:'france_best_disciplines_men',
       dim:{height:'240px',width:"col-md-4"},
-      format:'.1%'
+      format:'.0%'
     }
   ,
     {
@@ -182,7 +182,7 @@
       _yKey:'Discipline',
       domain:'france_best_disciplines_ever',
       dim:{height:'120px',width:"col-md-4"},
-      format:'.1%'
+      format:'.0%'
     }
   // ,
   //   {
