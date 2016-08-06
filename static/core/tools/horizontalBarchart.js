@@ -85,6 +85,14 @@
 
     legend.exit().remove();
 
+    // add title
+    svg.append('text').attr({
+        'class':'graph-title',
+        'x':'50px',
+        'y':graphContainer.margin.top/2
+    })
+    .text(graphContainer.title)
+
     nbviz.customYScale(data, graphContainer);
     nbviz.updateYAxis(data, graphContainer);
 

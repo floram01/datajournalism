@@ -1,6 +1,25 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 import pandas as pd
 from pymongo import MongoClient
 import numpy as np
+
+
+french_trad={
+  'Fencing':'Escrime',
+  'Canoeing':'Canoe/Kayak',
+  'Cycling':'Cyclisme',
+  'Rowing':'Aviron',
+  'Equestrian':'Equitation',
+  'Table tennis':'Tennis de table',
+  'Sailing':'Voile',
+  'Wrestling':'Lutte',
+  'Swimming':'Natation',
+  'Shooting':'Tir',
+  'Basque Pelota':'Pelote Basque',
+  'Synchronized swimming':u'Natation synchronisée'
+}
 
 def prepare_data_sources():
     france_best_disciplines()
@@ -33,6 +52,7 @@ def france_best_disciplines():
   df_medal_count_recent.groupby(['Discipline']).size()
   df_france_best_disciplines = france_recent_pct.sort_values(ascending=False).reset_index().rename(columns={0:'value'})
   df_france_best_disciplines = df_france_best_disciplines.loc[:9,:] 
+  df_france_best_disciplines.Discipline = df_france_best_disciplines.Discipline.replace(french_trad)
 
   logger.info('inserting df with shape: ' + str(df_france_best_disciplines.shape))
   #dataframe_to_mongo(df_france_best_disciplines, DATABASE, 'france_best_disciplines', erase=True)
@@ -63,7 +83,8 @@ def france_best_disciplines_men():
   france_recent_pct = france_medal_count_recent.groupby(['Discipline']).size()/\
   df_medal_count_recent.groupby(['Discipline']).size()
   df_france_best_disciplines = france_recent_pct.sort_values(ascending=False).reset_index().rename(columns={0:'value'})
-  df_france_best_disciplines = df_france_best_disciplines.loc[:9,:] 
+  df_france_best_disciplines = df_france_best_disciplines.loc[:9,:]
+  df_france_best_disciplines.Discipline = df_france_best_disciplines.Discipline.replace(french_trad)
 
   logger.info('inserting df with shape: ' + str(df_france_best_disciplines.shape))
   #dataframe_to_mongo(df_france_best_disciplines, DATABASE, 'france_best_disciplines', erase=True)
@@ -95,7 +116,8 @@ def france_best_disciplines_women():
   france_recent_pct = france_medal_count_recent.groupby(['Discipline']).size()/\
   df_medal_count_recent.groupby(['Discipline']).size()
   df_france_best_disciplines = france_recent_pct.sort_values(ascending=False).reset_index().rename(columns={0:'value'})
-  df_france_best_disciplines = df_france_best_disciplines.loc[:9,:] 
+  df_france_best_disciplines = df_france_best_disciplines.loc[:9,:]
+  df_france_best_disciplines.Discipline = df_france_best_disciplines.Discipline.replace(french_trad)
 
   logger.info('inserting df with shape: ' + str(df_france_best_disciplines.shape))
   #dataframe_to_mongo(df_france_best_disciplines, DATABASE, 'france_best_disciplines', erase=True)
@@ -128,6 +150,7 @@ def france_best_disciplines_ever():
   df_medal_count_recent.groupby(['Discipline']).size()
   df_france_best_disciplines = france_recent_pct.sort_values(ascending=False).reset_index().rename(columns={0:'value'})
   df_france_best_disciplines = df_france_best_disciplines.loc[:2,:] 
+  df_france_best_disciplines.Discipline = df_france_best_disciplines.Discipline.replace(french_trad)
 
   logger.info('inserting df with shape: ' + str(df_france_best_disciplines.shape))
   #dataframe_to_mongo(df_france_best_disciplines, DATABASE, 'france_best_disciplines', erase=True)

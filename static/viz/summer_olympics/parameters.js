@@ -65,6 +65,12 @@
         source:'static/viz/summer_olympics/france_best_disciplines_women.json',
         getterFunction:nbviz.getDataFromJSON
       }
+    ,
+      {
+        name:'france_best_disciplines_ever',
+        source:'static/viz/summer_olympics/france_best_disciplines_ever.json',
+        getterFunction:nbviz.getDataFromJSON
+      }
     ]
   };
 
@@ -126,44 +132,59 @@
     {
       _type:'HorizontalBarchart',
       _id:'horizontalBarchartFrance',
-      margins: {top:20, right:20, bottom:20, left:60},
-      padding: {interbar:.1, left:5, bottom:20, legend:5},
+      margins: {top:30, right:20, bottom:20, left:65},
+      padding: {interbar:.1, left:5, bottom:0, legend:5},
       divID: 'nobel-vBar-France',
       dataGetter:nbviz.fullData,
       _key:'Discipline',
       _yKey:'Discipline',
       domain:'france_best_disciplines',
-      dim:{height:'240px',width:"col-md-4"},
-      format:'.1%'
+      dim:{height:'240px',width:"col-md-12"},
+      format:'.1%',
+      title:'Graph info (period,etc.)'
     }
-  ,
-    {
-      _type:'HorizontalBarchart',
-      _id:'horizontalBarchartFranceMen',
-      margins: {top:20, right:20, bottom:20, left:60},
-      padding: {interbar:.1, left:5, bottom:20, legend:5},
-      divID: 'nobel-vBar-France-men',
-      dataGetter:nbviz.fullData,
-      _key:'Discipline',
-      _yKey:'Discipline',
-      domain:'france_best_disciplines_men',
-      dim:{height:'240px',width:"col-md-4"},
-      format:'.1%'
-    }
-  ,
-    {
-      _type:'HorizontalBarchart',
-      _id:'horizontalBarchartFranceWomen',
-      margins: {top:20, right:20, bottom:20, left:60},
-      padding: {interbar:.1, left:5, bottom:20, legend:5},
-      divID: 'nobel-vBar-France-women',
-      dataGetter:nbviz.fullData,
-      _key:'Discipline',
-      _yKey:'Discipline',
-      domain:'france_best_disciplines_women',
-      dim:{height:'240px',width:"col-md-4"},
-      format:'.1%'
-    }
+  // ,
+  //   {
+  //     _type:'HorizontalBarchart',
+  //     _id:'horizontalBarchartFranceWomen',
+  //     margins: {top:20, right:20, bottom:20, left:65},
+  //     padding: {interbar:.1, left:5, bottom:20, legend:5},
+  //     divID: 'nobel-vBar-France-women',
+  //     dataGetter:nbviz.fullData,
+  //     _key:'Discipline',
+  //     _yKey:'Discipline',
+  //     domain:'france_best_disciplines_women',
+  //     dim:{height:'240px',width:"col-md-4"},
+  //     format:'.1%'
+  //   }
+  // ,
+  //   {
+  //     _type:'HorizontalBarchart',
+  //     _id:'horizontalBarchartFranceMen',
+  //     margins: {top:20, right:20, bottom:20, left:65},
+  //     padding: {interbar:.1, left:5, bottom:20, legend:5},
+  //     divID: 'nobel-vBar-France-men',
+  //     dataGetter:nbviz.fullData,
+  //     _key:'Discipline',
+  //     _yKey:'Discipline',
+  //     domain:'france_best_disciplines_men',
+  //     dim:{height:'240px',width:"col-md-4"},
+  //     format:'.1%'
+  //   }
+  // ,
+  //   {
+  //     _type:'HorizontalBarchart',
+  //     _id:'horizontalBarchartFranceEver',
+  //     margins: {top:20, right:20, bottom:20, left:65},
+  //     padding: {interbar:.1, left:5, bottom:20, legend:5},
+  //     divID: 'nobel-vBar-France-ever',
+  //     dataGetter:nbviz.fullData,
+  //     _key:'Discipline',
+  //     _yKey:'Discipline',
+  //     domain:'france_best_disciplines_ever',
+  //     dim:{height:'120px',width:"col-md-4"},
+  //     format:'.1%'
+  //   }
   // ,
   //   {
   //     _type:'Heatmap',

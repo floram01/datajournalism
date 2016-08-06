@@ -95,6 +95,36 @@ text {
     letter-spacing:'normal'
 }
 
+#global-container{
+    background-color:#E8FFFF;
+    max-width:800px;
+    max-height: 300px
+}
+
+#title-container{
+    background-color:#FFD2D2;
+    font-family:'roboto';
+    height:30px;
+    font-size: 18px;
+    text-align: center:
+
+}
+
+#comment-container{
+    background-color:#FFE79F;
+    font-family:'georgia';
+    height:30px;
+    font-size: 13px;
+    text-align: left:
+}
+
+#nbviz:{
+    background-color:#CFFFCD
+}
+
+#menu:{
+    background-color:#FF6FEA
+}
 
 
 

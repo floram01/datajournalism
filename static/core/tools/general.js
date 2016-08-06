@@ -33,6 +33,7 @@
     o.yIndex = chart.yIndex||{};
     o.domain = chart.domain;
     o.format = chart.format;
+    o.title = chart.title;
 
     nbviz.charts.push(o)
     return o
