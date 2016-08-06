@@ -38,12 +38,6 @@ a:hover {
     margin:10%;
 }
 
-#nbviz {
-    /*position: relative;*/
-    /*width: 100%;*/
-/*    margin: 10%;*/
-}
-
 #chart {
     margin:10%;
     position: relative;
@@ -89,7 +83,17 @@ a:hover {
 
 }
 
+.svg-main-color{
+    fill:#A0D1C5
+}
 
+text {
+    color:#404040;
+    font-family:'Montserrat';
+    font-size:13px;
+    font-weight:400;
+    letter-spacing:'normal'
+}
 
 
 

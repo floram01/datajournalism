@@ -52,6 +52,7 @@
     // update all bars that are bound to a DOM element
     bars
     .transition().duration(nbviz.TRANS_DURATION)
+    .attr('class','svg-main-color')
     .attr('height', barWidth)
     .attr('width', function(d){return graphContainer.scales.xScale(d.value);})
     .attr('y', function(d,i){return graphContainer.scales.yScale(i);})
