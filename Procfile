@@ -1,1 +1,1 @@
-web: gunicorn datajournalism:app
+web: gunicorn wsgi:app
