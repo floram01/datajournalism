@@ -60,7 +60,7 @@ def france_best_disciplines():
   
   df_france_best_disciplines = pd.concat([df_france_best_disciplines, df_france_best_disciplines_total])  
   # df_france_best_disciplines = df_france_best_disciplines.loc[:9,:] 
-  # df_france_best_disciplines.Discipline = df_france_best_disciplines.Discipline.replace(french_trad)
+  df_france_best_disciplines.Discipline = df_france_best_disciplines.Discipline.replace(french_trad)
 
   logger.info('inserting df with shape: ' + str(df_france_best_disciplines.shape))
   #dataframe_to_mongo(df_france_best_disciplines, DATABASE, 'france_best_disciplines', erase=True)

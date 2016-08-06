@@ -53,7 +53,7 @@
     {
       _type:'HorizontalBarchart',
       _id:'horizontalBarchartFrance',
-      margins: {top:30, right:20, bottom:0, left:65},
+      margins: {top:30, right:20, bottom:0, left:72},
       padding: {interbar:.1, left:5, bottom:0, legend:5},
       divID: 'nobel-vBar-France',
       dataGetter:nbviz.myGetter,
@@ -63,7 +63,7 @@
       _yKey:'Discipline',
       domain:'fullData',
       dim:{height:'230px',width:"col-md-12"},
-      format:'.1%',
+      format:'.0%',
       title:'Graph info (period,etc.)'
     }
   ];
