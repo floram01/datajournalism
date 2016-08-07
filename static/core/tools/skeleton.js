@@ -23,8 +23,7 @@
       'id': f.dimension + '-select',
       'class':'col-md-' + JSON.stringify(12/nbviz.FILTERS.length)
     })
-    .text(f.name)
-    .append('select')
+    .append('select');
   })
 
   // charts

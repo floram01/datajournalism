@@ -149,6 +149,9 @@ text {
     font-family: georgia
 }
 
+select {
+    border:none
+}
 
 
 
