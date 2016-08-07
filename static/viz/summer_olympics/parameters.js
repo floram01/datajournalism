@@ -20,8 +20,9 @@
   nbviz.DATA_PATH = 'static/viz/' + nbviz.STORY.project_name + '/data_sources/'
 
   nbviz.FILTERS = [
-    {locationID:'gender-select select', name:'Gender', dimension:'Gender', defaultValue:'All'},
-    {locationID:'country-select select', name:'Country', dimension:'country_name', defaultValue:'France'},
+    {locationID:'gender-select select', name:'Gender', dimension:'Gender', defaultValue:'All', type:'Dropdown'},
+    {locationID:'country-select select', name:'Country', dimension:'country_name', defaultValue:'France', type:'Dropdown'},
+    {locationID:'value-select select', name:'Type de valeur', dimension:'value_filter', defaultValue:'%', type:'Radio'}
   ];
 
   nbviz.DATA_PROVIDER= {
@@ -29,7 +30,7 @@
     params:[
       {
         name:'fullData',
-        source:'results_by_disciplines.json',
+        source:'results_by_disciplines_with_value_type.json',
         getterFunction:nbviz.getDataFromJSON
       }
     ,

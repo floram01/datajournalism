@@ -23,7 +23,6 @@
       'id': f.dimension + '-select',
       'class':'col-md-' + JSON.stringify(12/nbviz.FILTERS.length)
     })
-    .append('select');
   })
 
   // charts

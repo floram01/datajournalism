@@ -146,3 +146,5 @@
 2016-08-07 09:50:46,548 :: INFO :: inserting df with shape: (3, 2)
 2016-08-07 09:57:53,154 :: INFO :: inserting df with shape: (1272, 6)
 2016-08-07 09:57:53,505 :: INFO :: inserting df with shape: (3, 2)
+2016-08-07 18:23:27,250 :: INFO :: inserting df with shape: (2544, 6)
+2016-08-07 18:23:27,607 :: INFO :: inserting df with shape: (3, 2)

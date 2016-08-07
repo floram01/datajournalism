@@ -157,7 +157,7 @@
 // populate a filter (locationID) with the values linked to a filterTool
 // use listOption
 // use onDataChange
-  nbviz.addFilter = function(data, filterParams){
+  nbviz.addDropdownFilter = function(data, filterParams){
     // d3.select('#menu')
     // .append('div')
     // .attr('id', filterParams.dimension + '-select')
@@ -167,7 +167,7 @@
     _options=nbviz.listOptions(data, filterParams.filterTool, filterParams.resetValue);
     // if(_options[0].includes('All')){_options.shift(0)};//à généraliser a priori resetValue contient All pas top
     nbviz[filterParams.dimension + 'Values'] = _options;
-    _filter = d3.select('#' + filterParams.dimension + '-select select');
+    _filter = d3.select('#' + filterParams.dimension + '-select').append('select');;
     _filter
       .selectAll('options')
       .data(_options)
@@ -180,8 +180,48 @@
     filterParams.filterTool.filter(filterParams.defaultValue);
 
     _filter.on('change', function(d){
-      debugger;
       var category = d3.select(this).property('value');
+      // if (category===filterParams.resetValue){
+      //     filterParams.filterTool.filter();
+      //   } else {
+      //     filterParams.filterTool.filter(category);
+      //   };
+      filterParams.filterTool.filter(category);
+      nbviz.onDataChange();
+
+      // select the default value
+
+  });
+};
+
+  nbviz.addRadioFilter = function(data, filterParams){
+    // d3.select('#menu')
+    // .append('div')
+    // .attr('id', filterParams.dimension + '-select')
+    // .text(filterParams.name)
+    // .append('select');
+
+    _options=nbviz.listOptions(data, filterParams.filterTool, filterParams.resetValue);
+    // if(_options[0].includes('All')){_options.shift(0)};//à généraliser a priori resetValue contient All pas top
+    nbviz[filterParams.dimension + 'Values'] = _options;
+    _filter = d3.select('#' + filterParams.dimension + '-select').append('form');
+    _filter
+      .selectAll('label')
+      .data(_options)
+      .enter()
+      .append('label')
+      .html(function(d){return d;})
+      .append('input')
+      .attr({
+        'type':'radio',
+        'name':'mode'
+      });
+
+    d3.selectAll('input').filter(function(d){return d===filterParams.defaultValue}).attr('checked','checked');
+    filterParams.filterTool.filter(filterParams.defaultValue);
+
+    d3.selectAll('label').on('change', function(d){
+      var category = d;
       // if (category===filterParams.resetValue){
       //     filterParams.filterTool.filter();
       //   } else {
@@ -202,8 +242,7 @@
       f.filterTool = nbviz[f.dimension + 'Dim'] = nbviz.filter.dimension(function(o) {
         return o[f.dimension];
       });
-      nbviz.addFilter(winnersData, f);
-
+      nbviz['add' + f.type + 'Filter'](winnersData, f);
     });
   };
 

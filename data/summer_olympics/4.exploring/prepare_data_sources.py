@@ -67,10 +67,17 @@ def results_by_disciplines():
   df_france_best_disciplines = pd.concat([df_merged, df_merged_detail])  
   # df_france_best_disciplines = df_france_best_disciplines.loc[:9,:] 
   df_france_best_disciplines.Discipline = df_france_best_disciplines.Discipline.replace(french_trad)
+  df_france_best_disciplines.set_index(
+                                       [c for c in df_france_best_disciplines.columns if c not in ['value','country_value']],
+                                       inplace=True
+                                       )
+  df_france_best_disciplines= df_france_best_disciplines.stack().reset_index().rename(columns={'level_4':'value_filter',0:'value'})
+  df_france_best_disciplines.value_filter.replace({'country_value':'Nombre','value':'%'}, inplace=True)
+  
   logger.info('inserting df with shape: ' + str(df_france_best_disciplines.shape))
   #dataframe_to_mongo(df_france_best_disciplines, DATABASE, 'france_best_disciplines', erase=True)
   #logger.info('insertion sucessful in db' + DATABASE + ' of collection: ' + 'df_france_best_disciplines')
-  df_france_best_disciplines.to_json('../../static/viz/summer_olympics/data_sources/results_by_disciplines.json', orient='records')    
+  df_france_best_disciplines.to_json('../../static/viz/summer_olympics/data_sources/results_by_disciplines_with_value_type.json', orient='records')    
 
 def france_best_disciplines_ever():
   from data_params import DATABASE, PROJECT
