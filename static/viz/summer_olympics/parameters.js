@@ -5,45 +5,37 @@
 
 (function(nbviz){
 
-  nbviz.valuePerCapita = 0; // metric flag
-  nbviz.activeCountry = null;
   nbviz.TRANS_DURATION = 1500; // length in ms for our transitions
-  nbviz.MAX_CENTROID_RADIUS = 30;
-  nbviz.MIN_CENTROID_RADIUS = 2;
   nbviz.COLORS = {palegold:'#E6BE8A'}; // any named colors we use
-
-  $EVE_API = 'http://localhost:5000/api/';//adress where the servor api is serving the database
-  nbviz.FULL_DATA = 'full_data'
 
   nbviz.STORY = {
     title :'MY TITLE',
     comment:'My comment',
     sources : 'My sources',
+    project_name:'summer_olympics'//has to match the file name
   }
+  
+  $EVE_API = 'http://localhost:5000/api/';//adress where the servor api is serving the database
+  nbviz.FULL_DATA = 'full_data'
+  nbviz.DATA_PATH = 'static/viz/' + nbviz.STORY.project_name + '/data_sources/'
 
   nbviz.FILTERS = [
     {locationID:'gender-select select', name:'Gender', dimension:'Gender', defaultValue:'All'},
+    {locationID:'country-select select', name:'Country', dimension:'country_name', defaultValue:'France'},
   ];
-
-  nbviz.OLD_DATA_PROVIDER= {
-    getterFunction:nbviz.getDataFromJSON,
-    params:{
-      file:'static/viz/summer_olympics/full_data_records_total.json'
-    }
-  };
 
   nbviz.DATA_PROVIDER= {
     getterFunction:nbviz.prepareDatasets,
     params:[
       {
         name:'fullData',
-        source:'static/viz/summer_olympics/france_best_disciplines_total.json',
+        source:'results_by_disciplines.json',
         getterFunction:nbviz.getDataFromJSON
       }
     ,
       {
         name:'text',
-        source:'static/viz/summer_olympics/text.csv',
+        source:'text.csv',
         getterFunction:nbviz.getDataFromCSV
       }
     ]
@@ -56,7 +48,7 @@
       margins: {top:30, right:20, bottom:0, left:72},
       padding: {interbar:.1, left:5, bottom:0, legend:5},
       divID: 'nobel-vBar-France',
-      dataGetter:nbviz.myGetter,
+      dataGetter:nbviz.topFlop,
       dataGetterParams:{groupDim:'Gender',top:true,top_num:10},
       _key:'Discipline',
       _value:'value',

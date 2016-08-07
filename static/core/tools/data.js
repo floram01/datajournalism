@@ -27,7 +27,7 @@
   };
   
   nbviz.getDataFromJSON = function(params, callback){
-      d3.json(params.source, function(error, data) {    
+      d3.json(nbviz.DATA_PATH + params.source, function(error, data) {    
         if(error){
           return callback(error);
         } else {
@@ -38,7 +38,7 @@
   };
 
   nbviz.getDataFromCSV = function(params, callback){
-      d3.csv(params.source, function(error, data) {    
+      d3.csv(nbviz.DATA_PATH + params.source, function(error, data) {    
         if(error){
           return callback(error);
         } else {
@@ -87,7 +87,7 @@
     return data;
 };
 // add a case with no grouping i.e. if groupDim is null: just sort and filter
-  nbviz.myGetter = function(graphContainer) {
+  nbviz.topFlop = function(graphContainer) {
     var _dim = graphContainer.dataGetterParams.groupDim;
     var top = graphContainer.dataGetterParams.top;
     var top_num = graphContainer.dataGetterParams.top_num;
@@ -163,10 +163,10 @@
     // .attr('id', filterParams.dimension + '-select')
     // .text(filterParams.name)
     // .append('select');
+
     _options=nbviz.listOptions(data, filterParams.filterTool, filterParams.resetValue);
     // if(_options[0].includes('All')){_options.shift(0)};//à généraliser a priori resetValue contient All pas top
     nbviz[filterParams.dimension + 'Values'] = _options;
-    
     _filter = d3.select('#' + filterParams.dimension + '-select select');
     _filter
       .selectAll('options')
@@ -176,9 +176,11 @@
       .attr('value', function(d){return d;})
       .html(function(d){return d;});
 
+    d3.selectAll('option').filter(function(d){return d===filterParams.defaultValue}).attr('selected','selected');
     filterParams.filterTool.filter(filterParams.defaultValue);
 
     _filter.on('change', function(d){
+      debugger;
       var category = d3.select(this).property('value');
       // if (category===filterParams.resetValue){
       //     filterParams.filterTool.filter();

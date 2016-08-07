@@ -21,7 +21,7 @@
     .append('div')
     .attr({
       'id': f.dimension + '-select',
-      'class':'col-md-4'
+      'class':'col-md-' + JSON.stringify(12/nbviz.FILTERS.length)
     })
     .text(f.name)
     .append('select')
