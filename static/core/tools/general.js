@@ -11,9 +11,9 @@
     var o = {};
     o.margin = {top:chart.margins.top, right:chart.margins.right, left:chart.margins.left, bottom:chart.margins.bottom};
     o.padding = {interbar : chart.padding.interbar, left : chart.padding.left, bottom : chart.padding.bottom, legend : chart.padding.legend};
-    o.divID = chart.divID;
-    o.svgID = chart._id;
+    o._id = chart._id;
     o._class = chart._id;
+    o.divID = '#div' + chart._id;
     o._key = chart._key;
     o._yKey = chart._yKey;
     o._xKey = chart._xKey;
@@ -27,6 +27,7 @@
     o.tableTitle = chart.tableTitle||{};
     o.tableColumns = chart.tableColumns||{};
     o._value = chart._value||{};
+    o._label = chart._label||{};
     o.xDimension = chart.xDimension||{};
     o.yDimension = chart.yDimension||{};
     o.xIndex = chart.xIndex||{};
@@ -58,8 +59,7 @@
 
 // get the graphContainer div bounding rect
   nbviz.getDivByID = function(graphContainer) {
-    var chartHolder=d3.select('#' + graphContainer.divID);
-
+    var chartHolder=d3.select(graphContainer.divID);
     graphContainer.boundingRect = chartHolder.node().getBoundingClientRect();
   };
 
@@ -79,10 +79,10 @@
     nbviz.getSVGDim(graphContainer);
     var dim = graphContainer.dim;
     var margin = graphContainer.margin;
-    var divID = '#' + graphContainer.divID;
+    var divID = graphContainer.divID;
     
     graphContainer.svg = d3.select(divID).append("svg")
-    .attr('id',graphContainer.svgID)
+    .attr('id','#svg' + graphContainer._id)
     .attr("width", dim.width + margin.left + margin.right)
     .attr("height", dim.height + margin.top + margin.bottom);
 

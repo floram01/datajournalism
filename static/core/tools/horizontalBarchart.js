@@ -39,7 +39,7 @@
 
     // data- join
     // provoque toujours bug au moment de l'update?
-    var bars=svg.select('g.' + graphContainer._class).selectAll('rect').data(data, function(d){return d[graphContainer._key];});
+    var bars=svg.select('g.' + graphContainer._class).selectAll('rect').data(data, function(d){return d[graphContainer._label];});
 
     // create bars for data points that are not yet bound to a DOM element
     bars.enter()
@@ -51,7 +51,7 @@
     .transition().duration(nbviz.TRANS_DURATION)
     .attr('class','svg-main-color')
     .attr('height', barWidth)
-    .attr('width', function(d){return graphContainer.scales.xScale(d.value);})
+    .attr('width', function(d){return graphContainer.scales.xScale(d[graphContainer._value]);})
     .attr('y', function(d,i){return graphContainer.scales.yScale(i);})
     .attr('x', function(d){return graphContainer.margin.left + graphContainer.padding.left;});
     
@@ -60,7 +60,7 @@
     bars.exit()
     .remove();
 
-    var legend = svg.select('g.' + graphContainer._class).selectAll('text.legend').data(data, function(d){return d[graphContainer._key];});
+    var legend = svg.select('g.' + graphContainer._class).selectAll('text.legend').data(data, function(d){return d[graphContainer._label];});
     legend.enter()
     .append('text')
     .classed(graphContainer._class + ' legend', true);
@@ -69,15 +69,14 @@
     .attr({
         'y' : function(d,i){return graphContainer.scales.yScale(i) + barWidth*3/4;},
         'x' : function(d){
-            return graphContainer.scales.xScale(d.value) + graphContainer.margin.left - graphContainer.padding.legend;
+            return graphContainer.scales.xScale(d[graphContainer._value]) + graphContainer.margin.left - graphContainer.padding.legend;
         },
         'text-anchor' : 'end',
         'vertical-align':'bottom'
     })  
     .text(function(d){
         // move elsewhere in data part
-        var my_format = d3.format(d.precision)
-        return my_format(d.value)})
+        return nbviz.format(d, graphContainer)})
     .attr({
         // 'fill':'white',
         'font-size':'12px'

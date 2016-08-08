@@ -79,7 +79,7 @@
     var padding = graphContainer.padding;
     var margin = graphContainer.margin;
     var xLinearScale = d3.scale.linear()
-    .domain([0, d3.max(data, function(d){return d.value;})])
+    .domain([0, d3.max(data, function(d){return d[graphContainer._value];})])
     .rangeRound([padding.left, dim.width - padding.left - margin.left - margin.right])
     return xLinearScale
   };
@@ -88,7 +88,7 @@
     var dim = graphContainer.dim;
     var margin = graphContainer.margin;
     var yLinearScale = d3.scale.linear()
-    .domain([0, d3.max(data, function(d){return d.value;})])
+    .domain([0, d3.max(data, function(d){return d[graphContainer._value];})])
     .rangeRound([dim.height, margin.top])
     return yLinearScale
   };
@@ -97,14 +97,14 @@
     // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
 
     graphContainer.scales.yScale.domain([0, d3.max(data, function(d){
-                                       return + d.value; })]);
+                                       return + d[graphContainer._value]; })]);
   };
 
   nbviz.updateDomainXLinearScale = function(data, graphContainer){
     // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
 
     graphContainer.scales.xScale.domain([0, d3.max(data, function(d){
-                                       return + d.value; })]);
+                                       return + d[graphContainer._value]; })]);
   };
 
   nbviz.updateRangeYLinearScale = function(data, graphContainer){

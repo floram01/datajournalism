@@ -56,7 +56,7 @@
   // nest data (entries) sharing same dimension 'key'
   // build or update a data object in graphContainer containing the nested data and some parameters
   nbviz.nestDataByKey = function(graphContainer) {          
-    var _dim = graphContainer.dataGetterParams.groupDim;
+    var _dim = nbviz.FILTERS[0].name;
     var entries = nbviz[_dim + 'Dim'].top(Infinity);
     var _key = graphContainer.timeID;
 
@@ -72,15 +72,15 @@
     var _dim = graphContainer.dataGetterParams.groupDim;
     var data = nbviz[_dim + 'Dim'].group().all()
         .sort(function(a, b) { 
-            return b.value - a.value; // descending
+            return b[graphContainer._value] - a[graphContainer._value]; // descending
         })
-        .filter(function(d){return d.value > 0});
+        .filter(function(d){return d[graphContainer._value] > 0});
     return data;
 };
 
 // add a case with no grouping i.e. if groupDim is null: just sort and filter
   nbviz.allDataSortedByKey = function(graphContainer) {
-    var _dim = graphContainer.dataGetterParams.groupDim;
+    var _dim = nbviz.FILTERS[0].name;
     var data = nbviz[_dim + 'Dim'].top(Infinity).sort(function(a, b) {
       return +b[graphContainer._key] - +a[graphContainer._key];
     });
@@ -88,7 +88,7 @@
 };
 // add a case with no grouping i.e. if groupDim is null: just sort and filter
   nbviz.topFlop = function(graphContainer) {
-    var _dim = graphContainer.dataGetterParams.groupDim;
+    var _dim = nbviz.FILTERS[0].name;
     var top = graphContainer.dataGetterParams.top;
     var top_num = graphContainer.dataGetterParams.top_num;
 

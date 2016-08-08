@@ -16,7 +16,6 @@
   }
   
   $EVE_API = 'http://localhost:5000/api/';//adress where the servor api is serving the database
-  nbviz.FULL_DATA = 'full_data'
   nbviz.DATA_PATH = 'static/viz/' + nbviz.STORY.project_name + '/data_sources/'
 
   nbviz.FILTERS = [
@@ -49,15 +48,13 @@
       _id:'horizontalBarchartFrance',
       margins: {top:30, right:20, bottom:0, left:72},
       padding: {interbar:.1, left:5, bottom:0, legend:5},
-      divID: 'nobel-vBar-France',
       dataGetter:nbviz.topFlop,
-      dataGetterParams:{groupDim:'Gender',top:true,top_num:10},
-      _key:'Discipline',
+      dataGetterParams:{top:true,top_num:10},
+      _label:'Discipline',
       _value:'value',
       _yKey:'Discipline',
       domain:'fullData',
       dim:{height:'230px',width:"col-md-12"},
-      format:'.0%',
       title:'Graph info (period,etc.)'
     }
   ];
