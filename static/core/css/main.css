@@ -166,6 +166,23 @@ select {
     margin-right:10px
 }
 
+.social-icon-container {
+   width: 190px;
+   display: flex;
+   justify-content: space-between;
+   margin:auto
+}
+
+#main-text {
+    margin-bottom: 10px
+}
+
+.social-icon {
+   height: 30px;
+   width: 30px;
+   cursor: pointer;
+}
+
 
 
 
