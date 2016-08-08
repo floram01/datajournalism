@@ -93,17 +93,16 @@
       _id:'heatmap',
       _key:'year',
       _yKey:'country',
+      domain:'fullData',
       margins: {top:20, right:20, bottom:60, left:40},
       padding: {interbar:.05, left:0, bottom:20, legend:0},
-      divID: 'nobel-heatmap',
       _value:'my_value',
       xDimension:'year',
       yDimension:'country',
       xIndex:'x_index',
       yIndex:'y_index',
-      // dataGetter:nbviz.groupBy,
-      // dataGetterParams:{groupDim:'category'},
-      dim:{height:'500px',width:"col-md-6"}
+      dataGetter:nbviz.fullData,
+      dim:{height:'500px',width:"col-md-12"}
     }
   ];
 
