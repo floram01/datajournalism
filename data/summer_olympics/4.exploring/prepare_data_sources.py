@@ -22,10 +22,24 @@ french_trad={
 }
 
 def prepare_data_sources():
-    results_by_disciplines()
-    france_best_disciplines_ever()
-    
-def results_by_disciplines():
+  assemble_periods()
+
+def assemble_periods():
+  import sys
+  sys.path.insert(0, "../data_tools/")
+  from my_logger import logger
+
+  df_1 = results_by_disciplines_and_period([1992,2012],'1992 - 2012')
+  df_2 = results_by_disciplines_and_period([2012,2012],'2012')
+  df_3 = results_by_disciplines_and_period([1896,2012],'1896 - 2012')
+  import ipdb;ipdb.set_trace()
+  
+  df = pd.concat([df_1, df_2, df_3])
+
+  logger.info('inserting df with shape: ' + str(df.shape))
+  df.to_json('../../static/viz/summer_olympics/data_sources/full_data.json', orient='records')
+
+def results_by_disciplines_and_period(period,period_name):
   from data_params import DATABASE, PROJECT
   # DATABASE='summer_olypics'
   # PROJECT='summer_olypics'
@@ -38,13 +52,14 @@ def results_by_disciplines():
   from my_logger import logger
 
   df = mongo_to_dataframe(DATABASE, 'full_data')
+  
 
   # france = df[df.country_name=='France']
   # france_medal_count = france.drop_duplicates(subset=['Edition','Event','Gender','Medal','Discipline'])
+  
   df_medal_count = df.drop_duplicates(subset=['Edition','Event','Gender','Medal','Discipline'])
-
   # france_medal_count_recent = france_medal_count[france_medal_count.Edition>1988]
-  df_medal_count_recent = df_medal_count[df_medal_count.Edition>1988]
+  df_medal_count_recent = df_medal_count[(df_medal_count.Edition>=period[0])&(df_medal_count.Edition<=period[1])]
   
   # pct by gender
   df_medal_by_country = df_medal_count_recent.groupby(['country_name','Gender','Discipline']).size()
@@ -73,41 +88,12 @@ def results_by_disciplines():
                                        )
   df_france_best_disciplines= df_france_best_disciplines.stack().reset_index().rename(columns={'level_4':'value_filter',0:'value'})
   df_france_best_disciplines.value_filter.replace({'country_value':'Nombre','value':'%'}, inplace=True)
-  
-  logger.info('inserting df with shape: ' + str(df_france_best_disciplines.shape))
-  #dataframe_to_mongo(df_france_best_disciplines, DATABASE, 'france_best_disciplines', erase=True)
-  #logger.info('insertion sucessful in db' + DATABASE + ' of collection: ' + 'df_france_best_disciplines')
-  df_france_best_disciplines.to_json('../../static/viz/summer_olympics/data_sources/results_by_disciplines_with_value_type.json', orient='records')    
 
-def france_best_disciplines_ever():
-  from data_params import DATABASE, PROJECT
-  # DATABASE='summer_olypics'
-  # PROJECT='summer_olypics'
-  import sys
-  sys.path.insert(0, "../data_tools/")
-  sys.path.insert(0, "../../static/summer_olypics/")
+  # add precision
+  df_france_best_disciplines.loc[df_france_best_disciplines.value_filter=='Nombre','precision']=',.0f'
+  df_france_best_disciplines.loc[df_france_best_disciplines.value_filter=='%','precision']=',.0%'
 
+  #add period column
+  df_france_best_disciplines['period']=period_name
 
-  from mongo_tools import mongo_to_dataframe,dataframe_to_mongo,get_mongo_database,mongo_coll_to_dicts
-  from my_logger import logger
-
-  df = mongo_to_dataframe(DATABASE, 'full_data')
-
-  france = df[df.country_name=='France']
-  france_medal_count = france.drop_duplicates(subset=['Edition','Event','Gender','Medal','Discipline'])
-  df_medal_count = df.drop_duplicates(subset=['Edition','Event','Gender','Medal','Discipline'])
-
-  france_medal_count_recent = france_medal_count
-  df_medal_count_recent = df_medal_count
-
-  france_recent_pct = france_medal_count_recent.groupby(['Discipline']).size()/\
-  df_medal_count_recent.groupby(['Discipline']).size()
-  df_france_best_disciplines = france_recent_pct.sort_values(ascending=False).reset_index().rename(columns={0:'value'})
-  df_france_best_disciplines = df_france_best_disciplines.loc[:2,:] 
-  df_france_best_disciplines.Discipline = df_france_best_disciplines.Discipline.replace(french_trad)
-
-  logger.info('inserting df with shape: ' + str(df_france_best_disciplines.shape))
-  #dataframe_to_mongo(df_france_best_disciplines, DATABASE, 'france_best_disciplines', erase=True)
-  #logger.info('insertion sucessful in db' + DATABASE + ' of collection: ' + 'df_france_best_disciplines')
-
-  df_france_best_disciplines.to_json('../../static/viz/summer_olympics/data_sources/france_best_disciplines_ever.json', orient='records')
+  return df_france_best_disciplines

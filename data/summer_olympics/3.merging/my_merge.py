@@ -13,7 +13,6 @@ def my_merge():
   winners_2012 = mongo_to_dataframe(DATABASE, 'winners_2012')
   wb = mongo_to_dataframe(DATABASE, 'wb_demo_eco')
   country_mapper = mongo_to_dataframe(DATABASE, 'country_mapper')
-
   #add city to London 2012 event
   winners_2012['City'] = 'London'
   winners_2012['Edition'] = 2012
@@ -78,7 +77,6 @@ def my_merge():
   winners_2012.loc[winners_2012.Event.str.contains("Women's"),'Gender'] ='Women'
   winners_2012.event = winners_2012.Event.str.replace("Men's ","")
   winners_2012.event = winners_2012.Event.str.replace("Women's ","")
-
   #merge results
   winners_all = pd.concat([winners_2012, winners_histo], join='outer')
   del winners_all['Sport']
@@ -92,12 +90,11 @@ def my_merge():
   wb.Edition = wb.Edition.astype('float')
 
   full_data = pd.merge(winners_all, wb, on=['Edition','NOC'], how='outer')
-
   del country_mapper['UN']
-  full_data = pd.merge(full_data, country_mapper, left_on='NOC',right_on='ISO3')
-  full_data.Edition = pd.to_datetime(full_data.Edition.map(int).map(str), format='%Y').map(lambda x : x.year)
+  full_data = pd.merge(full_data, country_mapper, left_on='NOC',right_on='ISO3', how='outer')
   full_data.dropna(subset=['Athlete'], inplace=True)
-
+  full_data.Edition = pd.to_datetime(full_data.Edition.map(int).map(str), format='%Y').map(lambda x : x.year)
+  
   logger.info('inserting df with shape: ' + str(full_data.shape))
   dataframe_to_mongo(full_data, DATABASE, 'full_data', erase=True)
   logger.info('insertion sucessful in db' + DATABASE + ' of collection: ' + 'full_data')

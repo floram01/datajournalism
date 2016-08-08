@@ -30,9 +30,6 @@
     var svg = graphContainer.svg;
     var dim = graphContainer.dim;
 
-    // move elsewhere in data part
-    var my_format = d3.format(graphContainer.format)
-
     nbviz.addDataBarchartInfo(data, graphContainer);
     nbviz.updateDomainYRangeBand(data, graphContainer);
     nbviz.updateDomainXLinearScale(data, graphContainer);
@@ -77,7 +74,10 @@
         'text-anchor' : 'end',
         'vertical-align':'bottom'
     })  
-    .text(function(d){return my_format(d.value)})
+    .text(function(d){
+        // move elsewhere in data part
+        var my_format = d3.format(d.precision)
+        return my_format(d.value)})
     .attr({
         // 'fill':'white',
         'font-size':'12px'

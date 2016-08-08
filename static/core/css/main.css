@@ -153,6 +153,19 @@ select {
     border:none
 }
 
+#menu div{
+    display:inline;
+    margin-left:15px
+}
+
+#menu form{
+    display:inline;
+}
+
+#menu label{
+    margin-right:10px
+}
+
 
 
 

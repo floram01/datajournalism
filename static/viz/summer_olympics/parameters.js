@@ -22,6 +22,7 @@
   nbviz.FILTERS = [
     {locationID:'gender-select select', name:'Gender', dimension:'Gender', defaultValue:'All', type:'Dropdown'},
     {locationID:'country-select select', name:'Country', dimension:'country_name', defaultValue:'France', type:'Dropdown'},
+    {locationID:'period-select select', name:'Period', dimension:'period', defaultValue:'1992 - 2012', type:'Dropdown'},
     {locationID:'value-select select', name:'Type de valeur', dimension:'value_filter', defaultValue:'%', type:'Radio'}
   ];
 
@@ -30,7 +31,7 @@
     params:[
       {
         name:'fullData',
-        source:'results_by_disciplines_with_value_type.json',
+        source:'full_data.json',
         getterFunction:nbviz.getDataFromJSON
       }
     ,
