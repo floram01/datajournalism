@@ -154,15 +154,7 @@
     return _options;
 };
 
-// populate a filter (locationID) with the values linked to a filterTool
-// use listOption
-// use onDataChange
   nbviz.addDropdownFilter = function(data, filterParams){
-    // d3.select('#menu')
-    // .append('div')
-    // .attr('id', filterParams.dimension + '-select')
-    // .text(filterParams.name)
-    // .append('select');
 
     _options=nbviz.listOptions(data, filterParams.filterTool, filterParams.resetValue);
     // if(_options[0].includes('All')){_options.shift(0)};//à généraliser a priori resetValue contient All pas top
@@ -195,11 +187,6 @@
 };
 
   nbviz.addRadioFilter = function(data, filterParams){
-    // d3.select('#menu')
-    // .append('div')
-    // .attr('id', filterParams.dimension + '-select')
-    // .text(filterParams.name)
-    // .append('select');
 
     _options=nbviz.listOptions(data, filterParams.filterTool, filterParams.resetValue);
     // if(_options[0].includes('All')){_options.shift(0)};//à généraliser a priori resetValue contient All pas top

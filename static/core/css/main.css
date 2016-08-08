@@ -115,7 +115,13 @@ select {
     margin-bottom: 10px
 }
 
+path.domain{
+    display:none;
+}
 
+.tick line{
+    display:none;
+}
 
 
 

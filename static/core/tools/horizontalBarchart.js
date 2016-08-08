@@ -11,9 +11,6 @@
 
     nbviz.addSVGtoDiv(graphContainer);
 
-    var dim = graphContainer.dim;
-    var svg = graphContainer.svg;
-
     // graphContainer.data ={}; //créer une fonction qui calcule ces éléments?
     graphContainer.scales.xScale = nbviz.xLinearScale(data, graphContainer);
     graphContainer.scales.yScale = nbviz.yRangeBand(data, graphContainer);
@@ -36,9 +33,7 @@
 
     var barWidth = graphContainer.scales.yScale.rangeBand();
     
-
     // data- join
-    // provoque toujours bug au moment de l'update?
     var bars=svg.select('g.' + graphContainer._class).selectAll('rect').data(data, function(d){return d[graphContainer._label];});
 
     // create bars for data points that are not yet bound to a DOM element
@@ -60,6 +55,7 @@
     bars.exit()
     .remove();
 
+    //addd bar-value legend
     var legend = svg.select('g.' + graphContainer._class).selectAll('text.legend').data(data, function(d){return d[graphContainer._label];});
     legend.enter()
     .append('text')
@@ -74,26 +70,21 @@
         'text-anchor' : 'end',
         'vertical-align':'bottom'
     })  
-    .text(function(d){
-        // move elsewhere in data part
-        return nbviz.format(d, graphContainer)});
+    .text(function(d){return nbviz.format(d, graphContainer)});
 
     legend.exit().remove();
 
     // add title
     svg.append('text').attr({
         'class':'graph-title',
-        'x':'50px',
-        'y':graphContainer.margin.top/2
+        'x':(graphContainer.dim.width + graphContainer.margin.left + graphContainer.margin.right)/2,
+        'y':graphContainer.margin.top/4*3,
+        'text-anchor':'middle'
     })
     .text(graphContainer.title)
 
     nbviz.customYScale(data, graphContainer);
     nbviz.updateYAxis(data, graphContainer);
-
-    // find another way to do it
-    d3.select('.'+ graphContainer._class+ ' path').attr({'display':'none'})
-    d3.selectAll('.'+ graphContainer._class+ ' line').attr({'display':'none'})
   };
 
 }(window.nbviz=window.nbviz || {}));
