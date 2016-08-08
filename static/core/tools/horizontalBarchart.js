@@ -76,11 +76,7 @@
     })  
     .text(function(d){
         // move elsewhere in data part
-        return nbviz.format(d, graphContainer)})
-    .attr({
-        // 'fill':'white',
-        'font-size':'12px'
-    })
+        return nbviz.format(d, graphContainer)});
 
     legend.exit().remove();
 
