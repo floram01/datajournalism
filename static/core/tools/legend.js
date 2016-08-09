@@ -4,9 +4,18 @@
 
 (function(nbviz){
 
-  nbviz.addLegend = function(graphContainer, dimensionName){
-    var _options = nbviz[dimensionName + 'Values'];//à généraliser a priori resetValue contient All pas top
-    _options.shift(0);
+  nbviz.addLegend = function(graphContainer){
+    var dimensionName = graphContainer.dataGetterParams.colorKey;
+    var _options = nbviz[dimensionName + 'Values'];
+    //filters for resetValues to be excluded from the legend
+    nbviz.FILTERS.forEach(function(d){
+      if(d.dimension === dimensionName){
+        var i = _options.indexOf(d.resetValue);
+        if(i!==-1){_options.splice(i,1)};        
+      }
+
+    });
+
     graphContainer.legend = graphContainer.svg.append('g')
         .attr('transform', "translate(10, 10)")
         .attr('class', 'labels')

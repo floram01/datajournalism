@@ -56,13 +56,16 @@
   // nest data (entries) sharing same dimension 'key'
   // build or update a data object in graphContainer containing the nested data and some parameters
   nbviz.nestDataByKey = function(graphContainer) {          
-    var _dim = nbviz.FILTERS[0].name;
+    var _dim = nbviz.FILTERS[0].dimension;
     var entries = nbviz[_dim + 'Dim'].top(Infinity);
-    var _key = graphContainer.timeID;
+    var _key = graphContainer.dataGetterParams.nestKey;
 
     var data = d3.nest()
     .key(function(w){return w[_key]})
     .entries(entries);
+
+    graphContainer.groupID = 'values';
+    graphContainer._label = 'key';
 
     return data
   };
@@ -127,14 +130,13 @@
     graphContainer.data = graphContainer.data || {};
 
     var groupID = graphContainer.groupID;
-    var _key = graphContainer._key;
-
+    var _key = graphContainer._label;
     graphContainer.data.valueRange = d3.range(
       + d3.min(data, function(d){return d[_key];}),
       + d3.max(data, function(d){return d[_key];}) + 1
        );
+
     graphContainer.data.maxGroupLength = d3.max(data, function(d){return d[groupID].length}) + 1;
-    
     return data
   };
 

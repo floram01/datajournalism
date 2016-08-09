@@ -14,7 +14,6 @@
     var rangeBandGen = d3.scale.ordinal()
     .domain(_range)
     .rangeRoundBands([bandwith + padding.left, dim.width - bandwith], padding.interbar)
-
     return rangeBandGen
   };
 

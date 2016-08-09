@@ -20,7 +20,7 @@
     nbviz.updateXAxis(data, graphContainer);
     
     //add legend
-    nbviz.addLegend(graphContainer, 'category');
+    nbviz.addLegend(graphContainer);
     nbviz.circleLegend(graphContainer);
     nbviz.textLegend(graphContainer);
     
@@ -33,11 +33,14 @@
     var data = graphContainer.dataGetter(graphContainer);
     var svg = graphContainer.svg;
     var dim = graphContainer.dim;
-    var _key = graphContainer._key;
+    var _key = graphContainer._label;
+    var groupID = graphContainer.groupID;
+    
     nbviz.addDataTimelineInfo(data, graphContainer);
     nbviz.updateRangeYRoundPoints(data, graphContainer);
     nbviz.updateRangeXRangeBand(data, graphContainer);
-
+    
+    // data-join
     graphContainer.xTime = svg
             .select('g.'+ graphContainer._class)
             // .append('g')
@@ -46,7 +49,8 @@
             .data(data, function(d) {
                 return d[_key]; 
             });
-
+    
+    // update pattern
     graphContainer.xTime.enter().append('g')
         .classed('xTime', true)
         .attr('name', function(d) { return d[_key];})
@@ -58,38 +62,39 @@
             return "translate(" + graphContainer.scales.xScale(+time[_key]) + ",0)";
         });
 
+    // exit pattern
     graphContainer.xTime.exit().transition().duration(nbviz.TRANS_DURATION)
     .attr("transform", function(time) {
         return "translate(" + 0 + "," + graphContainer.dim.height + graphContainer.margin.bottom*2 + ")";
     })
     .remove();
-
-// A generaliser values and name
+    
+    // data-join inner level
     graphContainer.bubbles = graphContainer.xTime
         .selectAll(".bubbleTime")
         .data(function(d) { 
-            return d.values;
+            return d[groupID];
         }, function(d) {
-            return d.name;
+            return d[graphContainer.dataGetterParams.nestedUniqueKey];
         });
-
-// A generaliser category
+    // update pattern inner level
     graphContainer.bubbles.enter()
     .append('circle')
     .classed('bubbleTime', true)
     .attr('fill', function(d) {
-        return nbviz.categoryFill(d.category); 
+        return nbviz.categoryFill(d[graphContainer.dataGetterParams.colorKey]); 
     })
     .attr('cx', graphContainer.scales.xScale.rangeBand()/2)
     .attr('cy', graphContainer.dim.height + graphContainer.margin.bottom*2)
     .attr('r', graphContainer.scales.xScale.rangeBand()/2);
-
+    // transition bubbles from the ext of the chart to their correct y position
     graphContainer.bubbles
     .transition().duration(nbviz.TRANS_DURATION)
     .attr('cy', function(d, i) {
                 return graphContainer.scales.yScale(i);
             });
 
+    // exit pattern
     graphContainer.bubbles.exit()
     .transition().duration(nbviz.TRANS_DURATION)
     .attr('cy', graphContainer.dim.height + graphContainer.margin.bottom*2 )

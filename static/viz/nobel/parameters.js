@@ -76,13 +76,9 @@
       _id:'timeline',
       margins: {top:20, right:20, bottom:40, left:20},
       padding: {interbar:.1, left:0, bottom:0},
-      divID: 'nobel-time',
-      xTicksFreq:'10',
-      _key:'key',
-      timeID:'year',
-      groupID:'values',
       dataGetter:nbviz.nestDataByKey,
-      dataGetterParams:{groupDim:'category'},
+      dataGetterParams:{nestKey:'year', nestedUniqueKey:'name', colorKey:'category'},
+      xTicksFreq:'10',
       dim:{height:'240px',width:"col-md-12"}
     } 
   ,
