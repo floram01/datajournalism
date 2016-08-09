@@ -13,7 +13,7 @@
   nbviz.COLORS = {palegold:'#E6BE8A'}; // any named colors we use
 
   $EVE_API = 'http://localhost:5000/api/';//adress where the servor api is serving the database
-  nbviz.FULL_DATA = 'full_data'
+  nbviz.FULL_DATA = 'nobelData'
 
   nbviz.STORY = {
     title :' Visualising the Nobel Prize',
@@ -21,16 +21,26 @@
   }
 
   nbviz.FILTERS = [
-    {locationID:'category-select select', name:'Category',dimension:'category', resetValue:'All Categories'},
-    {locationID:'gender-select select', name:'Gender', dimension:'gender', resetValue:'All'},
-    {locationID:'country-select select', name:'Country', dimension:'country', resetValue:'All Countries'}
+    {locationID:'category-select select', name:'Category',dimension:'category', resetValue:'All Categories',type:'Dropdown'},
+    {locationID:'gender-select select', name:'Gender', dimension:'gender', resetValue:'All',type:'Dropdown'},
+    {locationID:'country-select select', name:'Country', dimension:'country', resetValue:'All Countries',type:'Dropdown'}
   ];
 
   nbviz.DATA_PROVIDER= {
-    getterFunction:nbviz.getDataFromJSON,
-    params:{
-      file:'static/viz/nobel/full_data_records.json'
-    }
+    getterFunction:nbviz.prepareDatasets,
+    params:[
+      {
+        name:'nobelData',
+        source:'full_data_records.json',
+        getterFunction:nbviz.getDataFromJSON
+      }
+    ,
+      {
+        name:'text',
+        source:'text.csv',
+        getterFunction:nbviz.getDataFromCSV
+      }
+    ]
   };
 
   nbviz.CHARTS = [
@@ -39,11 +49,12 @@
       _id:'barchart',
       margins: {top:10, right:20, bottom:85, left:20},
       padding: {interbar:.1, left:10, bottom:10},
-      divID: 'nobel-bar',
-      _key:'key',
       dataGetter:nbviz.groupBy,
-      dataGetterParams:{groupDim:'country'},
-      dim:{height:'240px',width:"col-md-8"}
+      dataGetterParams:{groupDim:'country', customAxis:'x'},
+      _value:'value',
+      domain:'nobelData',
+      dim:{height:'240px',width:"col-md-12"},
+      title:'Graph title exemple'
     }
   ,
     {

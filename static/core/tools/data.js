@@ -74,7 +74,13 @@
         .sort(function(a, b) { 
             return b[graphContainer._value] - a[graphContainer._value]; // descending
         })
-        .filter(function(d){return d[graphContainer._value] > 0});
+        .filter(function(d){return d[graphContainer._value] !== 0});
+
+    graphContainer._label = 'key';
+    if(graphContainer.dataGetterParams.customAxis){
+      graphContainer['_' + graphContainer.dataGetterParams.customAxis + 'Key'] = 'key'
+    };
+
     return data;
 };
 
@@ -91,7 +97,6 @@
     var _dim = nbviz.FILTERS[0].name;
     var top = graphContainer.dataGetterParams.top;
     var top_num = graphContainer.dataGetterParams.top_num;
-
     var data = nbviz[_dim + 'Dim'].top(Infinity).sort(function(a, b) {
       if (top){
         return +b[graphContainer._value] - +a[graphContainer._value];
@@ -146,8 +151,7 @@
 
 // based on a filterTool dimension crossfilter object extract the values of the dimension and add a resetValue
   nbviz.listOptions = function(data, filterTool, resetValue) {
-    // _options=[resetValue];
-    var _options = [];
+    var _options = [resetValue||[]];
     filterTool.group().all().forEach(function(o){
         _options.push(o.key);
     });
@@ -168,17 +172,23 @@
       .attr('value', function(d){return d;})
       .html(function(d){return d;});
 
-    d3.selectAll('option').filter(function(d){return d===filterParams.defaultValue}).attr('selected','selected');
-    filterParams.filterTool.filter(filterParams.defaultValue);
+    d3.selectAll('option').filter(function(d){
+      return d===filterParams.defaultValue||d===filterParams.resetValue;
+    })
+    .attr('selected','selected');
+    
+    if(filterParams.defaultValue){
+      filterParams.filterTool.filter(filterParams.defaultValue);
+    };
 
     _filter.on('change', function(d){
       var category = d3.select(this).property('value');
-      // if (category===filterParams.resetValue){
-      //     filterParams.filterTool.filter();
-      //   } else {
-      //     filterParams.filterTool.filter(category);
-      //   };
-      filterParams.filterTool.filter(category);
+      if (category===filterParams.resetValue){
+          filterParams.filterTool.filter();
+        } else {
+          filterParams.filterTool.filter(category);
+        };
+      // filterParams.filterTool.filter(category);
       nbviz.onDataChange();
 
       // select the default value
@@ -204,17 +214,23 @@
         'name':'mode'
       });
 
-    d3.selectAll('input').filter(function(d){return d===filterParams.defaultValue}).attr('checked','checked');
-    filterParams.filterTool.filter(filterParams.defaultValue);
+    d3.selectAll('input').filter(function(d){
+      return d===filterParams.defaultValue||d===filterParams.resetValue;
+    })
+    .attr('checked','checked');
+
+    if(filterParams.defaultValue){
+      filterParams.filterTool.filter(filterParams.defaultValue);
+    };
 
     d3.selectAll('label').on('change', function(d){
       var category = d;
-      // if (category===filterParams.resetValue){
-      //     filterParams.filterTool.filter();
-      //   } else {
-      //     filterParams.filterTool.filter(category);
-      //   };
-      filterParams.filterTool.filter(category);
+      if (category===filterParams.resetValue){
+          filterParams.filterTool.filter();
+        } else {
+          filterParams.filterTool.filter(category);
+        };
+      // filterParams.filterTool.filter(category);
       nbviz.onDataChange();
 
       // select the default value

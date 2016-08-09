@@ -6,13 +6,11 @@
 //improvements: generalise more elements in core, factorise between build and update
   nbviz.buildBarchart = function(graphContainer) {
     var data = graphContainer.dataGetter(graphContainer);
+    
     nbviz['addData'+ graphContainer._type + 'Info'](data, graphContainer);
     nbviz.initialize(graphContainer, data);
 
     nbviz.addSVGtoDiv(graphContainer);
-
-    var dim = graphContainer.dim;
-    var svg = graphContainer.svg;
 
     // graphContainer.data ={}; //créer une fonction qui calcule ces éléments?
     graphContainer.scales.xScale = nbviz.xRangeBand(data, graphContainer);
@@ -39,8 +37,7 @@
     
     // data- join
     // provoque toujours bug au moment de l'update?
-    var bars=svg.select('g.'+ graphContainer._class).selectAll('rect').data(data, function(d){return d[graphContainer._key];});
-
+    var bars=svg.select('g.'+ graphContainer._class).selectAll('rect').data(data, function(d){return d[graphContainer._label];});
     // create bars for data points that are not yet bound to a DOM element
     bars.enter()
     .append('rect')
@@ -49,9 +46,9 @@
     // update all bars that are bound to a DOM element
     bars
     .transition().duration(nbviz.TRANS_DURATION)
-    .attr('height', function(d){return dim.height - graphContainer.scales.yScale(d.value);})
+    .attr('height', function(d){return dim.height - graphContainer.scales.yScale(d[graphContainer._value]);})
     .attr('width', barWidth)
-    .attr('y', function(d){return graphContainer.scales.yScale(d.value);})
+    .attr('y', function(d){return graphContainer.scales.yScale(d[graphContainer._value]);})
     .attr('x', function(d,i){return graphContainer.scales.xScale(i);});
     
     //remove bars that are not bound to data
