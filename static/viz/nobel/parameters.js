@@ -62,11 +62,10 @@
       _id:'table',
       margins: {top:0, right:0, bottom:0, left:0},
       padding: {interbar:0, left:0, bottom:0},
-      divID: 'nobel-table',
       dataGetter:nbviz.allDataSortedByKey,
-      dataGetterParams:{groupDim:'category'},
-      _key:'year',
-      dim:{height:'240px',width:"col-md-4"},
+      dataGetterParams:{groupDim:'category', sortKey:'year'},
+      domain:'nobelData',
+      dim:{height:'240px',width:"col-md-12"},
       tableTitle:'List of selected nobel winners',
       tableColumns:['year','category','name']
     } 
@@ -84,15 +83,17 @@
   ,
     {
       _type:'HorizontalBarchart',
-      _id:'horizontalBarchart',
-      margins: {top:20, right:20, bottom:20, left:60},
-      padding: {interbar:.1, left:5, bottom:20, legend:5},
-      divID: 'nobel-vBar',
-      _key:'key',
-      _yKey:'key',
-      dataGetter:nbviz.groupBy,
-      dataGetterParams:{groupDim:'category'},
-      dim:{height:'240px',width:"col-md-6"}
+      _id:'horizontalBarchartFrance',
+      margins: {top:30, right:20, bottom:0, left:72},
+      padding: {interbar:.1, left:5, bottom:0, legend:5},
+      dataGetter:nbviz.topFlop,
+      dataGetterParams:{top:true,top_num:10},
+      _label:'Discipline',
+      _value:'value',
+      _yKey:'Discipline',
+      domain:'fullData',
+      dim:{height:'230px',width:"col-md-12"},
+      title:'Graph info (period,etc.)'
     }
   ,
     {

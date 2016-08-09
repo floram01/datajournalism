@@ -89,15 +89,15 @@
 
 // add a case with no grouping i.e. if groupDim is null: just sort and filter
   nbviz.allDataSortedByKey = function(graphContainer) {
-    var _dim = nbviz.FILTERS[0].name;
+    var _dim = nbviz.FILTERS[0].dimension;
     var data = nbviz[_dim + 'Dim'].top(Infinity).sort(function(a, b) {
-      return +b[graphContainer._key] - +a[graphContainer._key];
+      return +b[graphContainer.dataGetterParams.sortKey] - +a[graphContainer.dataGetterParams.sortKey];
     });
     return data;
 };
 // add a case with no grouping i.e. if groupDim is null: just sort and filter
   nbviz.topFlop = function(graphContainer) {
-    var _dim = nbviz.FILTERS[0].name;
+    var _dim = nbviz.FILTERS[0].dimension;
     var top = graphContainer.dataGetterParams.top;
     var top_num = graphContainer.dataGetterParams.top_num;
     var data = nbviz[_dim + 'Dim'].top(Infinity).sort(function(a, b) {
@@ -153,10 +153,14 @@
 
 // based on a filterTool dimension crossfilter object extract the values of the dimension and add a resetValue
   nbviz.listOptions = function(data, filterTool, resetValue) {
-    var _options = [resetValue||[]];
+    var _options=[];
+
+    if(resetValue){_options.push(resetValue)};
+
     filterTool.group().all().forEach(function(o){
         _options.push(o.key);
     });
+    
     return _options;
 };
 

@@ -7,9 +7,10 @@
     nbviz.getDivByID(graphContainer);
     nbviz.getSVGDim(graphContainer);
 
-    var tableDiv = d3.select('#' + graphContainer.divID);
+    var tableDiv = d3.select(graphContainer.divID);
 
-    tableDiv.append('h2').text(graphContainer.tableTitle);
+    tableDiv.append('h2').text(graphContainer.tableTitle)
+    .attr({'class':'tableTitle'})
 
     var table = tableDiv
     .append('table');
@@ -30,8 +31,8 @@
       'font-size':'10px',
     });
 
-    d3.select('#' + graphContainer.divID + ' h2').style({
-      'font-size':'14px',
+    d3.select(graphContainer.divID + ' h2').style({
+      // 'font-size':'14px',
       'margin':'4px',
       'text-align':'center'
     });
