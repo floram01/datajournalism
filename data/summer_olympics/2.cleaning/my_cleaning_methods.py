@@ -5,8 +5,11 @@ def clean_winners_2012(df):
     #drop the TBC for France prices
     df = df[df.medal != 'TBC']
     #adjust dates and convert to datetime
-    df.date = df.date.str.replace('00000000','')
-    df.date = df.date.str.replace('-0000','')
+    try:
+        df.date = df.date.str.replace('00000000','')
+        df.date = df.date.str.replace('-0000','')
+    except:
+        pass
     df.date = pd.to_datetime(df.date,errors='coerce')
     #clean country code
     df.country_code = df.country_code.str.replace('(','')
