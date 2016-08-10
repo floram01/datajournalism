@@ -37,7 +37,7 @@ def assemble_periods():
   df = pd.concat([df_1, df_2, df_3])
 
   logger.info('inserting df with shape: ' + str(df.shape))
-  df.to_json('../../static/viz/summer_olympics/data_sources/full_data.json', orient='records')
+  df.to_json('../../app/static/viz/summer_olympics/data_sources/full_data.json', orient='records')
 
 def results_by_disciplines_and_period(period,period_name):
   from data_params import DATABASE, PROJECT
