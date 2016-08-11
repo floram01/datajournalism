@@ -157,3 +157,7 @@
 2016-08-08 11:13:42,433 :: INFO :: inserting df with shape: (30176, 13)
 2016-08-08 11:13:44,079 :: INFO :: insertion sucessful in dbsummer_olympics of collection: full_data
 2016-08-08 11:17:28,498 :: INFO :: inserting df with shape: (7718, 8)
+2016-08-11 10:49:55,442 :: INFO :: insertingcountry_code.csv
+2016-08-11 10:50:08,421 :: INFO :: insertingcountry_code.csv
+2016-08-11 10:50:08,427 :: INFO :: inserting df with shape: (264, 3)
+2016-08-11 10:50:08,487 :: INFO :: insertion sucessful in dbutilities of collection: country_code

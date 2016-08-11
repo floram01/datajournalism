@@ -6,6 +6,10 @@ from pymongo import MongoClient
 import numpy as np
 
 
+def prepare_data_source():
+  df = assemble_periods()
+  return df
+
 french_trad={
   'Fencing':'Escrime',
   'Canoeing':'Canoe/Kayak',
@@ -21,44 +25,21 @@ french_trad={
   'Synchronized swimming':u'Natation synchronisée'
 }
 
-def prepare_data_sources():
-  assemble_periods()
-
 def assemble_periods():
-  import sys
-  sys.path.insert(0, "../data_tools/")
-  from my_logger import logger
-
   df_1 = results_by_disciplines_and_period([1992,2012],'1992 - 2012')
   df_2 = results_by_disciplines_and_period([2012,2012],'2012')
   df_3 = results_by_disciplines_and_period([1896,2012],'1896 - 2012')
-  import ipdb;ipdb.set_trace()
   
   df = pd.concat([df_1, df_2, df_3])
-
-  logger.info('inserting df with shape: ' + str(df.shape))
-  df.to_json('../../app/static/viz/summer_olympics/data_sources/full_data.json', orient='records')
+  return df  
 
 def results_by_disciplines_and_period(period,period_name):
   from data_params import DATABASE, PROJECT
-  # DATABASE='summer_olypics'
-  # PROJECT='summer_olypics'
-  import sys
-  sys.path.insert(0, "../data_tools/")
-  sys.path.insert(0, "../../static/summer_olypics/")
-
-
   from mongo_tools import mongo_to_dataframe,dataframe_to_mongo,get_mongo_database,mongo_coll_to_dicts
-  from my_logger import logger
 
   df = mongo_to_dataframe(DATABASE, 'full_data')
-  
 
-  # france = df[df.country_name=='France']
-  # france_medal_count = france.drop_duplicates(subset=['Edition','Event','Gender','Medal','Discipline'])
-  
   df_medal_count = df.drop_duplicates(subset=['Edition','Event','Gender','Medal','Discipline'])
-  # france_medal_count_recent = france_medal_count[france_medal_count.Edition>1988]
   df_medal_count_recent = df_medal_count[(df_medal_count.Edition>=period[0])&(df_medal_count.Edition<=period[1])]
   
   # pct by gender
@@ -80,7 +61,6 @@ def results_by_disciplines_and_period(period,period_name):
 
   
   df_france_best_disciplines = pd.concat([df_merged, df_merged_detail])  
-  # df_france_best_disciplines = df_france_best_disciplines.loc[:9,:] 
   df_france_best_disciplines.Discipline = df_france_best_disciplines.Discipline.replace(french_trad)
   df_france_best_disciplines.set_index(
                                        [c for c in df_france_best_disciplines.columns if c not in ['value','country_value']],

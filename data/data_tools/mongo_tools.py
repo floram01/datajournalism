@@ -25,6 +25,20 @@ def insert_static_in_mongo():
         dataframe_to_mongo(df, DATABASE,file['collection_name'], erase=True)
         logger.info('insertion sucessful in db' + DATABASE + ' of collection: ' + file['collection_name'])
 
+def insert_file_in_mongo(file, DATABASE='utilities', collection_name='country_code'):
+    logger.info('inserting' + file['name'])
+    if file['type'] == 'csv':
+        df = pd.read_csv(file['name'])
+    elif file['type'] == 'excel':
+        df = pd.read_excel(
+                        file['name'],
+                        sheetname=file['sheetname'],
+                        skiprows=file['skiprows']
+                        )
+    logger.info('inserting df with shape: ' + str(df.shape))
+    dataframe_to_mongo(df, DATABASE,collection_name, erase=True)
+    logger.info('insertion sucessful in db ' + DATABASE + ' of collection ' + collection_name)
+
 def insert_scrapped_in_mongo():
     from data_params import PROJECT, SCRAPPED, DATABASE
     #insert path to scrapped data
