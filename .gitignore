@@ -1,3 +1,4 @@
 data/summer_olympics/1.getting the data/1.scrapping/summer_olympics/.scrapy/httpcache/*
 *.pyc
 main_env
+*.log
