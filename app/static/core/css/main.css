@@ -126,3 +126,8 @@ path.domain{
 .tableTitle {
     font-size: 13px;
 }
+
+.brand-img {
+    height: 45px;
+    margin-top: -12px;
+}
