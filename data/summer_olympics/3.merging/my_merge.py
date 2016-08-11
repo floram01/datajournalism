@@ -3,11 +3,9 @@ from pymongo import MongoClient
 import numpy as np
 
 def my_merge():
-  from data_params import DATABASE
-  import sys
-  sys.path.insert(0, "../data_tools/")
+  from data_params import DATABASE, DOMAIN
   from mongo_tools import mongo_to_dataframe,dataframe_to_mongo,get_mongo_database,mongo_coll_to_dicts
-  from my_logger import logger
+  # from my_logger import logger
 
   winners_histo = mongo_to_dataframe(DATABASE, 'winners_1896_2008')
   winners_2012 = mongo_to_dataframe(DATABASE, 'winners_2012')
@@ -94,7 +92,8 @@ def my_merge():
   full_data = pd.merge(full_data, country_mapper, left_on='NOC',right_on='ISO3', how='outer')
   full_data.dropna(subset=['Athlete'], inplace=True)
   full_data.Edition = pd.to_datetime(full_data.Edition.map(int).map(str), format='%Y').map(lambda x : x.year)
-  
-  logger.info('inserting df with shape: ' + str(full_data.shape))
-  dataframe_to_mongo(full_data, DATABASE, 'full_data', erase=True)
-  logger.info('insertion sucessful in db' + DATABASE + ' of collection: ' + 'full_data')
+
+  return full_data  
+  # logger.info('inserting df with shape: ' + str(full_data.shape))
+  # dataframe_to_mongo(full_data, DATABASE, DOMAIN, erase=True)
+  # logger.info('insertion sucessful in db' + DATABASE + ' of collection: ' + DOMAIN)

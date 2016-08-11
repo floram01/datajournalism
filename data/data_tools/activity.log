@@ -1,0 +1,53 @@
+2016-08-11 10:26:11,038 :: INFO :: creating domain: fullData for project summer_olympics, domain shapte is: (7718, 8)
+2016-08-11 11:00:33,972 :: INFO :: requesting api: wb
+2016-08-11 11:01:43,284 :: INFO :: requesting api: wb
+2016-08-11 11:10:31,824 :: INFO :: requesting api: wb
+2016-08-11 11:10:45,302 :: INFO :: Starting new HTTP connection (1): api.worldbank.org
+2016-08-11 11:10:48,680 :: DEBUG :: "GET /countries/all/indicators/NY.GDP.MKTP.CD?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2271834
+2016-08-11 11:17:24,289 :: INFO :: requesting api: wb
+2016-08-11 11:17:28,998 :: INFO :: Starting new HTTP connection (1): api.worldbank.org
+2016-08-11 11:17:30,361 :: DEBUG :: "GET /countries/all/indicators/NY.GDP.MKTP.CD?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2271834
+2016-08-11 11:18:54,751 :: DEBUG :: "GET /countries/all/indicators/SP.POP.TOTL?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2162883
+2016-08-11 11:19:20,674 :: INFO :: inserting df with shape: (10547, 4)
+2016-08-11 11:20:41,668 :: INFO :: requesting api: wb
+2016-08-11 11:20:42,181 :: INFO :: Starting new HTTP connection (1): api.worldbank.org
+2016-08-11 11:20:42,511 :: DEBUG :: "GET /countries/all/indicators/NY.GDP.MKTP.CD?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2271834
+2016-08-11 11:21:15,554 :: DEBUG :: "GET /countries/all/indicators/SP.POP.TOTL?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2162883
+2016-08-11 11:21:58,792 :: INFO :: inserting df with shape: (10547, 4)
+2016-08-11 11:21:59,167 :: INFO :: insertion sucessful in dbsummer_olympics of collection: wb_demo_eco
+2016-08-11 11:29:45,126 :: INFO :: inserting scraped data
+2016-08-11 11:32:21,081 :: INFO :: inserting scraped data
+2016-08-11 11:33:30,334 :: INFO :: inserting scraped data
+2016-08-11 11:33:56,926 :: INFO :: inserting scraped data
+2016-08-11 11:33:56,945 :: INFO :: inserting df with shape: (961, 8)
+2016-08-11 11:33:57,070 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_2012
+2016-08-11 11:33:57,070 :: INFO :: inserting static data
+2016-08-11 11:34:07,096 :: INFO :: inserting scraped data
+2016-08-11 11:34:07,114 :: INFO :: inserting df with shape: (961, 8)
+2016-08-11 11:34:07,222 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_2012
+2016-08-11 11:34:07,223 :: INFO :: inserting static data
+2016-08-11 11:34:10,902 :: INFO :: inserting df with shape: (29216, 10)
+2016-08-11 11:34:12,248 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_1896_2008
+2016-08-11 11:35:15,028 :: INFO :: inserting scraped data
+2016-08-11 11:35:15,045 :: INFO :: inserting df with shape: (961, 8)
+2016-08-11 11:35:15,165 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_2012
+2016-08-11 11:35:15,166 :: INFO :: inserting static data
+2016-08-11 11:35:18,905 :: INFO :: inserting df with shape: (29216, 10)
+2016-08-11 11:35:20,221 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_1896_2008
+2016-08-11 11:41:49,133 :: INFO :: inserting df with shape: (30177, 13)
+2016-08-11 11:41:50,767 :: INFO :: insertion sucessful in dbsummer_olympics of collection: full_data
+2016-08-11 12:00:28,842 :: INFO :: inserting scraped data
+2016-08-11 12:00:28,862 :: INFO :: inserting df with shape: (961, 8)
+2016-08-11 12:00:28,984 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_2012
+2016-08-11 12:00:28,984 :: INFO :: inserting static data
+2016-08-11 12:00:32,698 :: INFO :: inserting df with shape: (29216, 10)
+2016-08-11 12:00:34,058 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_1896_2008
+2016-08-11 12:04:32,674 :: INFO :: cleaning winners_2012, with shape: (960, 8)
+2016-08-11 12:04:32,778 :: INFO :: cleaning of winners_2012successful, output shape: (960, 8)
+2016-08-11 12:05:05,165 :: INFO :: inserting df with shape: (30176, 13)
+2016-08-11 12:05:06,792 :: INFO :: insertion sucessful in dbsummer_olympics of collection: full_data
+2016-08-11 12:08:57,626 :: INFO :: starting to merge data for project summer_olympics
+2016-08-11 12:09:12,839 :: INFO :: starting to merge data for project summer_olympics
+2016-08-11 12:09:13,864 :: INFO :: inserting df with shape: (30176, 13)
+2016-08-11 12:09:15,467 :: INFO :: insertion sucessful in db summer_olympics of collection: full_data
+2016-08-11 12:10:33,548 :: INFO :: creating domain: fullData for project summer_olympics, domain shape is: (7718, 8)

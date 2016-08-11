@@ -34,10 +34,10 @@ def assemble_periods():
   return df  
 
 def results_by_disciplines_and_period(period,period_name):
-  from data_params import DATABASE, PROJECT
+  from data_params import DATABASE, PROJECT, DOMAIN
   from mongo_tools import mongo_to_dataframe,dataframe_to_mongo,get_mongo_database,mongo_coll_to_dicts
 
-  df = mongo_to_dataframe(DATABASE, 'full_data')
+  df = mongo_to_dataframe(DATABASE, DOMAIN)
 
   df_medal_count = df.drop_duplicates(subset=['Edition','Event','Gender','Medal','Discipline'])
   df_medal_count_recent = df_medal_count[(df_medal_count.Edition>=period[0])&(df_medal_count.Edition<=period[1])]

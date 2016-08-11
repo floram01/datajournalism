@@ -9,7 +9,7 @@ from my_logger import logger
 def insert_static_in_mongo():
     from data_params import PROJECT, STATIC, DATABASE
     #insert path to scrapped data
-    common_path = "1.getting the data/3.static_files/"
+    common_path = "../" + PROJECT + "/1.getting the data/3.static_files/"
     #insert each scrapped file in mongodb
     for file in STATIC:
         logger.info('inserting static data')
@@ -42,7 +42,7 @@ def insert_file_in_mongo(file, DATABASE='utilities', collection_name='country_co
 def insert_scrapped_in_mongo():
     from data_params import PROJECT, SCRAPPED, DATABASE
     #insert path to scrapped data
-    common_path = "1.getting the data/1.scrapping/" + PROJECT + '/'
+    common_path = "../" + PROJECT + "/1.getting the data/1.scrapping/" + PROJECT + '/'
     #insert each scrapped file in mongodb
     for file in SCRAPPED:
         logger.info('inserting scraped data')
@@ -51,11 +51,11 @@ def insert_scrapped_in_mongo():
         dataframe_to_mongo(df, DATABASE,file['collection_name'], erase=True)
         logger.info('insertion sucessful in db' + DATABASE + ' of collection: ' + file['collection_name'])
 
-def insert_country_maping():
-    from data_params import DATABASE
+# def insert_country_maping():
+#     from data_params import DATABASE
 
-    df = pd.read_csv('country_code.csv')
-    dataframe_to_mongo(df, DATABASE,'country_mapper', erase=True)
+#     df = pd.read_csv('country_code.csv')
+#     dataframe_to_mongo(df, DATABASE,'country_mapper', erase=True)
 
 def get_mongo_database(db_name, host='localhost',
                        port=27017, username=None, password=None):

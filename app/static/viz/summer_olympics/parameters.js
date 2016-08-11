@@ -31,7 +31,7 @@
     params:[
       {
         name:'fullData',
-        source:'full_data.json',
+        source:'fullData.json',
         getterFunction:nbviz.getDataFromJSON
       }
     ,

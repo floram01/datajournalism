@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import sys
+sys.path.insert(0,'ressources/')
 
 def create_data_source(PROJECT_NAME):
     sys.path.insert(0,'../' + PROJECT_NAME + '/')
@@ -13,11 +14,12 @@ def create_data_source(PROJECT_NAME):
     from my_logger import logger
 
     df = prepare_data_source()
+
     logger.info(
                 'creating domain: fullData for project ' + PROJECT_NAME +', domain shape is: ' + str(df.shape)
                 )
     df.to_json('../../app/static/viz/' + PROJECT_NAME + '/data_sources/fullData.json', orient='records')
-  
+    logger.info('domain successfuly created")
 
 if __name__ == '__main__':
     create_data_source(sys.argv[1])

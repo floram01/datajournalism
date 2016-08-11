@@ -3,6 +3,7 @@ PROJECT='summer_olympics'
 DATABASE = 'summer_olympics'
 #Collections
 ECONOMICS = 'wb_demo_eco'
+DOMAIN = 'full_data'
 
 #scrapped domains
 SCRAPPED = [

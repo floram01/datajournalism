@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import sys
+sys.path.insert(0,'ressources/')
 
 def run(PROJECT_NAME):
     sys.path.insert(0,'../' + PROJECT_NAME + '/')
