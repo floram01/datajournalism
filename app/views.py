@@ -2,8 +2,8 @@ from flask import Flask, send_from_directory, render_template
 from app import app
 
 @app.route('/')
-@app.route('/summer_olympics')
-def summer_olympics():
+# @app.route('/summer_olympics')
+def summer_olympic():
     # title="JO 2016 top 10 meilleures disciplines par pays"
     previous_article={'url':'/nobel', 'title':'Prix nobels'}
     next_article={}

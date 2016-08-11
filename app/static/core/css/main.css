@@ -126,16 +126,3 @@ path.domain{
 .tableTitle {
     font-size: 13px;
 }
-
-div.navbar-tool {
-    position: absolute;
-    top:30%;
-    right:50%
-}
-
-.navbar-tool a{
-    color: #F3C600
-}
-
-
-

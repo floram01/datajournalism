@@ -9,15 +9,9 @@
         <title>{{ title }}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- <link rel="apple-touch-icon" href="apple-touch-icon.png"> -->
         <link rel="shortcut icon" href="static/core/img/social-icons/toucan-icon.png">
         <link rel="stylesheet" href="static/core/css/bootstrap.min.css">
-        <style>
-            body {
-                padding-top: 50px;
-                padding-bottom: 20px;
-            }
-        </style>
         <link rel="stylesheet" href="static/core/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="static/core/css/main.css">
 
@@ -27,10 +21,11 @@
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -38,26 +33,19 @@
           </button>
           <a class="navbar-brand" href="/">{{ title }}</a>
         </div>
-        <div class='navbar-tool'>
-          {% if next_article %}
-            <a href="{{ next_article.url }}">Next article</a>
-          {% endif %}
-          {% if previous_article %}
-            <a href="{{ previous_article.url }}">Previous article</a>
-          {% endif %}
-        </div>
-<!--         <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" role="form">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-        </div> --><!--/.navbar-collapse -->
-      </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            {% if next_article %}
+              <li><a href="{{ next_article.url }}">Next article</a></li>
+            {% endif %}
+            {% if previous_article %}
+              <li><a href="{{ previous_article.url }}">Previous article</a></li>
+            {% endif %}
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
     </nav>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
