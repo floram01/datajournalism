@@ -1,0 +1,163 @@
+2016-07-24 12:47:26,355 :: INFO :: inserting df with shape: (29216, 10)
+2016-07-24 12:47:27,624 :: INFO :: insertion sucessful in dbsummer_olympicsof collection: winners_1896_2008
+2016-07-24 13:35:50,460 :: INFO :: requesting api: wb
+2016-07-24 13:37:29,211 :: INFO :: requesting api: wb
+2016-07-24 13:37:39,386 :: INFO :: Starting new HTTP connection (1): api.worldbank.org
+2016-07-24 13:37:40,079 :: DEBUG :: "GET /countries/all/indicators/NY.GDP.MKTP.CD?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2271834
+2016-07-24 13:37:44,796 :: DEBUG :: "GET /countries/all/indicators/SP.POP.TOTL?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2162883
+2016-07-24 13:37:47,919 :: INFO :: inserting df with shape: (13992, 4)
+2016-07-24 13:40:12,384 :: INFO :: requesting api: wb
+2016-07-24 13:40:12,846 :: INFO :: Starting new HTTP connection (1): api.worldbank.org
+2016-07-24 13:40:13,084 :: DEBUG :: "GET /countries/all/indicators/NY.GDP.MKTP.CD?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2271834
+2016-07-24 13:40:16,828 :: DEBUG :: "GET /countries/all/indicators/SP.POP.TOTL?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2162883
+2016-07-24 13:40:20,727 :: INFO :: inserting df with shape: (13992, 4)
+2016-07-24 13:44:11,903 :: INFO :: requesting api: wb
+2016-07-24 13:44:12,000 :: INFO :: Starting new HTTP connection (1): api.worldbank.org
+2016-07-24 13:44:12,233 :: DEBUG :: "GET /countries/all/indicators/NY.GDP.MKTP.CD?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2271834
+2016-07-24 13:44:15,996 :: DEBUG :: "GET /countries/all/indicators/SP.POP.TOTL?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2162883
+2016-07-24 13:44:19,301 :: INFO :: inserting df with shape: (13992, 4)
+2016-07-24 13:47:15,795 :: INFO :: requesting api: wb
+2016-07-24 13:47:16,256 :: INFO :: Starting new HTTP connection (1): api.worldbank.org
+2016-07-24 13:47:16,482 :: DEBUG :: "GET /countries/all/indicators/NY.GDP.MKTP.CD?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2271834
+2016-07-24 13:47:20,690 :: DEBUG :: "GET /countries/all/indicators/SP.POP.TOTL?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2162883
+2016-07-24 13:47:23,849 :: INFO :: inserting df with shape: (13992, 4)
+2016-07-24 13:50:51,023 :: INFO :: requesting api: wb
+2016-07-24 13:50:51,333 :: INFO :: Starting new HTTP connection (1): api.worldbank.org
+2016-07-24 13:50:52,796 :: DEBUG :: "GET /countries/all/indicators/NY.GDP.MKTP.CD?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2271834
+2016-07-24 13:50:56,472 :: DEBUG :: "GET /countries/all/indicators/SP.POP.TOTL?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2162883
+2016-07-24 13:51:00,239 :: INFO :: inserting df with shape: (13992, 4)
+2016-07-24 13:51:00,698 :: INFO :: insertion sucessful in dbsummer_olympics of collection: wb_demo_eco
+2016-07-24 14:32:58,426 :: INFO :: inserting static data
+2016-07-24 14:33:01,888 :: INFO :: inserting df with shape: (29216, 10)
+2016-07-24 14:33:03,207 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_1896_2008
+2016-07-24 14:33:16,021 :: INFO :: inserting scraped data
+2016-07-24 14:33:41,564 :: INFO :: inserting scraped data
+2016-07-24 14:33:41,592 :: INFO :: inserting df with shape: (1365, 8)
+2016-07-24 14:33:41,734 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_2012
+2016-07-24 14:48:36,732 :: INFO :: inserting scraped data
+2016-07-24 14:48:36,750 :: INFO :: inserting df with shape: (961, 8)
+2016-07-24 14:48:36,846 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_2012
+2016-07-24 18:49:20,786 :: INFO :: inserting scraped data
+2016-07-24 18:49:20,805 :: INFO :: inserting df with shape: (961, 8)
+2016-07-24 18:49:20,903 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_2012
+2016-07-24 18:50:28,106 :: INFO :: inserting scraped data
+2016-07-24 18:50:28,123 :: INFO :: inserting df with shape: (961, 8)
+2016-07-24 18:50:28,212 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_2012
+2016-07-24 18:54:41,527 :: INFO :: inserting scraped data
+2016-07-24 18:54:41,549 :: INFO :: inserting df with shape: (961, 8)
+2016-07-24 18:54:41,645 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_2012
+2016-07-24 18:56:52,332 :: INFO :: inserting scraped data
+2016-07-24 18:56:52,355 :: INFO :: inserting df with shape: (961, 8)
+2016-07-24 18:56:52,477 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_2012
+2016-07-24 19:00:29,020 :: INFO :: inserting scraped data
+2016-07-24 19:00:29,040 :: INFO :: inserting df with shape: (961, 8)
+2016-07-24 19:00:29,147 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_2012
+2016-07-24 19:10:22,767 :: INFO :: inserting scraped data
+2016-07-24 19:10:22,792 :: INFO :: inserting df with shape: (961, 8)
+2016-07-24 19:10:22,883 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_2012
+2016-07-24 19:17:15,453 :: INFO :: inserting scraped data
+2016-07-24 19:17:15,473 :: INFO :: inserting df with shape: (961, 8)
+2016-07-24 19:17:15,574 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_2012
+2016-07-27 13:55:07,009 :: INFO :: inserting scraped data
+2016-07-27 13:55:07,052 :: INFO :: inserting df with shape: (961, 8)
+2016-07-27 13:55:07,393 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_2012
+2016-07-27 13:55:27,101 :: INFO :: inserting static data
+2016-07-27 13:55:40,483 :: INFO :: inserting static data
+2016-07-27 13:55:44,849 :: INFO :: inserting df with shape: (29216, 10)
+2016-07-27 13:55:46,603 :: INFO :: insertion sucessful in dbsummer_olympics of collection: winners_1896_2008
+2016-07-27 13:56:44,762 :: INFO :: requesting api: wb
+2016-07-27 13:56:44,931 :: INFO :: Starting new HTTP connection (1): api.worldbank.org
+2016-07-27 13:56:46,647 :: DEBUG :: "GET /countries/all/indicators/NY.GDP.MKTP.CD?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2271834
+2016-07-27 13:56:50,893 :: DEBUG :: "GET /countries/all/indicators/SP.POP.TOTL?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2162883
+2016-07-27 13:56:53,219 :: INFO :: inserting df with shape: (13992, 4)
+2016-07-27 13:56:53,798 :: INFO :: insertion sucessful in dbsummer_olympics of collection: wb_demo_eco
+2016-07-27 15:31:04,365 :: INFO :: requesting api: wb
+2016-07-27 15:31:04,444 :: INFO :: Starting new HTTP connection (1): api.worldbank.org
+2016-07-27 15:31:05,091 :: DEBUG :: "GET /countries/all/indicators/NY.GDP.MKTP.CD?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2271834
+2016-07-27 15:31:07,827 :: DEBUG :: "GET /countries/all/indicators/SP.POP.TOTL?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2162883
+2016-07-27 15:34:14,249 :: INFO :: requesting api: wb
+2016-07-27 15:34:14,716 :: INFO :: Starting new HTTP connection (1): api.worldbank.org
+2016-07-27 15:34:16,177 :: DEBUG :: "GET /countries/all/indicators/NY.GDP.MKTP.CD?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2271834
+2016-07-27 15:34:21,892 :: DEBUG :: "GET /countries/all/indicators/SP.POP.TOTL?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2162883
+2016-07-27 15:34:25,592 :: INFO :: inserting df with shape: (10547, 7)
+2016-07-27 15:34:26,286 :: INFO :: insertion sucessful in dbsummer_olympics of collection: wb_demo_eco
+2016-07-27 15:36:55,296 :: INFO :: requesting api: wb
+2016-07-27 15:36:55,353 :: INFO :: Starting new HTTP connection (1): api.worldbank.org
+2016-07-27 15:36:55,571 :: DEBUG :: "GET /countries/all/indicators/NY.GDP.MKTP.CD?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2271834
+2016-07-27 15:36:59,591 :: DEBUG :: "GET /countries/all/indicators/SP.POP.TOTL?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2162883
+2016-07-27 15:37:03,116 :: INFO :: inserting df with shape: (10547, 4)
+2016-07-27 15:37:03,500 :: INFO :: insertion sucessful in dbsummer_olympics of collection: wb_demo_eco
+2016-07-27 16:50:44,872 :: INFO :: inserting df with shape: (21234, 13)
+2016-07-27 16:50:46,172 :: INFO :: insertion sucessful in dbsummer_olympics of collection: full_data
+2016-08-01 14:49:37,328 :: INFO :: inserting df with shape: (34,)
+2016-08-01 14:51:31,113 :: INFO :: inserting df with shape: (34,)
+2016-08-01 14:52:20,439 :: INFO :: inserting df with shape: (34,)
+2016-08-01 14:53:36,555 :: INFO :: inserting df with shape: (34,)
+2016-08-01 14:54:43,541 :: INFO :: inserting df with shape: (34,)
+2016-08-03 15:01:11,242 :: INFO :: inserting df with shape: (11, 2)
+2016-08-03 15:02:15,212 :: INFO :: inserting df with shape: (11, 2)
+2016-08-03 15:02:15,703 :: INFO :: inserting df with shape: (11, 2)
+2016-08-03 15:05:24,422 :: INFO :: inserting df with shape: (10, 2)
+2016-08-03 15:05:24,858 :: INFO :: inserting df with shape: (11, 2)
+2016-08-03 15:05:25,389 :: INFO :: inserting df with shape: (11, 2)
+2016-08-03 16:55:05,231 :: INFO :: inserting df with shape: (10, 2)
+2016-08-03 16:55:05,694 :: INFO :: inserting df with shape: (11, 2)
+2016-08-03 16:55:06,167 :: INFO :: inserting df with shape: (11, 2)
+2016-08-03 16:55:28,530 :: INFO :: inserting df with shape: (10, 2)
+2016-08-03 16:55:28,996 :: INFO :: inserting df with shape: (11, 2)
+2016-08-03 16:55:29,505 :: INFO :: inserting df with shape: (11, 2)
+2016-08-03 16:55:29,967 :: INFO :: inserting df with shape: (5, 2)
+2016-08-03 16:59:06,578 :: INFO :: inserting df with shape: (3, 2)
+2016-08-03 16:59:07,058 :: INFO :: inserting df with shape: (11, 2)
+2016-08-03 16:59:07,561 :: INFO :: inserting df with shape: (11, 2)
+2016-08-03 16:59:08,027 :: INFO :: inserting df with shape: (5, 2)
+2016-08-03 16:59:48,675 :: INFO :: inserting df with shape: (11, 2)
+2016-08-03 16:59:49,125 :: INFO :: inserting df with shape: (11, 2)
+2016-08-03 16:59:49,630 :: INFO :: inserting df with shape: (11, 2)
+2016-08-03 16:59:50,095 :: INFO :: inserting df with shape: (3, 2)
+2016-08-03 17:00:25,986 :: INFO :: inserting df with shape: (10, 2)
+2016-08-03 17:00:26,449 :: INFO :: inserting df with shape: (10, 2)
+2016-08-03 17:00:26,943 :: INFO :: inserting df with shape: (10, 2)
+2016-08-03 17:00:27,399 :: INFO :: inserting df with shape: (3, 2)
+2016-08-06 10:40:04,804 :: INFO :: inserting df with shape: (10,)
+2016-08-06 10:40:05,124 :: INFO :: inserting df with shape: (10,)
+2016-08-06 10:40:05,469 :: INFO :: inserting df with shape: (10,)
+2016-08-06 10:40:05,794 :: INFO :: inserting df with shape: (3,)
+2016-08-06 10:40:59,632 :: INFO :: inserting df with shape: (10, 2)
+2016-08-06 10:40:59,984 :: INFO :: inserting df with shape: (10, 2)
+2016-08-06 10:41:00,343 :: INFO :: inserting df with shape: (10, 2)
+2016-08-06 10:41:00,686 :: INFO :: inserting df with shape: (3, 2)
+2016-08-06 10:44:20,249 :: INFO :: inserting df with shape: (10, 2)
+2016-08-06 10:44:20,595 :: INFO :: inserting df with shape: (10, 2)
+2016-08-06 10:44:20,946 :: INFO :: inserting df with shape: (10, 2)
+2016-08-06 10:44:21,289 :: INFO :: inserting df with shape: (3, 2)
+2016-08-06 15:34:41,113 :: INFO :: inserting df with shape: (97, 3)
+2016-08-06 15:34:41,472 :: INFO :: inserting df with shape: (10, 2)
+2016-08-06 15:34:41,814 :: INFO :: inserting df with shape: (10, 2)
+2016-08-06 15:34:42,162 :: INFO :: inserting df with shape: (3, 2)
+2016-08-06 19:26:56,165 :: INFO :: inserting df with shape: (97, 3)
+2016-08-06 19:26:56,526 :: INFO :: inserting df with shape: (10, 2)
+2016-08-06 19:26:56,890 :: INFO :: inserting df with shape: (10, 2)
+2016-08-06 19:26:57,252 :: INFO :: inserting df with shape: (3, 2)
+2016-08-07 09:49:54,978 :: INFO :: inserting df with shape: (1272, 6)
+2016-08-07 09:49:55,369 :: INFO :: inserting df with shape: (3, 2)
+2016-08-07 09:50:33,698 :: INFO :: inserting df with shape: (1272, 6)
+2016-08-07 09:50:46,199 :: INFO :: inserting df with shape: (1272, 6)
+2016-08-07 09:50:46,548 :: INFO :: inserting df with shape: (3, 2)
+2016-08-07 09:57:53,154 :: INFO :: inserting df with shape: (1272, 6)
+2016-08-07 09:57:53,505 :: INFO :: inserting df with shape: (3, 2)
+2016-08-07 18:23:27,250 :: INFO :: inserting df with shape: (2544, 6)
+2016-08-07 18:23:27,607 :: INFO :: inserting df with shape: (3, 2)
+2016-08-08 10:33:56,438 :: INFO :: inserting df with shape: (2544, 7)
+2016-08-08 10:33:56,781 :: INFO :: inserting df with shape: (3, 2)
+2016-08-08 10:43:04,930 :: INFO :: inserting df with shape: (2630, 8)
+2016-08-08 10:44:36,992 :: INFO :: inserting df with shape: (2544, 8)
+2016-08-08 11:08:33,252 :: INFO :: inserting df with shape: (30177, 13)
+2016-08-08 11:08:34,846 :: INFO :: insertion sucessful in dbsummer_olympics of collection: full_data
+2016-08-08 11:13:42,433 :: INFO :: inserting df with shape: (30176, 13)
+2016-08-08 11:13:44,079 :: INFO :: insertion sucessful in dbsummer_olympics of collection: full_data
+2016-08-08 11:17:28,498 :: INFO :: inserting df with shape: (7718, 8)
+2016-08-11 10:49:55,442 :: INFO :: insertingcountry_code.csv
+2016-08-11 10:50:08,421 :: INFO :: insertingcountry_code.csv
+2016-08-11 10:50:08,427 :: INFO :: inserting df with shape: (264, 3)
+2016-08-11 10:50:08,487 :: INFO :: insertion sucessful in dbutilities of collection: country_code
