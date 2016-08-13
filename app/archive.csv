@@ -1,0 +1,3 @@
+project_name,template_name,previous_url,next_url
+nobel,nobel.html,,summer_olympics
+summer_olympics,summer_olympics.html,nobel,

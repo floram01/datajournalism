@@ -41,10 +41,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             {% if next_article %}
-              <li><a href="{{ next_article.url }}">Next article</a></li>
+              <li><a href="{{ next_article }}">Next article</a></li>
             {% endif %}
             {% if previous_article %}
-              <li><a href="{{ previous_article.url }}">Previous article</a></li>
+              <li><a href="{{ previous_article }}">Previous article</a></li>
             {% endif %}
           </ul>
         </div><!-- /.navbar-collapse -->
