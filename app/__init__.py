@@ -19,6 +19,7 @@ def function_maker(previous_article, next_article, template_name):
                                )
     return my_function
 
+#attention remplacer na par une valeur qui en vanilla python est false
 df = pd.read_csv('app/archive.csv')
 
 for i in df.index :
