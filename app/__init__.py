@@ -21,6 +21,8 @@ def function_maker(previous_article, next_article, template_name):
 
 #attention remplacer na par une valeur qui en vanilla python est false
 df = pd.read_csv('app/archive.csv')
+df.loc[df.previous_url.isnull(),'previous_url'] = df.loc[df.previous_url.isnull(),'project_name']
+df.loc[df.next_url.isnull(),'next_url'] = df.loc[df.next_url.isnull(),'project_name']
 
 for i in df.index :
     project_name = df.loc[:, 'project_name'][i]

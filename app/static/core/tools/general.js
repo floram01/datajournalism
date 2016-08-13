@@ -10,7 +10,7 @@
     nbviz.charts = nbviz.charts || [];
     var o = {};
     o.margin = {top:chart.margins.top, right:chart.margins.right, left:chart.margins.left, bottom:chart.margins.bottom};
-    o.padding = {interbar : chart.padding.interbar, left : chart.padding.left, bottom : chart.padding.bottom, legend : chart.padding.legend};
+    o.padding = {interbar : chart.padding.interbar, left : chart.padding.left, right : chart.padding.right, bottom : chart.padding.bottom, legend : chart.padding.legend};
     o._id = chart._id;
     o._class = chart._id;
     o.divID = '#div' + chart._id;
@@ -85,7 +85,7 @@
     .attr('id','#svg' + graphContainer._id)
     .attr("width", dim.width + margin.left + margin.right)
     .attr("height", dim.height + margin.top + margin.bottom);
-
+    
     graphContainer.svg
     .append("g").classed(graphContainer._class, true)
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");

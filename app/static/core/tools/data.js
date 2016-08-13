@@ -133,9 +133,8 @@
     var _key = graphContainer._label;
     graphContainer.data.valueRange = d3.range(
       + d3.min(data, function(d){return d[_key];}),
-      + d3.max(data, function(d){return d[_key];}) + 1
+      + d3.max(data, function(d){return d[_key];}) +1
        );
-
     graphContainer.data.maxGroupLength = d3.max(data, function(d){return d[groupID].length}) + 1;
     return data
   };

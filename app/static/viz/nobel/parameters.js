@@ -72,8 +72,8 @@ nbviz.TRANS_DURATION = 1500; // length in ms for our transitions
     {
       _type:'Timeline',
       _id:'timeline',
-      margins: {top:20, right:20, bottom:40, left:20},
-      padding: {interbar:.1, left:0, bottom:0},
+      margins: {top:20, right:0, bottom:40, left:0},
+      padding: {interbar:.1, left:0, right:0, bottom:0},
       dataGetter:nbviz.nestDataByKey,
       dataGetterParams:{nestKey:'year', nestedUniqueKey:'name', colorKey:'category'},
       xTicksFreq:'10',

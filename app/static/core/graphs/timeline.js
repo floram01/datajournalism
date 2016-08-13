@@ -39,6 +39,7 @@
     nbviz.addDataTimelineInfo(data, graphContainer);
     nbviz.updateRangeYRoundPoints(data, graphContainer);
     nbviz.updateRangeXRangeBand(data, graphContainer);
+
     
     // data-join
     graphContainer.xTime = svg
@@ -61,7 +62,6 @@
         .attr("transform", function(time) {
             return "translate(" + graphContainer.scales.xScale(+time[_key]) + ",0)";
         });
-
     // exit pattern
     graphContainer.xTime.exit().transition().duration(nbviz.TRANS_DURATION)
     .attr("transform", function(time) {
