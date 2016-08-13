@@ -46,5 +46,3 @@ app.add_url_rule(
                  'latest',
                  function_maker(previous_url, next_url, template_name)
                  )
-
-from app import views
