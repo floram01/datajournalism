@@ -48,7 +48,7 @@
       _type:'HorizontalBarchart',
       _id:'horizontalBarchartFrance',
       margins: {top:30, right:20, bottom:0, left:72},
-      padding: {interbar:.1, left:5, bottom:0, legend:5},
+      padding: {interbar:.1, left:5, bottom:0, legend:10},
       dataGetter:nbviz.topFlop,
       dataGetterParams:{top:true,top_num:10},
       _label:'Discipline',

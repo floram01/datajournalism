@@ -49,7 +49,6 @@
     .attr('width', function(d){return graphContainer.scales.xScale(d[graphContainer._value]);})
     .attr('y', function(d,i){return graphContainer.scales.yScale(i);})
     .attr('x', function(d){return graphContainer.margin.left + graphContainer.padding.left;});
-    
     //remove bars that are not bound to data
     //improvement: translate before exiting (with transition)
     bars.exit()
@@ -63,11 +62,27 @@
     legend
     .transition().duration(nbviz.TRANS_DURATION)
     .attr({
-        'y' : function(d,i){return graphContainer.scales.yScale(i) + barWidth*3/4;},
+        'y' : function(d,i){return graphContainer.scales.yScale(i) + barWidth/2;},
+        'dy': '.4em',
         'x' : function(d){
-            return graphContainer.scales.xScale(d[graphContainer._value]) + graphContainer.margin.left - graphContainer.padding.legend;
+            return graphContainer.scales.xScale(d[graphContainer._value]) + graphContainer.margin.left  + graphContainer.padding.left;
         },
-        'text-anchor' : 'end',
+        'dx' : function(d){
+            var pos =  graphContainer.scales.xScale(d[graphContainer._value]) + graphContainer.margin.left  + graphContainer.padding.left - graphContainer.padding.legend;
+            if (pos < (graphContainer.margin.left  + graphContainer.padding.left + 2 * graphContainer.padding.legend)){
+                return + graphContainer.padding.legend;
+            } else {
+                return  - graphContainer.padding.legend;
+            };
+        },
+        'text-anchor' : function(d){
+            var pos = graphContainer.scales.xScale(d[graphContainer._value]) + graphContainer.margin.left  + graphContainer.padding.left - graphContainer.padding.legend;
+            if (pos < (graphContainer.margin.left  + graphContainer.padding.left + 2 * graphContainer.padding.legend)){
+                return 'start'
+            } else {
+                return 'end'
+             };
+        },
         'vertical-align':'bottom'
     })  
     .text(function(d){return nbviz.format(d, graphContainer)});
