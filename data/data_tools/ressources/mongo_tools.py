@@ -14,13 +14,24 @@ def insert_static_in_mongo():
     for file in STATIC:
         logger.info('inserting static data')
         if file['type'] == 'csv':
-            df = read_csv(common_path + file['file'])
+            try:
+                df = read_csv(common_path + file['file'])
+            except:
+                logger.info('No file ' + file['file'] + 'of type' + file['type'] + 'in project statics folder')
         elif file['type'] == 'excel':
-            df = pd.read_excel(
+            try:
+                df = pd.read_excel(
                             common_path + file['file'],
                             sheetname=file['sheetname'],
                             skiprows=file['skiprows']
                             )
+            except:
+                logger.info('No file ' + file['file'] + 'of type' + file['type'] + 'in project statics folder')
+        elif file['type'] == 'json':
+            try:
+                df = pd.read_json(common_path + file['file'])
+            except:
+                logger.info('No file ' + file['file'] + 'of type' + file['type'] + 'in project statics folder')
         logger.info('inserting df with shape: ' + str(df.shape))
         dataframe_to_mongo(df, DATABASE,file['collection_name'], erase=True)
         logger.info('insertion sucessful in db' + DATABASE + ' of collection: ' + file['collection_name'])
@@ -46,10 +57,13 @@ def insert_scrapped_in_mongo():
     #insert each scrapped file in mongodb
     for file in SCRAPPED:
         logger.info('inserting scraped data')
-        df = pd.read_json(open(common_path + file['file']), orient=file['orient'])
-        logger.info('inserting df with shape: ' + str(df.shape))
-        dataframe_to_mongo(df, DATABASE,file['collection_name'], erase=True)
-        logger.info('insertion sucessful in db' + DATABASE + ' of collection: ' + file['collection_name'])
+        try:
+            df = pd.read_json(open(common_path + file['file']), orient=file['orient'])
+            logger.info('inserting df with shape: ' + str(df.shape))
+            dataframe_to_mongo(df, DATABASE,file['collection_name'], erase=True)
+            logger.info('insertion sucessful in db' + DATABASE + ' of collection: ' + file['collection_name'])
+        except:
+            logger.info('No file ' + file['file'] + 'of type' + file['type'] + 'in project scrapped folder')
 
 # def insert_country_maping():
 #     from data_params import DATABASE

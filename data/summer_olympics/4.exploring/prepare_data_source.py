@@ -61,7 +61,7 @@ def results_by_disciplines_and_period(period,period_name):
 
   
   df_france_best_disciplines = pd.concat([df_merged, df_merged_detail])  
-  df_france_best_disciplines.Discipline = df_france_best_disciplines.Discipline.replace(french_trad)
+  # df_france_best_disciplines.Discipline = df_france_best_disciplines.Discipline.replace(french_trad)
   df_france_best_disciplines.set_index(
                                        [c for c in df_france_best_disciplines.columns if c not in ['value','country_value']],
                                        inplace=True

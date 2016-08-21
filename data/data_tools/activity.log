@@ -51,3 +51,31 @@
 2016-08-11 12:09:13,864 :: INFO :: inserting df with shape: (30176, 13)
 2016-08-11 12:09:15,467 :: INFO :: insertion sucessful in db summer_olympics of collection: full_data
 2016-08-11 12:10:33,548 :: INFO :: creating domain: fullData for project summer_olympics, domain shape is: (7718, 8)
+2016-08-21 18:33:50,416 :: INFO :: inserting scraped data
+2016-08-21 18:36:48,246 :: INFO :: inserting static data
+2016-08-21 18:36:51,775 :: INFO :: inserting df with shape: (29216, 10)
+2016-08-21 18:36:53,070 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: winners_1896_2008
+2016-08-21 18:36:53,070 :: INFO :: inserting static data
+2016-08-21 18:37:41,062 :: INFO :: inserting static data
+2016-08-21 18:37:44,610 :: INFO :: inserting df with shape: (29216, 10)
+2016-08-21 18:37:45,967 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: winners_1896_2008
+2016-08-21 18:37:45,967 :: INFO :: inserting static data
+2016-08-21 18:37:45,994 :: INFO :: inserting df with shape: (961, 8)
+2016-08-21 18:37:46,098 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: winners_2012
+2016-08-21 18:47:39,565 :: INFO :: requesting api: wb
+2016-08-21 18:47:40,000 :: INFO :: Starting new HTTP connection (1): api.worldbank.org
+2016-08-21 18:47:41,857 :: DEBUG :: "GET /countries/all/indicators/NY.GDP.MKTP.CD?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2271834
+2016-08-21 18:47:46,725 :: DEBUG :: "GET /countries/all/indicators/SP.POP.TOTL?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2162883
+2016-08-21 18:47:50,402 :: INFO :: inserting df with shape: (10547, 4)
+2016-08-21 18:47:50,765 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: my_extraction_name
+2016-08-21 18:49:37,300 :: INFO :: starting to merge data for project summer_olympics_gb
+2016-08-21 18:52:43,901 :: INFO :: requesting api: wb
+2016-08-21 18:52:44,260 :: INFO :: Starting new HTTP connection (1): api.worldbank.org
+2016-08-21 18:52:44,495 :: DEBUG :: "GET /countries/all/indicators/NY.GDP.MKTP.CD?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2271834
+2016-08-21 18:52:47,739 :: DEBUG :: "GET /countries/all/indicators/SP.POP.TOTL?date=1960%3A2012&per_page=25000&format=json HTTP/1.1" 200 2162883
+2016-08-21 18:52:50,822 :: INFO :: inserting df with shape: (10547, 4)
+2016-08-21 18:52:51,200 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: wb_demo_eco
+2016-08-21 18:53:07,245 :: INFO :: starting to merge data for project summer_olympics_gb
+2016-08-21 18:54:48,571 :: INFO :: starting to merge data for project summer_olympics_gb
+2016-08-21 18:54:49,605 :: INFO :: inserting df with shape: (30177, 13)
+2016-08-21 18:54:51,213 :: INFO :: insertion sucessful in db summer_olympics_gb of collection: full_data
