@@ -10,6 +10,7 @@
     nbviz['addData'+ graphContainer._type + 'Info'](data, graphContainer);
     nbviz.initialize(graphContainer, data);
     nbviz.addSVGtoDiv(graphContainer);
+    var svg = graphContainer.svg;
 
     graphContainer.scales.xScale = nbviz.xTime(data, graphContainer);
     graphContainer.scales.yScale = nbviz.yLinearScale(data, graphContainer);
@@ -25,7 +26,30 @@
     // nbviz.textLegend(graphContainer);
 
     // data- join
-    nbviz.updateLinechart(graphContainer);
+    graphContainer.line = d3.svg.line()
+    .x(function(d) { return graphContainer.scales.xScale(d.Edition); })
+    .y(function(d) { return graphContainer.scales.yScale(d.value); });
+
+    g = svg.select('g.'+ graphContainer._class);
+
+    // data- join
+    graphContainer.series = g
+    .selectAll('.series')
+    .data(data);
+    
+    graphContainer.series.enter()
+    .append('g')
+    .attr('class', 'series')
+    .append("path")
+    .attr("class", "line")
+    .attr("d", function(d) { return graphContainer.line(d.values); })
+    .attr({
+        'fill': 'none',
+        'stroke': '#666',
+        'stroke-width': '1.5px'
+    });
+
+    // nbviz.updateLinechart(graphContainer);
 
 };
 
@@ -40,26 +64,12 @@
     nbviz.updateDomainYLinearScale(data, graphContainer);
     nbviz.updateDomainXTime(data, graphContainer);
 
-
-    var line = d3.svg.line()
-    .x(function(d) { return graphContainer.scales.xScale(d.Edition); })
-    .y(function(d) { return graphContainer.scales.yScale(d.value); });
-
-    g = svg.select('g.'+ graphContainer._class);
-
-    var lines = g.selectAll('.lines').data(data).enter().append('g').attr('class', 'lines');
     
-    lines.append("path")
-    .attr("class", "line")
-    .attr("d", function(d) { return line(d.values); })
-    .attr({
-        'fill': 'none',
-        'stroke': '#666',
-        'stroke-width': '1.5px'
-    });
-    
-    // nbviz.customXScale(data, graphContainer);
-    // .style("stroke", function(d) { return z(d.id); });
+    // data-join
+    graphContainer.series.data(data);
+    //update
+    graphContainer.series.select('path')
+    .attr("d", function(d) { return graphContainer.line(d.values); })
 };
 
 }(window.nbviz=window.nbviz || {}));
