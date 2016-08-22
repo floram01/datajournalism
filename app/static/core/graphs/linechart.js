@@ -108,14 +108,35 @@
         })
     .text('Traumatisme de 1996');
 
+    var rect = g.insert("rect","#tooltip")
+        .classed('boxTooltip',true)
+        .attr('id','boxTooltip')
+        .classed('hidden',true);
+
+
     circle.on("mouseover", function(d){
         d3.select('#tooltip')
-        .classed('hidden',false)
+        .classed('hidden',false);
+
+        var text = d3.select("#tooltip");
+        var bbox = text.node().getBBox();
+        var padding = 2;
+
+        d3.select('#boxTooltip')
+        .attr("x", bbox.x - padding)
+        .attr("y", bbox.y - padding)
+        .attr("width", bbox.width + (padding*2))
+        .attr("height", bbox.height + (padding*2))
+        .classed('hidden',false);
+
     });
 
     circle.on("mouseout", function(d){
         d3.select('#tooltip')
         .classed('hidden',true)
+
+        d3.select('#boxTooltip')
+        .classed('hidden',true);
     });
 };
 

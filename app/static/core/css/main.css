@@ -136,5 +136,10 @@ path.domain{
 }
 
 .textTooltip {
-    fill:#F3C600;
+    fill:black;
+    background-color:#F3C600 
+}
+.boxTooltip {
+    fill-opacity:0.3;
+    fill:#F3C600 
 }
