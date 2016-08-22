@@ -27,6 +27,24 @@ STATIC=[
         'file':'2012_winners.json',
         'type':'json',
         'collection_name':'winners_2012'
+    } 
+,  
+    {
+        'file':'Grant_information.csv',
+        'type':'csv',
+        'collection_name':'grant_information'
+    } 
+,  
+    {
+        'file':'results_france.csv',
+        'type':'csv',
+        'collection_name':'results_france_2016'
+    } 
+,  
+    {
+        'file':'results_gb.csv',
+        'type':'csv',
+        'collection_name':'results_gb_2016'
     }   
 ]
 

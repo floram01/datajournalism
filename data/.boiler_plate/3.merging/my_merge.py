@@ -15,3 +15,14 @@ def my_merge():
   
   #return a dataframe
   return df_merged  
+
+#reference here your merging functions
+#TO_MERGE has to contain the "collection_name" containing the name of the merged data
+#and the "method" i.e. python function you have written to build the target data
+
+TO_CLEAN = [
+    {
+        'collection_name':'my_merged_collection_name',
+        'method':my_cleaning_method
+    }
+]

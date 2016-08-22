@@ -9,12 +9,27 @@ def my_merge():
 
   winners_histo = mongo_to_dataframe(DATABASE, 'winners_1896_2008')
   winners_2012 = mongo_to_dataframe(DATABASE, 'winners_2012')
+  winners_france_2016 = mongo_to_dataframe(DATABASE, 'results_france_2016')
+  winners_gb_2016 = mongo_to_dataframe(DATABASE, 'results_gb_2016')
+
   wb = mongo_to_dataframe(DATABASE, 'wb_demo_eco')
   country_mapper = mongo_to_dataframe('utilities', 'country_code')
   #add city to London 2012 event
   winners_2012['City'] = 'London'
   winners_2012['Edition'] = 2012
-  #
+  
+  #add country to 2016 results
+  winners_france_2016['Country'] = 'France'
+  winners_gb_2016['Country'] = 'Great Britain'
+  #clean event names
+  winners_france_2016.Event = winners_france_2016.Event.str.replace("Men's ","")
+  winners_france_2016.Event = winners_france_2016.Event.str.replace("Women's ","")
+  winners_gb_2016.Event = winners_gb_2016.Event.str.replace("Men's ","")
+  winners_gb_2016.Event = winners_gb_2016.Event.str.replace("Women's ","")
+  #add NOC column
+  winners_gb_2016['NOC'] = 'GBR'
+  winners_france_2016['NOC'] = 'FRA'
+
   RENAME_2012_COL = {
       'country_code':'NOC',
       'name':'Athlete',
@@ -73,24 +88,30 @@ def my_merge():
   #event and gender
   winners_2012.loc[winners_2012.Event.str.contains("Men's"),'Gender'] ='Men'
   winners_2012.loc[winners_2012.Event.str.contains("Women's"),'Gender'] ='Women'
-  winners_2012.event = winners_2012.Event.str.replace("Men's ","")
-  winners_2012.event = winners_2012.Event.str.replace("Women's ","")
+  winners_2012.Event = winners_2012.Event.str.replace("Men's ","")
+  winners_2012.Event = winners_2012.Event.str.replace("Women's ","")
   #merge results
-  winners_all = pd.concat([winners_2012, winners_histo], join='outer')
+  winners_all = pd.concat([winners_2012, winners_histo, winners_france_2016, winners_gb_2016], join='outer')
   del winners_all['Sport']
   del winners_all['Event_gender']
   del winners_all['Date']
-  del winners_all['Country']
+  # del winners_all['Country']
 
   #merge eco/demo
-  wb.head()
-  wb.rename(columns={'ISO3':'NOC','year':'Edition'}, inplace=True)
-  wb.Edition = wb.Edition.astype('float')
+  # wb.head()
+  # wb.rename(columns={'ISO3':'NOC','year':'Edition'}, inplace=True)
+  # wb.Edition = wb.Edition.astype('float')
 
-  full_data = pd.merge(winners_all, wb, on=['Edition','NOC'], how='outer')
-  del country_mapper['UN']
-  full_data = pd.merge(full_data, country_mapper, left_on='NOC',right_on='ISO3', how='outer')
-  full_data.dropna(subset=['Athlete'], inplace=True)
-  full_data.Edition = pd.to_datetime(full_data.Edition.map(int).map(str), format='%Y').map(lambda x : x.year)
+  # full_data = pd.merge(winners_all, wb, on=['Edition','NOC'], how='outer')
+  # del country_mapper['UN']
+  
+  #final cleaning
+  winners_all.dropna(subset=['Athlete'], inplace=True)
+  winners_all.Edition = pd.to_datetime(winners_all.Edition.map(int).map(str), format='%Y').map(lambda x : x.year)
+  winners_all = pd.merge(winners_all, country_mapper, left_on='NOC',right_on='ISO3', how='outer')
 
-  return full_data  
+  return winners_all  
+
+TO_MERGE = [
+  {'method':my_merge, 'collection_name':'full_data'}
+  ]

@@ -15,9 +15,10 @@ def insert_static_in_mongo():
         logger.info('inserting static data')
         if file['type'] == 'csv':
             try:
-                df = read_csv(common_path + file['file'])
+                df = pd.read_csv(common_path + file['file'])
             except:
-                logger.info('No file ' + file['file'] + 'of type' + file['type'] + 'in project statics folder')
+                logger.info('No file ' + file['file'] + ' of type ' + file['type'] + ' in project statics folder')
+                sys.exit()
         elif file['type'] == 'excel':
             try:
                 df = pd.read_excel(
@@ -26,12 +27,14 @@ def insert_static_in_mongo():
                             skiprows=file['skiprows']
                             )
             except:
-                logger.info('No file ' + file['file'] + 'of type' + file['type'] + 'in project statics folder')
+                logger.info('No file ' + file['file'] + ' of type ' + file['type'] + ' in project statics folder')
+                sys.exit()
         elif file['type'] == 'json':
             try:
                 df = pd.read_json(common_path + file['file'])
             except:
-                logger.info('No file ' + file['file'] + 'of type' + file['type'] + 'in project statics folder')
+                logger.info('No file ' + file['file'] + ' of type ' + file['type'] + ' in project statics folder')
+                sys.exit()
         logger.info('inserting df with shape: ' + str(df.shape))
         dataframe_to_mongo(df, DATABASE,file['collection_name'], erase=True)
         logger.info('insertion sucessful in db' + DATABASE + ' of collection: ' + file['collection_name'])

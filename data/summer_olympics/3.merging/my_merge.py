@@ -97,3 +97,7 @@ def my_merge():
   # logger.info('inserting df with shape: ' + str(full_data.shape))
   # dataframe_to_mongo(full_data, DATABASE, DOMAIN, erase=True)
   # logger.info('insertion sucessful in db' + DATABASE + ' of collection: ' + DOMAIN)
+
+  TO_MERGE = [
+    {'method':my_merge, 'collection_name':'full_data'}
+  ]

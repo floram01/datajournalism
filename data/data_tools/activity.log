@@ -79,3 +79,92 @@
 2016-08-21 18:54:48,571 :: INFO :: starting to merge data for project summer_olympics_gb
 2016-08-21 18:54:49,605 :: INFO :: inserting df with shape: (30177, 13)
 2016-08-21 18:54:51,213 :: INFO :: insertion sucessful in db summer_olympics_gb of collection: full_data
+2016-08-22 09:25:16,750 :: INFO :: inserting static data
+2016-08-22 09:25:20,270 :: INFO :: inserting df with shape: (29216, 10)
+2016-08-22 09:25:21,544 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: winners_1896_2008
+2016-08-22 09:25:21,545 :: INFO :: inserting static data
+2016-08-22 09:25:21,566 :: INFO :: inserting df with shape: (961, 8)
+2016-08-22 09:25:21,689 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: winners_2012
+2016-08-22 09:25:21,690 :: INFO :: inserting static data
+2016-08-22 09:25:21,690 :: INFO :: No file Grant_information.csvof typecsvin project statics folder
+2016-08-22 09:25:21,690 :: INFO :: inserting df with shape: (961, 8)
+2016-08-22 09:25:21,786 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: grant_information
+2016-08-22 09:25:21,786 :: INFO :: inserting static data
+2016-08-22 09:25:21,786 :: INFO :: No file results_france.csvof typecsvin project statics folder
+2016-08-22 09:25:21,786 :: INFO :: inserting df with shape: (961, 8)
+2016-08-22 09:25:21,873 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: results_france_2016
+2016-08-22 09:25:21,873 :: INFO :: inserting static data
+2016-08-22 09:25:21,873 :: INFO :: No file results_gb.csvof typecsvin project statics folder
+2016-08-22 09:25:21,873 :: INFO :: inserting df with shape: (961, 8)
+2016-08-22 09:25:21,968 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: results_gb_2016
+2016-08-22 09:28:15,701 :: INFO :: inserting static data
+2016-08-22 09:28:19,225 :: INFO :: inserting df with shape: (29216, 10)
+2016-08-22 09:28:20,555 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: winners_1896_2008
+2016-08-22 09:28:20,555 :: INFO :: inserting static data
+2016-08-22 09:28:20,573 :: INFO :: inserting df with shape: (961, 8)
+2016-08-22 09:28:20,693 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: winners_2012
+2016-08-22 09:28:20,693 :: INFO :: inserting static data
+2016-08-22 09:28:20,693 :: INFO :: No file Grant_information.csv of typecsv in project statics folder
+2016-08-22 09:29:08,180 :: INFO :: inserting static data
+2016-08-22 09:29:11,852 :: INFO :: inserting df with shape: (29216, 10)
+2016-08-22 09:29:13,183 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: winners_1896_2008
+2016-08-22 09:29:13,183 :: INFO :: inserting static data
+2016-08-22 09:29:13,201 :: INFO :: inserting df with shape: (961, 8)
+2016-08-22 09:29:13,324 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: winners_2012
+2016-08-22 09:29:13,324 :: INFO :: inserting static data
+2016-08-22 09:30:32,437 :: INFO :: inserting static data
+2016-08-22 09:30:36,151 :: INFO :: inserting df with shape: (29216, 10)
+2016-08-22 09:30:37,488 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: winners_1896_2008
+2016-08-22 09:30:37,488 :: INFO :: inserting static data
+2016-08-22 09:30:37,509 :: INFO :: inserting df with shape: (961, 8)
+2016-08-22 09:30:37,624 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: winners_2012
+2016-08-22 09:30:37,624 :: INFO :: inserting static data
+2016-08-22 09:30:37,639 :: INFO :: inserting df with shape: (7945, 5)
+2016-08-22 09:31:58,095 :: INFO :: inserting static data
+2016-08-22 09:32:01,808 :: INFO :: inserting df with shape: (29216, 10)
+2016-08-22 09:32:03,111 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: winners_1896_2008
+2016-08-22 09:32:03,112 :: INFO :: inserting static data
+2016-08-22 09:32:03,133 :: INFO :: inserting df with shape: (961, 8)
+2016-08-22 09:32:03,241 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: winners_2012
+2016-08-22 09:32:03,241 :: INFO :: inserting static data
+2016-08-22 09:32:03,252 :: INFO :: inserting df with shape: (7945, 5)
+2016-08-22 09:32:03,568 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: grant_information
+2016-08-22 09:32:03,568 :: INFO :: inserting static data
+2016-08-22 09:32:03,570 :: INFO :: inserting df with shape: (40, 6)
+2016-08-22 09:32:03,649 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: results_france_2016
+2016-08-22 09:32:03,650 :: INFO :: inserting static data
+2016-08-22 09:32:03,651 :: INFO :: inserting df with shape: (66, 6)
+2016-08-22 09:32:03,733 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: results_gb_2016
+2016-08-22 10:34:14,467 :: INFO :: cleaning winners_2012, with shape: (960, 8)
+2016-08-22 10:34:14,588 :: INFO :: cleaning of winners_2012 successful, output shape: (960, 8)
+2016-08-22 10:34:37,401 :: INFO :: cleaning winners_2012, with shape: (960, 8)
+2016-08-22 10:34:37,510 :: INFO :: cleaning of winners_2012 successful, output shape: (960, 8)
+2016-08-22 10:34:39,037 :: INFO :: cleaning grant_information, with shape: (4105, 6)
+2016-08-22 10:34:39,297 :: INFO :: cleaning of grant_information successful, output shape: (4105, 6)
+2016-08-22 10:55:01,710 :: INFO :: starting to merge data for project summer_olympics_gb
+2016-08-22 10:55:43,421 :: INFO :: starting to merge data for project summer_olympics_gb
+2016-08-22 11:00:03,021 :: INFO :: starting to merge data for project summer_olympics_gb
+2016-08-22 11:03:22,648 :: INFO :: starting to merge data for project summer_olympics_gb
+2016-08-22 11:04:26,591 :: INFO :: inserting df with shape: (30282, 10)
+2016-08-22 11:04:28,010 :: INFO :: insertion sucessful in db summer_olympics_gb of collection: full_data
+2016-08-22 11:13:09,895 :: INFO :: starting to merge data for project summer_olympics_gb
+2016-08-22 11:13:10,861 :: INFO :: inserting df with shape: (30282, 10)
+2016-08-22 11:13:12,307 :: INFO :: insertion sucessful in db summer_olympics_gb of collection: full_data
+2016-08-22 11:14:04,877 :: INFO :: Successful merge to full_data, with shape: (30282, 10)
+2016-08-22 11:14:06,298 :: INFO :: Successful insertion of full_data
+2016-08-22 11:28:35,444 :: INFO :: creating domain: full_data for project summer_olympics_gb, domain shape is: (1816, 7)
+2016-08-22 11:28:35,448 :: INFO :: domain successfuly created
+2016-08-22 11:33:40,492 :: INFO :: Successful merge to full_data, with shape: (30282, 10)
+2016-08-22 11:33:41,927 :: INFO :: Successful insertion of full_data
+2016-08-22 12:19:46,843 :: INFO :: creating domain: full_data for project summer_olympics_gb, domain shape is: (362, 8)
+2016-08-22 12:19:46,845 :: INFO :: domain successfuly created
+2016-08-22 12:21:51,254 :: INFO :: creating domain: full_data for project summer_olympics_gb, domain shape is: (374, 9)
+2016-08-22 12:21:51,256 :: INFO :: domain successfuly created
+2016-08-22 12:25:56,856 :: INFO :: creating domain: full_data for project summer_olympics_gb, domain shape is: (374, 9)
+2016-08-22 12:25:56,858 :: INFO :: domain successfuly created
+2016-08-22 12:49:23,770 :: INFO :: Successful merge to full_data, with shape: (30464, 13)
+2016-08-22 12:49:25,513 :: INFO :: Successful insertion of full_data
+2016-08-22 12:52:31,112 :: INFO :: creating domain: full_data for project summer_olympics_gb, domain shape is: (1338, 9)
+2016-08-22 12:52:31,115 :: INFO :: domain successfuly created
+2016-08-22 12:53:19,898 :: INFO :: creating domain: full_data for project summer_olympics_gb, domain shape is: (748, 9)
+2016-08-22 12:53:19,900 :: INFO :: domain successfuly created
