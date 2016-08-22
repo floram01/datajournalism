@@ -80,6 +80,7 @@ def prepare_linechart():
   num = df.loc[df.value_filter=='Nombre', 'value'] /  df.loc[df.value_filter=='Nombre', 'total_value'] 
   df.loc[df.value_filter=='%', 'value'] = num.tolist()
   df = df[df.Edition >= 1976]
+  df = df[df.value_filter=='Nombre']
   return df
 
 

@@ -19,6 +19,7 @@
     nbviz.genYAxis(graphContainer);
     // nbviz.customXTicks(graphContainer);
     nbviz.updateXAxis(data, graphContainer);
+    nbviz.updateYAxis(data, graphContainer);
     
     //add legend
     // nbviz.addLegend(graphContainer);
@@ -42,15 +43,13 @@
     .attr('class', 'series')
     .append("path")
     .attr("class", "line")
-    .attr("d", function(d) { return graphContainer.line(d.values); })
     .attr({
         'fill': 'none',
         'stroke': '#666',
         'stroke-width': '1.5px'
     });
 
-    // nbviz.updateLinechart(graphContainer);
-
+    nbviz.updateLinechart(graphContainer)
 };
 
   nbviz.updateLinechart = function(graphContainer) {
@@ -70,6 +69,10 @@
     //update
     graphContainer.series.select('path')
     .attr("d", function(d) { return graphContainer.line(d.values); })
+
+    // update axis
+    nbviz.updateXAxis(data, graphContainer);
+    nbviz.updateYAxis(data, graphContainer);
 };
 
 }(window.nbviz=window.nbviz || {}));

@@ -226,3 +226,9 @@
 2016-08-22 19:35:18,897 :: INFO :: creating domain: main_linechart for project summer_olympics_gb, domain shape is: (88, 6)
 2016-08-22 19:35:18,899 :: INFO :: domain successfuly created
 2016-08-22 19:35:18,982 :: INFO :: domain successfuly inserted
+2016-08-22 20:43:37,003 :: INFO :: creating domain: fullData for project summer_olympics_gb, domain shape is: (1490, 9)
+2016-08-22 20:43:37,007 :: INFO :: domain successfuly created
+2016-08-22 20:43:37,142 :: INFO :: domain successfuly inserted
+2016-08-22 20:43:37,174 :: INFO :: creating domain: main_linechart for project summer_olympics_gb, domain shape is: (44, 6)
+2016-08-22 20:43:37,175 :: INFO :: domain successfuly created
+2016-08-22 20:43:37,257 :: INFO :: domain successfuly inserted

@@ -59,7 +59,7 @@
     var _dim = nbviz.FILTERS[0].dimension;
     var entries = nbviz[_dim + 'Dim'].top(Infinity);
     var _value= graphContainer._value;
-    var format = graphContainer.format.flag;
+    var format = graphContainer.format?graphContainer.format.flag:null;
     var sort = graphContainer.dataGetterParams.sort;
     
     // A generalise dans le script formatting

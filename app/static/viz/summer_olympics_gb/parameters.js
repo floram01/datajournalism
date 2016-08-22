@@ -20,8 +20,7 @@
   nbviz.FULL_DATA = 'main_linechart'
 
   nbviz.FILTERS = [
-    {locationID:'medal-select select', name:'Medal', dimension:'Medal', defaultValue:'Gold', type:'Dropdown'},
-    {locationID:'value-select select', name:'Type de valeur', dimension:'value_filter', defaultValue:'Nombre', type:'Radio'}
+    {locationID:'medal-select select', name:'Medal', dimension:'Medal', defaultValue:'Gold', type:'Radio'},
   ];
 
   nbviz.DATA_PROVIDER= {
@@ -51,8 +50,8 @@
     {
       _type:'Linechart',
       _id:'mainLinechart',
-      margins: {top:0, right:15, bottom:40, left:15},
-      padding: {interbar:.1, left:5, bottom:0, legend:5},
+      margins: {top:0, right:15, bottom:40, left:20},
+      padding: {interbar:.1, left:15, bottom:0, legend:5},
       dataGetter:nbviz.nestDataByKey,
       dataGetterParams:{nestKey:'country_name', xKey:'Edition', sort:{'type':'ascending','on':'Edition'}},
       xStep: 4,
