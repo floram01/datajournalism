@@ -20,7 +20,7 @@
   nbviz.FULL_DATA = 'main_linechart'
 
   nbviz.FILTERS = [
-    {locationID:'medal-select select', name:'Medal', dimension:'Medal', defaultValue:'Gold', type:'Radio'},
+    {locationID:'medal-select select', name:'Medal', dimension:'Medal', defaultValue:'All', type:'Radio'}
   ];
 
   nbviz.DATA_PROVIDER= {
@@ -35,7 +35,8 @@
       {
         name:'main_linechart',
         source:'main_linechart.json',
-        getterFunction:nbviz.getDataFromJSON
+        getterFunction:nbviz.getDataFromJSON,
+        parseDate:{format:'%Y', dimension:'Edition'}
       }
     // ,
     //   {

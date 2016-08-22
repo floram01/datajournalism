@@ -25,12 +25,22 @@
         }
       });
   };
+  // a mettre à part
+  nbviz.parseDate = function(params, data){
+    parseDate = d3.time.format(params.format).parse;
+    data.forEach(function(d){
+      d[params.dimension] = parseDate(String(d[params.dimension]));
+    });
+    return data
+  }
   
+  //mettre à part la part de formating en construisant une fonction format-manager?
   nbviz.getDataFromJSON = function(params, callback){
       d3.json(nbviz.DATA_PATH + params.source, function(error, data) {    
         if(error){
           return callback(error);
         } else {
+          if(params.parseDate){data = nbviz.parseDate(params.parseDate, data)};
           nbviz.DATASTORE[params.name] = data;
           callback(null, data);
         };
@@ -61,15 +71,6 @@
     var _value= graphContainer._value;
     var format = graphContainer.format?graphContainer.format.flag:null;
     var sort = graphContainer.dataGetterParams.sort;
-    
-    // A generalise dans le script formatting
-    if(format){
-      graphContainer.format.flag = false;
-      parseDate = d3.time.format("%Y").parse;
-      entries.forEach(function(d){
-        d.Edition = parseDate(String(d.Edition));
-      });
-    };
 
     // A generalise dans le script formatting
     if(sort){

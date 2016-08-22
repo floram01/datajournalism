@@ -126,3 +126,15 @@ path.domain{
 .tableTitle {
     font-size: 13px;
 }
+
+.hidden {
+    display:none;
+}
+
+.circleTooltip {
+    fill:#F3C600;
+}
+
+.textTooltip {
+    fill:#F3C600;
+}

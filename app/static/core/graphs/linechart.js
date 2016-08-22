@@ -73,6 +73,50 @@
     // update axis
     nbviz.updateXAxis(data, graphContainer);
     nbviz.updateYAxis(data, graphContainer);
+
+    var parseDate = d3.time.format("%Y").parse;
+    var tooltip = {};
+    tooltip.x = parseDate(String(1996))
+    data.forEach(function(d){
+        if(d.key=='United Kingdom'){
+            d.values.forEach(function(o){
+                var target = new Date(o.Edition); 
+                var temp = new Date(parseDate(String(1996)));
+                if(target.getTime() === temp.getTime()){
+                    tooltip.y = o.value;
+                };
+            });
+        };
+    });
+
+    var circle = g.append('circle')
+    .attr({
+        'cx':graphContainer.scales.xScale(tooltip.x),
+        'cy':graphContainer.scales.yScale(tooltip.y),
+        'r':5,
+        'class':'circleTooltip'
+    })
+    
+    g.append('text')
+    .attr({
+        'id':'tooltip',
+        'class':'textTooltip hidden',
+        'x':graphContainer.scales.xScale(tooltip.x),
+        'y':graphContainer.scales.yScale(tooltip.y),
+        'text-anchor':'middle',
+        'dy':'-0.5em'
+        })
+    .text('Traumatisme de 1996');
+
+    circle.on("mouseover", function(d){
+        d3.select('#tooltip')
+        .classed('hidden',false)
+    });
+
+    circle.on("mouseout", function(d){
+        d3.select('#tooltip')
+        .classed('hidden',true)
+    });
 };
 
 }(window.nbviz=window.nbviz || {}));
