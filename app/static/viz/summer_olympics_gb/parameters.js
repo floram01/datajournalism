@@ -17,46 +17,51 @@
   
   $EVE_API = 'http://localhost:5000/api/';//adress where the servor api is serving the database
   nbviz.DATA_PATH = 'static/viz/' + nbviz.STORY.project_name + '/data_sources/'
-  nbviz.FULL_DATA = 'fullData'
+  nbviz.FULL_DATA = 'main_linechart'
 
   nbviz.FILTERS = [
-    {locationID:'gender-select select', name:'Gender', dimension:'Gender', defaultValue:'All', type:'Dropdown'},
-    {locationID:'country-select select', name:'Country', dimension:'country_name', defaultValue:'France', type:'Dropdown'},
-    {locationID:'period-select select', name:'Period', dimension:'period', defaultValue:'1992 - 2012', type:'Dropdown'},
-    {locationID:'value-select select', name:'Type de valeur', dimension:'value_filter', defaultValue:'%', type:'Radio'}
+    {locationID:'medal-select select', name:'Medal', dimension:'Medal', defaultValue:'Gold', type:'Dropdown'},
+    {locationID:'value-select select', name:'Type de valeur', dimension:'value_filter', defaultValue:'Nombre', type:'Radio'}
   ];
 
   nbviz.DATA_PROVIDER= {
     getterFunction:nbviz.prepareDatasets,
     params:[
+    //   {
+    //     name:'fullData',
+    //     source:'fullData.json',
+    //     getterFunction:nbviz.getDataFromJSON
+    //   }
+    // ,
       {
-        name:'fullData',
-        source:'fullData.json',
+        name:'main_linechart',
+        source:'main_linechart.json',
         getterFunction:nbviz.getDataFromJSON
       }
-    ,
-      {
-        name:'text',
-        source:'text.csv',
-        getterFunction:nbviz.getDataFromCSV
-      }
+    // ,
+    //   {
+    //     name:'text',
+    //     source:'text.csv',
+    //     getterFunction:nbviz.getDataFromCSV
+    //   }
     ]
   };
 
   nbviz.CHARTS = [
     {
-      _type:'HorizontalBarchart',
-      _id:'horizontalBarchartFrance',
-      margins: {top:30, right:20, bottom:0, left:72},
+      _type:'Linechart',
+      _id:'mainLinechart',
+      margins: {top:0, right:15, bottom:40, left:15},
       padding: {interbar:.1, left:5, bottom:0, legend:5},
-      dataGetter:nbviz.topFlop,
-      dataGetterParams:{top:true,top_num:10},
-      _label:'Discipline',
+      dataGetter:nbviz.nestDataByKey,
+      dataGetterParams:{nestKey:'country_name', xKey:'Edition', sort:{'type':'ascending','on':'Edition'}},
+      xStep: 4,
+      xTicksFreq:'2',
+      domain:'main_linechart',
       _value:'value',
-      _yKey:'Discipline',
-      domain:'fullData',
-      dim:{height:'230px',width:"col-md-12"},
-      title:'Graph info (period,etc.)'
+      dim:{height:'150px',width:"col-md-12"},
+      title:'Graph info (period,etc.)',
+      format:{'dimension':'Edition','type':'date','format':'%Y', flag:true}
     }
   ];
 

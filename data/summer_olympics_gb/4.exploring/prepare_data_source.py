@@ -4,18 +4,13 @@ from __future__ import unicode_literals
 import pandas as pd
 from pymongo import MongoClient
 import numpy as np
+from data_params import DATABASE, PROJECT, DOMAIN
+from mongo_tools import mongo_to_dataframe,dataframe_to_mongo,get_mongo_database,mongo_coll_to_dicts
 
-
-def prepare_data_source():
-  df = my_method()
-  return df
 
 def my_method():
-  from data_params import DATABASE, PROJECT, DOMAIN
-  from mongo_tools import mongo_to_dataframe,dataframe_to_mongo,get_mongo_database,mongo_coll_to_dicts
 
   df = mongo_to_dataframe(DATABASE, DOMAIN)
-
   grant_info = mongo_to_dataframe(DATABASE, 'grant_information')
   df_medal_count = df.drop_duplicates(subset=['Edition','Event','Gender','Medal','Discipline'])
   
@@ -55,12 +50,12 @@ def my_method():
   df_france_best_disciplines.loc[df_france_best_disciplines.value_filter=='%','precision']=',.0%'
 
   #filter for dimension of interests
-  df_france_best_disciplines = df_france_best_disciplines[df_france_best_disciplines.country_name.isin(['France','Great Britain'])]
+  df_france_best_disciplines = df_france_best_disciplines[df_france_best_disciplines.country_name.isin(['France','United Kingdom'])]
   df_france_best_disciplines = df_france_best_disciplines[df_france_best_disciplines.Medal.isin(['All','Gold'])]
 
   #prepare grant info for merge
   grant_info = grant_info[(grant_info.Year>=2011)]
-  grant_info['country_name'] = 'Great Britain'
+  grant_info['country_name'] = 'United Kingdom'
   RENAME_GRANT = {
       'Modern Pentathlon':'Modern pentathlon'
   }
@@ -72,5 +67,24 @@ def my_method():
   full_data = pd.merge(df_france_best_disciplines, grant_clean, on=['country_name','Discipline'], how='outer')
   full_data.loc[full_data.value.isnull(), 'value'] = 0
   full_data.loc[full_data.Budget.isnull(), 'Budget'] = 0
-
+  
+  #budget with no Edition with medal
+  full_data.dropna(subset=['Edition'], inplace=True)
   return full_data
+
+def prepare_linechart():
+  df = mongo_to_dataframe(DATABASE, 'fullData')
+
+  grouped = df.groupby(['country_name','Edition','Medal', 'value_filter'])['value','total_value'].sum() 
+  df = grouped.reset_index()
+  num = df.loc[df.value_filter=='Nombre', 'value'] /  df.loc[df.value_filter=='Nombre', 'total_value'] 
+  df.loc[df.value_filter=='%', 'value'] = num.tolist()
+  df = df[df.Edition >= 1976]
+  return df
+
+
+TO_PREPARE = [
+  {'method':my_method,'source_name':'full_data','output_name':'fullData'}
+,
+  {'method':prepare_linechart,'source_name':'fullData','output_name':'main_linechart'}
+]

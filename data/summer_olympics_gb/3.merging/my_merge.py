@@ -20,7 +20,7 @@ def my_merge():
   
   #add country to 2016 results
   winners_france_2016['Country'] = 'France'
-  winners_gb_2016['Country'] = 'Great Britain'
+  winners_gb_2016['Country'] = 'United Kingdom'
   #clean event names
   winners_france_2016.Event = winners_france_2016.Event.str.replace("Men's ","")
   winners_france_2016.Event = winners_france_2016.Event.str.replace("Women's ","")
@@ -109,7 +109,6 @@ def my_merge():
   winners_all.dropna(subset=['Athlete'], inplace=True)
   winners_all.Edition = pd.to_datetime(winners_all.Edition.map(int).map(str), format='%Y').map(lambda x : x.year)
   winners_all = pd.merge(winners_all, country_mapper, left_on='NOC',right_on='ISO3', how='outer')
-
   return winners_all  
 
 TO_MERGE = [

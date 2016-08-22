@@ -14,9 +14,22 @@
     var rangeBandGen = d3.scale.ordinal()
     .domain(_domain)
     .rangeRoundBands([bandwith, dim.width - bandwith])
-
     return rangeBandGen
   };
+  
+  nbviz.xTime = function(data, graphContainer) {
+    var dim = graphContainer.dim;
+    var padding = graphContainer.padding;
+    var margin = graphContainer.margin;
+    var extent = graphContainer.data.xExtent    
+    var timeScale = d3.time.scale()
+    .domain(extent)
+    .range([0, dim.width]);
+
+
+    return timeScale
+  };
+  
 
   nbviz.yRangeBand = function(data, graphContainer) {
     var dim = graphContainer.dim;
@@ -34,10 +47,17 @@
     var dim = graphContainer.dim;
     var margin = graphContainer.margin;
     var padding = graphContainer.padding;
-
     graphContainer.scales.xScale.domain( graphContainer.data.valueRange || graphContainer.data.pointRange || graphContainer.data.xRange );
   };
 
+  nbviz.updateDomainXTime = function(data, graphContainer) {
+    var dim = graphContainer.dim;
+    var padding = graphContainer.padding;
+    var margin = graphContainer.margin;
+    var extent = graphContainer.data.xExtent
+
+    graphContainer.scales.xScale.domain( extent );
+  };
   nbviz.updateDomainYRangeBand = function(data, graphContainer){
     // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
     var dim = graphContainer.dim;
@@ -89,17 +109,19 @@
   nbviz.yLinearScale = function(data, graphContainer) {
     var dim = graphContainer.dim;
     var margin = graphContainer.margin;
+    
+    var max = graphContainer.data.maxValue || d3.max(data, function(d){return d[graphContainer._value];})
     var yLinearScale = d3.scale.linear()
-    .domain([0, d3.max(data, function(d){return d[graphContainer._value];})])
-    .rangeRound([dim.height, margin.top])
+    .domain([0, max])
+    .range ([dim.height, margin.top])
     return yLinearScale
   };
 
   nbviz.updateDomainYLinearScale = function(data, graphContainer){
     // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
+    var max = graphContainer.data.maxValue || d3.max(data, function(d){return d[graphContainer._value];})
 
-    graphContainer.scales.yScale.domain([0, d3.max(data, function(d){
-                                       return + d[graphContainer._value]; })]);
+    graphContainer.scales.yScale.domain([0, max]);
   };
 
   nbviz.updateDomainXLinearScale = function(data, graphContainer){

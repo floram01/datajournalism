@@ -65,7 +65,7 @@
         .style("text-anchor", "end")
         .attr("dx", "-.8em")
         .attr("dy", ".15em")
-        .attr("transform", "rotate(-65)");
+        .attr("transform", "rotate(-20)");
   };
 
   nbviz.updateYAxis = function(data, graphContainer){

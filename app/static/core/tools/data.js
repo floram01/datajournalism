@@ -58,15 +58,33 @@
   nbviz.nestDataByKey = function(graphContainer) {          
     var _dim = nbviz.FILTERS[0].dimension;
     var entries = nbviz[_dim + 'Dim'].top(Infinity);
+    var _value= graphContainer._value;
+    var format = graphContainer.format.flag;
+    var sort = graphContainer.dataGetterParams.sort;
+    
+    // A generalise dans le script formatting
+    if(format){
+      graphContainer.format.flag = false;
+      parseDate = d3.time.format("%Y").parse;
+      entries.forEach(function(d){
+        d.Edition = parseDate(String(d.Edition));
+      });
+    };
+
+    // A generalise dans le script formatting
+    if(sort){
+      entries = entries.sort(function(a, b) { 
+            return a.Edition - b.Edition; // descending
+        })
+    };
     var _key = graphContainer.dataGetterParams.nestKey;
 
     var data = d3.nest()
     .key(function(w){return w[_key]})
     .entries(entries);
-
+    
     graphContainer.groupID = 'values';
     graphContainer._label = 'key';
-
     return data
   };
 
@@ -147,6 +165,29 @@
     graphContainer.data.max = d3.max(data, function(d){return + d[graphContainer._value];});
     graphContainer.data.xRange = d3.range(0, d3.max(data, function(d){return + d[graphContainer.xIndex];}) + 1);
     graphContainer.data.yRange = d3.range(0, d3.max(data, function(d){return + d[graphContainer.yIndex];}) + 1);
+    return data
+  };
+//range à généraliser en fonction des besoins identifiés au fur et à mesure
+  nbviz.addDataLinechartInfo = function(data, graphContainer) {          
+    graphContainer.data = graphContainer.data || {};
+
+    var groupID = graphContainer.groupID;
+    var _key = graphContainer._label;
+    var step = graphContainer.xStep;
+
+    var min = d3.min(data, function(d){
+          return d3.min(d.values, function(x){return x.Edition})
+        })
+    var max = d3.max(data, function(d){
+          return d3.max(d.values, function(x){return x.Edition})
+        })
+    
+    var max_value = d3.max(data, function(d){
+          return d3.max(d.values, function(x){return x.value})
+        })
+
+    graphContainer.data.xExtent = [min, max];
+    graphContainer.data.maxValue = max_value;
     return data
   };
 

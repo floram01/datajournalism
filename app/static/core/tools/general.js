@@ -37,6 +37,8 @@
     o.title = chart.title;
     o.source = chart.source;
     o.source = chart.source;
+    o.xStep = chart.xStep;
+    o.format = chart.format;
 
     nbviz.charts.push(o)
     return o
@@ -82,7 +84,7 @@
     var divID = graphContainer.divID;
     
     graphContainer.svg = d3.select(divID).append("svg")
-    .attr('id','#svg' + graphContainer._id)
+    .attr('id','svg' + graphContainer._id)
     .attr("width", dim.width + margin.left + margin.right)
     .attr("height", dim.height + margin.top + margin.bottom);
     
