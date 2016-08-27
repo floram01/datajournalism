@@ -19,11 +19,6 @@ nbviz.TRANS_DURATION = 1500; // length in ms for our transitions
   nbviz.DATA_PATH = 'static/viz/' + nbviz.STORY.project_name + '/data_sources/'
   nbviz.FULL_DATA = 'nobelData'
 
-  nbviz.FILTERS = [
-    {locationID:'category-select select', name:'Category',dimension:'category', resetValue:'All Categories',type:'Dropdown'},
-    {locationID:'gender-select select', name:'Gender', dimension:'gender', resetValue:'All',type:'Dropdown'},
-    {locationID:'country-select select', name:'Country', dimension:'country', resetValue:'All Countries',type:'Dropdown'}
-  ];
 
   nbviz.DATA_PROVIDER= {
     getterFunction:nbviz.prepareDatasets,
@@ -69,16 +64,6 @@ nbviz.TRANS_DURATION = 1500; // length in ms for our transitions
   //     tableColumns:['year','category','name']
   //   } 
   // ,
-    {
-      _type:'Timeline',
-      _id:'timeline',
-      margins: {top:20, right:0, bottom:40, left:0},
-      padding: {interbar:.1, left:0, right:0, bottom:0},
-      dataGetter:nbviz.nestDataByKey,
-      dataGetterParams:{nestKey:'year',colorKey:'category',nestedUniqueKey:'name'},
-      xTicksFreq:'10',
-      dim:{height:'240px',width:"col-md-12"}
-    } 
   // ,
   //   {
   //     _type:'HorizontalBarchart',
@@ -111,6 +96,40 @@ nbviz.TRANS_DURATION = 1500; // length in ms for our transitions
   //     dataGetter:nbviz.fullData,
   //     dim:{height:'500px',width:"col-md-12"}
   //   }
+  ];
+
+  nbviz.CHARTS = [
+    {
+      _id:'france',
+      
+      chartsParams:[
+        {
+          _id:'timeline',
+          _type:'Timeline',
+          margins: {top:20, right:0, bottom:40, left:0},
+          padding: {interbar:.1, left:0, right:0, bottom:0},
+          dataGetter:nbviz.nestDataByKey,
+          dataGetterParams:{nestKey:'year',colorKey:'category',nestedUniqueKey:'name', dim:'country'},
+          xTicksFreq:'10',
+          dim:{height:'240px',width:"col-md-12"}
+        } 
+      ],
+
+      filters : [
+        {locationID:'category-select select', name:'Category',dimension:'category', resetValue:'All Categories',type:'Dropdown'},
+        {locationID:'gender-select select', name:'Gender', dimension:'gender', resetValue:'All',type:'Dropdown'},
+        {locationID:'country-select select', name:'Country', dimension:'country', resetValue:'All Countries',type:'Dropdown'}
+      ],
+      
+      story:{
+        title:'Prix nobels par discipline (1992 - 2012)',
+        comment:'Résultats tous genres et toutes médailles confondus',
+        sources:'Wikipedia',
+        // text:{
+        //   'domain':'text'
+        // }
+      }
+    }
   ];
 
 }(window.nbviz=window.nbviz || {}));

@@ -122,11 +122,4 @@
     }
   ];
 
-  nbviz.TEXT = [
-    {
-      'domain':'text',
-      'id':'france'
-    }
-  ]
-
 }(window.nbviz=window.nbviz || {}));

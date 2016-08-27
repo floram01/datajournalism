@@ -10,7 +10,6 @@
     nbviz['addData'+ graphContainer._type + 'Info'](data, graphContainer);
     nbviz.initialize(graphContainer, data);
     nbviz.addSVGtoDiv(graphContainer);
-
     graphContainer.scales.xScale = nbviz.xRangeBand(data, graphContainer);
     graphContainer.scales.yScale = nbviz.yRoundPoints(data, graphContainer);
     
@@ -82,7 +81,7 @@
     .append('circle')
     .classed('bubbleTime', true)
     .attr('fill', function(d) {
-        return nbviz.categoryFill(d[graphContainer.dataGetterParams.colorKey]); 
+        return nbviz.categoryFill(d[graphContainer.dataGetterParams.colorKey], graphContainer); 
     })
     .attr('cx', graphContainer.scales.xScale.rangeBand()/2)
     .attr('cy', graphContainer.dim.height + graphContainer.margin.bottom*2)

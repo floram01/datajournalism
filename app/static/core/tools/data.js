@@ -68,8 +68,8 @@
   // nest data (entries) sharing same dimension 'key'
   // build or update a data object in graphContainer containing the nested data and some parameters
   nbviz.nestDataByKey = function(graphContainer) {          
-    var _dim = nbviz.FILTERS[0].dimension;
-    var entries = nbviz[_dim + 'Dim'].top(Infinity);
+    var _dim = graphContainer.dataGetterParams.dim;
+    var entries = nbviz[graphContainer.chartsParams._id + _dim + 'Dim'].top(Infinity);
     var _value= graphContainer._value;
     var format = graphContainer.format?graphContainer.format.flag:null;
     var sort = graphContainer.dataGetterParams.sort;
@@ -272,7 +272,6 @@
     if(filterParams.defaultValue){
       filterParams.filterTool.filter(filterParams.defaultValue);
     };
-    debugger;
     d3.selectAll('label .' + chartsParams._id).on('change', function(d){
       var category = d;
       if (category===filterParams.resetValue){

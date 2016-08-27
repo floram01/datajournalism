@@ -6,9 +6,9 @@
 
   nbviz.addLegend = function(graphContainer){
     var dimensionName = graphContainer.dataGetterParams.colorKey;
-    var _options = nbviz[dimensionName + 'Values'];
+    var _options = nbviz[graphContainer.chartsParams._id + dimensionName + 'Values'];
     //filters for resetValues to be excluded from the legend
-    nbviz.FILTERS.forEach(function(d){
+    graphContainer.chartsParams.filters.forEach(function(d){
       if(d.dimension === dimensionName){
         var i = _options.indexOf(d.resetValue);
         if(i!==-1){_options.splice(i,1)};        
@@ -29,7 +29,7 @@
   nbviz.circleLegend = function(graphContainer){
     graphContainer.legend.append('circle')
       .attr('class', 'legend') 
-      .attr('fill', (nbviz.categoryFill)) 
+      .attr('fill', function(d){return nbviz.categoryFill(d,graphContainer)}) 
       .attr('r', graphContainer.scales.xScale.rangeBand()/2);
 };
   
