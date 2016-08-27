@@ -8,7 +8,7 @@
 // else we have a simple object and return it directly
   nbviz.prepareDataSet = function(param, callback){
     nbviz.DATASTORE = nbviz.DATASTORE || {}
-    nbviz.DATASTORE[param.name] = param.getterFunction(param, callback)
+    param.getterFunction(param, callback)
   };
 
   nbviz.getDataFromAPI = function(params, callback){
@@ -32,7 +32,7 @@
       d[params.dimension] = parseDate(String(d[params.dimension]));
     });
     return data
-  }
+  };
   
   //mettre à part la part de formating en construisant une fonction format-manager?
   nbviz.getDataFromJSON = function(params, callback){
@@ -41,7 +41,9 @@
           return callback(error);
         } else {
           if(params.parseDate){data = nbviz.parseDate(params.parseDate, data)};
-          nbviz.DATASTORE[params.name] = data;
+          nbviz.CHARTS.forEach(function(chartsParams){
+            nbviz.DATASTORE[params.name + chartsParams._id] = data;
+          });
           callback(null, data);
         };
       });
@@ -119,7 +121,7 @@
     var _dim = graphContainer.dataGetterParams.dim;
     var top = graphContainer.dataGetterParams.top;
     var top_num = graphContainer.dataGetterParams.top_num;
-    var data = nbviz[_dim + 'Dim'].top(Infinity).sort(function(a, b) {
+    var data = nbviz[graphContainer.chartsParams._id + _dim + 'Dim'].top(Infinity).sort(function(a, b) {
       if (top){
         return +b[graphContainer._value] - +a[graphContainer._value];
       }else {return +b[graphContainer._value] - +a[graphContainer._value];}
@@ -205,12 +207,12 @@
     return _options;
 };
 
-  nbviz.addDropdownFilter = function(data, filterParams){
+  nbviz.addDropdownFilter = function(data, filterParams, chartsParams){
 
     _options=nbviz.listOptions(data, filterParams.filterTool, filterParams.resetValue);
     // if(_options[0].includes('All')){_options.shift(0)};//à généraliser a priori resetValue contient All pas top
-    nbviz[filterParams.dimension + 'Values'] = _options;
-    _filter = d3.select('#' + filterParams.dimension + '-select').append('select');;
+    nbviz[chartsParams._id + filterParams.dimension + 'Values'] = _options;
+    _filter = d3.select('#' + chartsParams._id + filterParams.dimension + '-select').append('select');;
     _filter
       .selectAll('options')
       .data(_options)
@@ -236,19 +238,19 @@
           filterParams.filterTool.filter(category);
         };
       // filterParams.filterTool.filter(category);
-      nbviz.onDataChange();
+      nbviz.onDataChange(chartsParams);
 
       // select the default value
 
   });
 };
 
-  nbviz.addRadioFilter = function(data, filterParams){
+  nbviz.addRadioFilter = function(data, filterParams, chartsParams){
 
     _options=nbviz.listOptions(data, filterParams.filterTool, filterParams.resetValue);
     // if(_options[0].includes('All')){_options.shift(0)};//à généraliser a priori resetValue contient All pas top
-    nbviz[filterParams.dimension + 'Values'] = _options;
-    _filter = d3.select('#' + filterParams.dimension + '-select').append('form');
+    nbviz[chartsParams._id + filterParams.dimension + 'Values'] = _options;
+    _filter = d3.select('#' + chartsParams._id + filterParams.dimension + '-select').append('form');
     _filter
       .selectAll('label')
       .data(_options)
@@ -278,7 +280,7 @@
           filterParams.filterTool.filter(category);
         };
       // filterParams.filterTool.filter(category);
-      nbviz.onDataChange();
+      nbviz.onDataChange(chartsParams);
 
       // select the default value
 
@@ -286,20 +288,20 @@
 };
 
   // set up the dimensions of the crossfilter
-  nbviz.makeFilterAndDimensions = function(winnersData, filters){
-    nbviz.filter=crossfilter(winnersData);
-    filters.forEach(function(f){
-      f.filterTool = nbviz[f.dimension + 'Dim'] = nbviz.filter.dimension(function(o) {
+  nbviz.makeFilterAndDimensions = function(winnersData, chartsParams){
+    nbviz[chartsParams._id + 'filter']=crossfilter(winnersData);
+    chartsParams.filters.forEach(function(f){
+      f.filterTool = nbviz[chartsParams._id + f.dimension + 'Dim'] = nbviz[chartsParams._id + 'filter'].dimension(function(o) {
         return o[f.dimension];
       });
-      nbviz['add' + f.type + 'Filter'](winnersData, f);
+      nbviz['add' + f.type + 'Filter'](winnersData, f, chartsParams);
     });
   };
 
 // to generalize iterating through all the graphs and updating the data, the data getter function has to be linked to 
 //the graphContainer itself
-  nbviz.onDataChange = function() {
-      nbviz.charts.forEach(function(chart){
+  nbviz.onDataChange = function(chartsParams) {
+      chartsParams.charts.forEach(function(chart){
         nbviz['update'+chart._type](chart);
     });
   };

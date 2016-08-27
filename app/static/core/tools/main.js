@@ -23,17 +23,17 @@ function ready(error, data) {
   // nbviz.STATIC_DATA.heatmap = data[1];
   // add title etc.
   nbviz.CHARTS.forEach(function(chartsParams, i){
-    nbviz.makeFilterAndDimensions(nbviz.DATASTORE[nbviz.FULL_DATA], chartsParams.filters);
+    nbviz.makeFilterAndDimensions(nbviz.DATASTORE[nbviz.FULL_DATA+chartsParams._id], chartsParams);
     
-    chartsParams.charts.forEach(function(chartParams){
-      var chart = nbviz.initGraphContainer(chartParams);
+    chartsParams.chartsParams.forEach(function(chartParams){
+      var chart = nbviz.initGraphContainer(chartParams, chartsParams);
       nbviz['build' + chartParams._type](
         chart
         )
     });
 
     nbviz.buildStory(chartsParams);
+    nbviz.buildText(chartsParams);
   
   });
-  nbviz.addText();
 };

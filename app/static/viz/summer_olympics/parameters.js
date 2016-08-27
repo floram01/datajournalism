@@ -53,7 +53,7 @@
     {
       _id:'full_exploration',
       
-      charts:[
+      chartsParams:[
         {
           _id:'main_graph',
           _type:'HorizontalBarchart',
@@ -71,6 +71,56 @@
       ,
         {
           _id:'other_graph',
+          _type:'HorizontalBarchart',
+          margins: {top:30, right:20, bottom:0, left:72},
+          padding: {interbar:.1, left:5, bottom:0, legend:10},
+          dataGetter:nbviz.topFlop,
+          dataGetterParams:{top:true,top_num:10, dim:'Gender'},
+          _label:'Discipline',
+          _value:'value',
+          _yKey:'Discipline',
+          domain:'fullData',
+          title:'Graph info (period,etc.)',
+          dim:{height:'230px',width:"col-md-12"},
+        }
+      ],
+
+      filters : [
+        {locationID:'gender-select select', name:'Gender', dimension:'Gender', defaultValue:'All', type:'Dropdown'},
+        {locationID:'country-select select', name:'Country', dimension:'country_name', defaultValue:'France', type:'Dropdown'},
+        {locationID:'period-select select', name:'Period', dimension:'period', defaultValue:'1992 - 2012', type:'Dropdown'},
+        {locationID:'value-select select', name:'Type de valeur', dimension:'value_filter', defaultValue:'%', type:'Radio'}
+      ],
+      
+      story:{
+        title:'my_title',
+        comment:'my_comment',
+        sources:'my_sources',
+        text:true
+      }
+    }
+  ,
+    {
+      _id:'extra_exploration',
+      
+      chartsParams:[
+        {
+          _id:'main_graph_2',
+          _type:'HorizontalBarchart',
+          margins: {top:30, right:20, bottom:0, left:72},
+          padding: {interbar:.1, left:5, bottom:0, legend:10},
+          dataGetter:nbviz.topFlop,
+          dataGetterParams:{top:true,top_num:10, dim:'Gender'},
+          _label:'Discipline',
+          _value:'value',
+          _yKey:'Discipline',
+          domain:'fullData',
+          title:'Graph info (period,etc.)',
+          dim:{height:'230px',width:"col-md-12"},
+        }
+      ,
+        {
+          _id:'other_graph_2',
           _type:'HorizontalBarchart',
           margins: {top:30, right:20, bottom:0, left:72},
           padding: {interbar:.1, left:5, bottom:0, legend:10},

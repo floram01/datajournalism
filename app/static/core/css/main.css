@@ -40,7 +40,7 @@
     letter-spacing:'normal'
 }
 
-.sources text{
+.sources-container text{
     font-style:italic;
     font-family:'georgia';
     font-size: 12px;
@@ -57,7 +57,7 @@
     max-width:800px;
 }
 
-#sub-container{
+.sub-container{
     max-width:800px;
     /*max-height: 300px*/
 }
@@ -74,12 +74,13 @@
     text-align: left:
 }
 
-.sources {
-    text-align:center
+.sources-container {
+    text-align:center;
+    margin-bottom: 10px
 }
 
-#main-text {
-    margin-top:10px;
+.main-text {
+    margin-bottom:10px;
     text-align:justify;
     font-family: georgia;
     font-size: 13px
@@ -113,10 +114,6 @@ select {
    height: 30px;
    width: 30px;
    cursor: pointer;
-}
-
-#main-text {
-    margin-bottom: 10px
 }
 
 path.domain{

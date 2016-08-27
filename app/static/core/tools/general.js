@@ -6,8 +6,8 @@
 
   // build a graphContainer object with name "name" and corresponding parameters
   //margins and padding are objects, other parameters are strings
-  nbviz.initGraphContainer = function(chart){
-    nbviz.charts = nbviz.charts || [];
+  nbviz.initGraphContainer = function(chart, chartsParams){
+    chartsParams.charts = chartsParams.charts || [];
     var o = {};
     o.margin = {top:chart.margins.top, right:chart.margins.right, left:chart.margins.left, bottom:chart.margins.bottom};
     o.padding = {interbar : chart.padding.interbar, left : chart.padding.left, right : chart.padding.right, bottom : chart.padding.bottom, legend : chart.padding.legend};
@@ -41,8 +41,9 @@
     o.format = chart.format;
     o.story = chart.story;
     o.filters = chart.filters;
+    o.chartsParams = chartsParams;
 
-    nbviz.charts.push(o)
+    chartsParams.charts.push(o);
     return o
   };
 
@@ -101,11 +102,13 @@
     var story = chartsParams.story;
     d3.select('#' + _id + 'title-container').append('text').text(story.title)
     d3.select('#' + _id + 'comment-container').append('text').text(story.comment)
-    d3.select('#' + _id + 'sources').append('text').text(story.sources)
+    d3.select('#' + _id + 'sources-container').append('text').text(story.sources)
   };
 
-  nbviz.addText = function(){
-    d3.select('#main-text').append('text').text(nbviz.DATASTORE[nbviz.TEXT.domain]['0'].content);
+  nbviz.buildText = function(graphContainer){
+    if(graphContainer.story.text){
+      d3.select('#' + graphContainer._id + 'main-text').append('text').text(nbviz.DATASTORE[nbviz.TEXT.domain]['0'].content);
+    };
   };
 
   
