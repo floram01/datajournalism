@@ -21,14 +21,19 @@ function ready(error, data) {
   }
   // nbviz.STATIC_DATA = {};
   // nbviz.STATIC_DATA.heatmap = data[1];
-  nbviz.makeFilterAndDimensions(nbviz.DATASTORE[nbviz.FULL_DATA], nbviz.FILTERS);
   // add title etc.
-  nbviz.buildStory();
-  nbviz.CHARTS.forEach(function(chartParams, i){
-    nbviz.initGraphContainer(chartParams);
-    nbviz['build' + chartParams._type](
-      nbviz.charts[i]
-      )
+  nbviz.CHARTS.forEach(function(chartsParams, i){
+    nbviz.makeFilterAndDimensions(nbviz.DATASTORE[nbviz.FULL_DATA], chartsParams.filters);
+    
+    chartsParams.charts.forEach(function(chartParams){
+      var chart = nbviz.initGraphContainer(chartParams);
+      nbviz['build' + chartParams._type](
+        chart
+        )
+    });
+
+    nbviz.buildStory(chartsParams);
+  
   });
   nbviz.addText();
 };

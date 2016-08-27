@@ -18,14 +18,14 @@
     fill:#A0D1C5
 }
 
-#title-container text{
+.title-container text{
     font-family:'montserrat';
     font-size: 18px;
     text-align: center;
     color: white; 
 }
 .graph-title,
-#comment-container text{
+.comment-container text{
     font-family:'roboto';
     font-size: 13px;
     text-align: left:
@@ -40,7 +40,7 @@
     letter-spacing:'normal'
 }
 
-#sources text{
+.sources text{
     font-style:italic;
     font-family:'georgia';
     font-size: 12px;
@@ -55,22 +55,26 @@
 
 #global-container{
     max-width:800px;
-    max-height: 300px
 }
 
-#title-container {
+#sub-container{
+    max-width:800px;
+    /*max-height: 300px*/
+}
+
+.title-container {
     height:30px;
     text-align: center;
     background-color:#F3C600;
 }
 
-#comment-container {
+.comment-container {
     // background-color:#FFE79F;
     height:30px;
     text-align: left:
 }
 
-#sources {
+.sources {
     text-align:center
 }
 
@@ -85,16 +89,16 @@ select {
     border:none
 }
 
-#menu div{
+.menu div{
     display:inline-flex;
     margin-left:15px
 }
 
-#menu form{
+.menu form{
     display:inline;
 }
 
-#menu label{
+.menu label{
     margin-right:10px
 }
 

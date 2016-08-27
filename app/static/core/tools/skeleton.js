@@ -1,25 +1,35 @@
 (function(nbviz){
 
-  //filter
-  nbviz.FILTERS.forEach(function(f){
-    d3.select('#menu')
-    .append('div')
-    .attr({
-      'id': f.dimension + '-select',
-    })
-  })
 
   // charts
   nbviz.CHARTS.forEach(function(f){
+    //filter
     d3.select('#chart-holder')
-    .append('div')
-    .attr({
-      'class':f.dim.width,
-      'id':'div' + f._id
-    })
-    .style({
-      'position':'relative',
-      'height':f.dim.height
+      .append('div')
+      .attr({
+        'id':f._id + 'menu',
+        'class':'menu'
+      });
+
+    f.filters.forEach(function(filter){
+      d3.select('#' + f._id + 'menu')
+      .append('div')
+      .attr({
+        'id': filter.dimension + '-select',
+      })
+    });
+
+    f.charts.forEach(function(chart){
+      d3.select('#chart-holder')
+      .append('div')
+      .attr({
+        'class':chart.dim.width,
+        'id':'div' + chart._id
+      })
+      .style({
+        'position':'relative',
+        'height':chart.dim.height
+      });
     });
   });
 

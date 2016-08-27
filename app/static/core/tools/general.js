@@ -39,6 +39,8 @@
     o.source = chart.source;
     o.xStep = chart.xStep;
     o.format = chart.format;
+    o.story = chart.story;
+    o.filters = chart.filters;
 
     nbviz.charts.push(o)
     return o
@@ -94,10 +96,12 @@
   };
 
 // add the title, comment and sources
-  nbviz.buildStory = function(){
-    d3.select('#title-container').append('text').text(nbviz.STORY.title)
-    d3.select('#comment-container').append('text').text(nbviz.STORY.comment)
-    d3.select('#sources').append('text').text(nbviz.STORY.sources)
+  nbviz.buildStory = function(chartsParams){
+    var _id = chartsParams._id;
+    var story = chartsParams.story;
+    d3.select('#' + _id + 'title-container').append('text').text(story.title)
+    d3.select('#' + _id + 'comment-container').append('text').text(story.comment)
+    d3.select('#' + _id + 'sources').append('text').text(story.sources)
   };
 
   nbviz.addText = function(){

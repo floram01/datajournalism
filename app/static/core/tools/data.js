@@ -116,7 +116,7 @@
 };
 // add a case with no grouping i.e. if groupDim is null: just sort and filter
   nbviz.topFlop = function(graphContainer) {
-    var _dim = nbviz.FILTERS[0].dimension;
+    var _dim = graphContainer.dataGetterParams.dim;
     var top = graphContainer.dataGetterParams.top;
     var top_num = graphContainer.dataGetterParams.top_num;
     var data = nbviz[_dim + 'Dim'].top(Infinity).sort(function(a, b) {

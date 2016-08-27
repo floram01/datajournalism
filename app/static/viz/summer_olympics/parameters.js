@@ -8,6 +8,18 @@
   nbviz.TRANS_DURATION = 1500; // length in ms for our transitions
   nbviz.COLORS = {palegold:'#E6BE8A'}; // any named colors we use
 
+  // nbviz.ELEMENTS : [
+  //   {
+  //     id:'full_exploration',
+  //     type:'chart',
+  //     story:{
+  //       title:'my_title',
+  //       comment:'my_comment',
+  //       sources:'my_sources'
+  //     }
+  //   }
+  // ]
+
   nbviz.STORY = {
     title :'MY TITLE',
     comment:'My comment',
@@ -19,12 +31,6 @@
   nbviz.DATA_PATH = 'static/viz/' + nbviz.STORY.project_name + '/data_sources/'
   nbviz.FULL_DATA = 'fullData'
 
-  nbviz.FILTERS = [
-    {locationID:'gender-select select', name:'Gender', dimension:'Gender', defaultValue:'All', type:'Dropdown'},
-    {locationID:'country-select select', name:'Country', dimension:'country_name', defaultValue:'France', type:'Dropdown'},
-    {locationID:'period-select select', name:'Period', dimension:'period', defaultValue:'1992 - 2012', type:'Dropdown'},
-    {locationID:'value-select select', name:'Type de valeur', dimension:'value_filter', defaultValue:'%', type:'Radio'}
-  ];
 
   nbviz.DATA_PROVIDER= {
     getterFunction:nbviz.prepareDatasets,
@@ -45,18 +51,52 @@
 
   nbviz.CHARTS = [
     {
-      _type:'HorizontalBarchart',
-      _id:'horizontalBarchartFrance',
-      margins: {top:30, right:20, bottom:0, left:72},
-      padding: {interbar:.1, left:5, bottom:0, legend:10},
-      dataGetter:nbviz.topFlop,
-      dataGetterParams:{top:true,top_num:10},
-      _label:'Discipline',
-      _value:'value',
-      _yKey:'Discipline',
-      domain:'fullData',
-      dim:{height:'230px',width:"col-md-12"},
-      title:'Graph info (period,etc.)'
+      _id:'full_exploration',
+      
+      charts:[
+        {
+          _id:'main_graph',
+          _type:'HorizontalBarchart',
+          margins: {top:30, right:20, bottom:0, left:72},
+          padding: {interbar:.1, left:5, bottom:0, legend:10},
+          dataGetter:nbviz.topFlop,
+          dataGetterParams:{top:true,top_num:10, dim:'Gender'},
+          _label:'Discipline',
+          _value:'value',
+          _yKey:'Discipline',
+          domain:'fullData',
+          title:'Graph info (period,etc.)',
+          dim:{height:'230px',width:"col-md-12"},
+        }
+      ,
+        {
+          _id:'other_graph',
+          _type:'HorizontalBarchart',
+          margins: {top:30, right:20, bottom:0, left:72},
+          padding: {interbar:.1, left:5, bottom:0, legend:10},
+          dataGetter:nbviz.topFlop,
+          dataGetterParams:{top:true,top_num:10, dim:'Gender'},
+          _label:'Discipline',
+          _value:'value',
+          _yKey:'Discipline',
+          domain:'fullData',
+          title:'Graph info (period,etc.)',
+          dim:{height:'230px',width:"col-md-12"},
+        }
+      ],
+
+      filters : [
+        {locationID:'gender-select select', name:'Gender', dimension:'Gender', defaultValue:'All', type:'Dropdown'},
+        {locationID:'country-select select', name:'Country', dimension:'country_name', defaultValue:'France', type:'Dropdown'},
+        {locationID:'period-select select', name:'Period', dimension:'period', defaultValue:'1992 - 2012', type:'Dropdown'},
+        {locationID:'value-select select', name:'Type de valeur', dimension:'value_filter', defaultValue:'%', type:'Radio'}
+      ],
+      
+      story:{
+        title:'my_title',
+        comment:'my_comment',
+        sources:'my_sources'
+      }
     }
   ];
 
