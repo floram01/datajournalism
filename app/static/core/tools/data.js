@@ -54,14 +54,16 @@
         if(error){
           return callback(error);
         } else {
-          nbviz.DATASTORE[params.name] = data;
+          nbviz.CHARTS.forEach(function(chartsParams){
+            nbviz.DATASTORE[params.name + chartsParams._id] = data;
+          });
           callback(null, data);
         };
       });
   };
 
   nbviz.fullData = function(graphContainer) {          
-    var data = nbviz.DATASTORE[graphContainer.domain]
+    var data = nbviz.DATASTORE[graphContainer.domain + graphContainer.chartsParams._id]
     return data
   };
 
@@ -94,7 +96,7 @@
 // add a case with no grouping i.e. if groupDim is null: just sort and filter
   nbviz.groupBy = function(graphContainer) {
     var _dim = graphContainer.dataGetterParams.groupDim;
-    var data = nbviz[_dim + 'Dim'].group().all()
+    var data = nbviz[graphContainer.chartsParams._id + _dim + 'Dim'].group().all()
         .sort(function(a, b) { 
             return b[graphContainer._value] - a[graphContainer._value]; // descending
         })
@@ -110,8 +112,8 @@
 
 // add a case with no grouping i.e. if groupDim is null: just sort and filter
   nbviz.allDataSortedByKey = function(graphContainer) {
-    var _dim = nbviz.FILTERS[0].dimension;
-    var data = nbviz[_dim + 'Dim'].top(Infinity).sort(function(a, b) {
+    var _dim = graphContainer.dataGetterParams.dim;
+    var data = nbviz[graphContainer.chartsParams._id + _dim + 'Dim'].top(Infinity).sort(function(a, b) {
       return +b[graphContainer.dataGetterParams.sortKey] - +a[graphContainer.dataGetterParams.sortKey];
     });
     return data;
@@ -163,7 +165,6 @@
 //range à généraliser en fonction des besoins identifiés au fur et à mesure
   nbviz.addDataHeatmapInfo = function(data, graphContainer) {          
     graphContainer.data = graphContainer.data || {};
-
     graphContainer.data.min = d3.min(data, function(d){return + d[graphContainer._value];});
     graphContainer.data.max = d3.max(data, function(d){return + d[graphContainer._value];});
     graphContainer.data.xRange = d3.range(0, d3.max(data, function(d){return + d[graphContainer.xIndex];}) + 1);
