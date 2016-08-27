@@ -20,50 +20,59 @@
   nbviz.FULL_DATA = 'main_linechart'
 
   nbviz.FILTERS = [
-    {locationID:'medal-select select', name:'Medal', dimension:'Medal', defaultValue:'All', type:'Radio'}
   ];
 
   nbviz.DATA_PROVIDER= {
     getterFunction:nbviz.prepareDatasets,
     params:[
-    //   {
-    //     name:'fullData',
-    //     source:'fullData.json',
-    //     getterFunction:nbviz.getDataFromJSON
-    //   }
-    // ,
       {
         name:'main_linechart',
         source:'main_linechart.json',
         getterFunction:nbviz.getDataFromJSON,
         parseDate:{format:'%Y', dimension:'Edition'}
       }
-    // ,
-    //   {
-    //     name:'text',
-    //     source:'text.csv',
-    //     getterFunction:nbviz.getDataFromCSV
-    //   }
     ]
   };
 
   nbviz.CHARTS = [
-    {
-      _type:'Linechart',
-      _id:'mainLinechart',
-      margins: {top:0, right:15, bottom:40, left:20},
-      padding: {interbar:.1, left:15, bottom:0, legend:5},
-      dataGetter:nbviz.nestDataByKey,
-      dataGetterParams:{nestKey:'country_name', xKey:'Edition', sort:{'type':'ascending','on':'Edition'}},
-      xStep: 4,
-      xTicksFreq:'2',
-      domain:'main_linechart',
-      _value:'value',
-      dim:{height:'150px',width:"col-md-12"},
-      title:'Graph info (period,etc.)',
-      format:{'dimension':'Edition','type':'date','format':'%Y', flag:true}
-    }
   ];
+
+  nbviz.CHARTS = [
+  {
+    _id:'france',
+    
+    chartsParams:[
+      {
+        _type:'Linechart',
+        _id:'mainLinechart',
+        margins: {top:0, right:15, bottom:40, left:20},
+        padding: {interbar:.1, left:15, bottom:0, legend:5},
+        dataGetter:nbviz.nestDataByKey,
+        dataGetterParams:{nestKey:'country_name', xKey:'Edition', sort:{'type':'ascending','on':'Edition'}, dim:'Medal'},
+        xStep: 4,
+        xTicksFreq:'2',
+        domain:'main_linechart',
+        _value:'value',
+        dim:{height:'150px',width:"col-md-12"},
+        title:'Graph info (period,etc.)',
+        format:{'dimension':'Edition','type':'date','format':'%Y', flag:true}
+      }
+    ],
+
+    filters : [
+      {locationID:'medal-select select', name:'Medal', dimension:'Medal', defaultValue:'All', type:'Radio'}
+    ],
+    
+    story:{
+      title:'France (1992 - 2012)',
+      comment:'Résultats tous genres et toutes médailles confondus',
+      sources:'Wikipedia, The guardian Datablog',
+      text:{
+        'domain':'text'
+      }
+    }
+  }
+];
 
   nbviz.TEXT = {'domain':'text'}
 
