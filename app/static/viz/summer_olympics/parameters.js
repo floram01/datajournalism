@@ -51,7 +51,7 @@
 
   nbviz.CHARTS = [
     {
-      _id:'full_exploration',
+      _id:'france',
       
       chartsParams:[
         {
@@ -68,35 +68,22 @@
           title:'Graph info (period,etc.)',
           dim:{height:'230px',width:"col-md-12"},
         }
-      ,
-        {
-          _id:'other_graph',
-          _type:'HorizontalBarchart',
-          margins: {top:30, right:20, bottom:0, left:72},
-          padding: {interbar:.1, left:5, bottom:0, legend:10},
-          dataGetter:nbviz.topFlop,
-          dataGetterParams:{top:true,top_num:10, dim:'Gender'},
-          _label:'Discipline',
-          _value:'value',
-          _yKey:'Discipline',
-          domain:'fullData',
-          title:'Graph info (period,etc.)',
-          dim:{height:'230px',width:"col-md-12"},
-        }
       ],
 
       filters : [
-        {locationID:'gender-select select', name:'Gender', dimension:'Gender', defaultValue:'All', type:'Dropdown'},
-        {locationID:'country-select select', name:'Country', dimension:'country_name', defaultValue:'France', type:'Dropdown'},
-        {locationID:'period-select select', name:'Period', dimension:'period', defaultValue:'1992 - 2012', type:'Dropdown'},
+        {locationID:'gender-select select', name:'Gender', dimension:'Gender', defaultValue:'All', type:'Hidden'},
+        {locationID:'country-select select', name:'Country', dimension:'country_name', defaultValue:'France', type:'Hidden'},
+        {locationID:'period-select select', name:'Period', dimension:'period', defaultValue:'1992 - 2012', type:'Hidden'},
         {locationID:'value-select select', name:'Type de valeur', dimension:'value_filter', defaultValue:'%', type:'Radio'}
       ],
       
       story:{
-        title:'my_title',
-        comment:'my_comment',
-        sources:'my_sources',
-        text:true
+        title:'France (1992 - 2012)',
+        comment:'Résultats tous genres et toutes médailles confondus',
+        sources:'Wikipedia, The guardian Datablog',
+        text:{
+          'domain':'text'
+        }
       }
     }
   ,
@@ -118,21 +105,6 @@
           title:'Graph info (period,etc.)',
           dim:{height:'230px',width:"col-md-12"},
         }
-      ,
-        {
-          _id:'other_graph_2',
-          _type:'HorizontalBarchart',
-          margins: {top:30, right:20, bottom:0, left:72},
-          padding: {interbar:.1, left:5, bottom:0, legend:10},
-          dataGetter:nbviz.topFlop,
-          dataGetterParams:{top:true,top_num:10, dim:'Gender'},
-          _label:'Discipline',
-          _value:'value',
-          _yKey:'Discipline',
-          domain:'fullData',
-          title:'Graph info (period,etc.)',
-          dim:{height:'230px',width:"col-md-12"},
-        }
       ],
 
       filters : [
@@ -143,14 +115,18 @@
       ],
       
       story:{
-        title:'my_title',
-        comment:'my_comment',
-        sources:'my_sources'
+        title:'Trouver votre histoire',
+        comment:'En jouant avec les dimensions de genre, pays, période et % vs Nombre, à vous de plongez dans les données',
+        sources:'Wikipedia, The guardian Datablog'
       }
     }
   ];
 
-  nbviz.TEXT = {'domain':'text'}
-
+  nbviz.TEXT = [
+    {
+      'domain':'text',
+      'id':'france'
+    }
+  ]
 
 }(window.nbviz=window.nbviz || {}));

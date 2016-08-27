@@ -252,7 +252,7 @@
     nbviz[chartsParams._id + filterParams.dimension + 'Values'] = _options;
     _filter = d3.select('#' + chartsParams._id + filterParams.dimension + '-select').append('form');
     _filter
-      .selectAll('label')
+      .selectAll('label .' + chartsParams._id)
       .data(_options)
       .enter()
       .append('label')
@@ -260,7 +260,8 @@
       .append('input')
       .attr({
         'type':'radio',
-        'name':'mode'
+        'name':'mode',
+        'class':chartsParams._id
       });
 
     d3.selectAll('input').filter(function(d){
@@ -271,8 +272,8 @@
     if(filterParams.defaultValue){
       filterParams.filterTool.filter(filterParams.defaultValue);
     };
-
-    d3.selectAll('label').on('change', function(d){
+    debugger;
+    d3.selectAll('label .' + chartsParams._id).on('change', function(d){
       var category = d;
       if (category===filterParams.resetValue){
           filterParams.filterTool.filter();
@@ -285,7 +286,13 @@
       // select the default value
 
   });
-};
+  };
+
+  nbviz.addHiddenFilter = function(data, filterParams, chartsParams){
+    if(filterParams.defaultValue){
+      filterParams.filterTool.filter(filterParams.defaultValue);
+    };
+  };
 
   // set up the dimensions of the crossfilter
   nbviz.makeFilterAndDimensions = function(winnersData, chartsParams){

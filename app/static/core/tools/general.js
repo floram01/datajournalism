@@ -42,6 +42,7 @@
     o.story = chart.story;
     o.filters = chart.filters;
     o.chartsParams = chartsParams;
+    o.text=chart.text;
 
     chartsParams.charts.push(o);
     return o
@@ -107,7 +108,7 @@
 
   nbviz.buildText = function(graphContainer){
     if(graphContainer.story.text){
-      d3.select('#' + graphContainer._id + 'main-text').append('text').text(nbviz.DATASTORE[nbviz.TEXT.domain]['0'].content);
+      d3.select('#' + graphContainer._id + 'main-text').append('text').text(nbviz.DATASTORE[graphContainer.story.text.domain]['0'].content);
     };
   };
 

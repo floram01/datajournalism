@@ -28,7 +28,7 @@
 .comment-container text{
     font-family:'roboto';
     font-size: 13px;
-    text-align: left:
+    text-align: left;
 }
 
 .legend,
@@ -66,17 +66,21 @@
     height:30px;
     text-align: center;
     background-color:#F3C600;
+    overflow:hidden;
 }
 
 .comment-container {
     // background-color:#FFE79F;
     height:30px;
-    text-align: left:
+    text-align: left;
+    overflow:hidden;
+    line-height: 1
 }
 
 .sources-container {
     text-align:center;
-    margin-bottom: 10px
+    margin-bottom: 10px;
+    overflow:hidden;
 }
 
 .main-text {
