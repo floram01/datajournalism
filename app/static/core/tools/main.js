@@ -26,8 +26,12 @@ function ready(error, data) {
   nbviz.buildStory();
   nbviz.CHARTS.forEach(function(chartParams, i){
     nbviz.initGraphContainer(chartParams);
-    nbviz['build' + chartParams._type](
-      nbviz.charts[i]
+    var graphContainer = nbviz.charts[i]
+    nbviz.initialize(graphContainer, data);
+    nbviz.addSVGtoDiv(graphContainer);
+    chartParams.graph(
+      'g.'+ graphContainer._class,
+      graphContainer
       )
   });
   nbviz.addText();

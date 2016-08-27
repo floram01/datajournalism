@@ -26,8 +26,8 @@
     o.dataGetterParams = chart.dataGetterParams||{};
     o.tableTitle = chart.tableTitle||{};
     o.tableColumns = chart.tableColumns||{};
-    o._value = chart._value||{};
-    o._label = chart._label||{};
+    o.value = chart._value||{};
+    o.label = chart._label||{};
     o.xDimension = chart.xDimension||{};
     o.yDimension = chart.yDimension||{};
     o.xIndex = chart.xIndex||{};
