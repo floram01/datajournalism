@@ -41,9 +41,13 @@
           return callback(error);
         } else {
           if(params.parseDate){data = nbviz.parseDate(params.parseDate, data)};
-          nbviz.CHARTS.forEach(function(chartsParams){
+          if(params.type==='local'){
+            nbviz.CHARTS.forEach(function(chartsParams){
             nbviz.DATASTORE[params.name + chartsParams._id] = data;
-          });
+            });
+          }else{
+            nbviz.DATASTORE[params.name] = data;
+          };
           callback(null, data);
         };
       });
@@ -54,9 +58,13 @@
         if(error){
           return callback(error);
         } else {
-          nbviz.CHARTS.forEach(function(chartsParams){
+          if(params.type==='local'){
+            nbviz.CHARTS.forEach(function(chartsParams){
             nbviz.DATASTORE[params.name + chartsParams._id] = data;
-          });
+            });
+          }else{
+            nbviz.DATASTORE[params.name] = data;
+          };
           callback(null, data);
         };
       });

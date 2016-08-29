@@ -232,3 +232,23 @@
 2016-08-22 20:43:37,174 :: INFO :: creating domain: main_linechart for project summer_olympics_gb, domain shape is: (44, 6)
 2016-08-22 20:43:37,175 :: INFO :: domain successfuly created
 2016-08-22 20:43:37,257 :: INFO :: domain successfuly inserted
+2016-08-28 08:56:41,629 :: INFO :: inserting static data
+2016-08-28 08:56:46,094 :: INFO :: inserting df with shape: (29216, 10)
+2016-08-28 08:56:48,349 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: winners_1896_2008
+2016-08-28 08:56:48,349 :: INFO :: inserting static data
+2016-08-28 08:56:48,388 :: INFO :: inserting df with shape: (961, 8)
+2016-08-28 08:56:48,457 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: winners_2012
+2016-08-28 08:56:48,457 :: INFO :: inserting static data
+2016-08-28 08:56:48,483 :: INFO :: inserting df with shape: (7945, 5)
+2016-08-28 08:56:48,852 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: grant_information
+2016-08-28 08:56:48,853 :: INFO :: inserting static data
+2016-08-28 08:56:48,855 :: INFO :: inserting df with shape: (40, 6)
+2016-08-28 08:56:48,879 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: results_france_2016
+2016-08-28 08:56:48,879 :: INFO :: inserting static data
+2016-08-28 08:56:48,884 :: INFO :: inserting df with shape: (66, 6)
+2016-08-28 08:56:48,900 :: INFO :: insertion sucessful in dbsummer_olympics_gb of collection: results_gb_2016
+2016-08-28 08:57:17,421 :: INFO :: cleaning winners_2012, with shape: (960, 8)
+2016-08-28 08:57:17,496 :: INFO :: cleaning of winners_2012 successful, output shape: (960, 8)
+2016-08-28 08:57:19,283 :: INFO :: cleaning grant_information, with shape: (4105, 6)
+2016-08-28 08:57:19,479 :: INFO :: cleaning of grant_information successful, output shape: (4105, 6)
+2016-08-28 09:02:35,617 :: INFO :: requesting api: wb

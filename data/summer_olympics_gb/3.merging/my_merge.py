@@ -12,8 +12,8 @@ def my_merge():
   winners_france_2016 = mongo_to_dataframe(DATABASE, 'results_france_2016')
   winners_gb_2016 = mongo_to_dataframe(DATABASE, 'results_gb_2016')
 
-  wb = mongo_to_dataframe(DATABASE, 'wb_demo_eco')
-  country_mapper = mongo_to_dataframe('utilities', 'country_code')
+  # wb = mongo_to_dataframe(DATABASE, 'wb_demo_eco')
+  # country_mapper = mongo_to_dataframe('utilities', 'country_code')
   #add city to London 2012 event
   winners_2012['City'] = 'London'
   winners_2012['Edition'] = 2012

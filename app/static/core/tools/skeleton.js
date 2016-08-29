@@ -11,14 +11,23 @@
         'class':'container sub-container'
       });
 
-    d3.select('#' + f._id + 'sub-container')
+    var topContainer = d3.select('#' + f._id + 'sub-container')
+      .append('div')
+      .attr({
+        'id':f._id + 'top-container',
+        'class':'col-md-12',
+      });
+    
+    topContainer
+    // d3.select('#' + f._id + 'sub-container')
       .append('div')
       .attr({
         'id':f._id + 'title-container',
         'class':'col-md-4 title-container'
       });
 
-    d3.select('#' + f._id + 'sub-container')
+    // d3.select('#' + f._id + 'sub-container')
+    topContainer
       .append('div')
       .attr({
         'id':f._id + 'comment-container',
@@ -34,7 +43,7 @@
       .append('div')
       .attr({
         'id':f._id + 'menu',
-        'class':'menu'
+        'class':'menu col-md-12'
       });
 
     d3.select('#' + f._id + 'sub-container')
@@ -70,7 +79,7 @@
       .append('div')
       .attr({
         'id':f._id + 'main-text',
-        'class':'main-text'
+        'class':'main-text col-md-12',
       });
 
   });

@@ -19,6 +19,7 @@
   nbviz.DATA_PATH = 'static/viz/' + nbviz.STORY.project_name + '/data_sources/'
   nbviz.FULL_DATA = 'main_linechart'
 
+  nbviz.TITLE = 'RETRO JO'
   nbviz.FILTERS = [
   ];
 

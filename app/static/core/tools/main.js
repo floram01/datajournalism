@@ -22,9 +22,9 @@ function ready(error, data) {
   // nbviz.STATIC_DATA = {};
   // nbviz.STATIC_DATA.heatmap = data[1];
   // add title etc.
+  nbviz.addArticleTitle()
   nbviz.CHARTS.forEach(function(chartsParams, i){
     nbviz.makeFilterAndDimensions(nbviz.DATASTORE[nbviz.FULL_DATA+chartsParams._id], chartsParams);
-    
     chartsParams.chartsParams.forEach(function(chartParams){
       var chart = nbviz.initGraphContainer(chartParams, chartsParams);
       nbviz['build' + chartParams._type](

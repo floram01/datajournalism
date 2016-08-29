@@ -106,9 +106,19 @@
     d3.select('#' + _id + 'sources-container').append('text').text(story.sources)
   };
 
+// add the article title, comment and sources
+  nbviz.addArticleTitle = function(){
+    d3.select('#article-title')
+    .append('text')
+    .text(nbviz.STORY.title);
+    d3.select('#article-edito').append('text')
+    .text(nbviz.DATASTORE[nbviz.STORY.edito]['0'].content);
+
+  };
+
   nbviz.buildText = function(graphContainer){
     if(graphContainer.story.text){
-      d3.select('#' + graphContainer._id + 'main-text').append('text').text(nbviz.DATASTORE[graphContainer.story.text.domain + graphContainer._id]['0'].content);
+      d3.select('#' + graphContainer._id + 'main-text').append('text').text(nbviz.DATASTORE[graphContainer.story.text.domain]['0'].content);
     };
   };
 

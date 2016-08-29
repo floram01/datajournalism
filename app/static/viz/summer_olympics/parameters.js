@@ -8,22 +8,9 @@
   nbviz.TRANS_DURATION = 1500; // length in ms for our transitions
   nbviz.COLORS = {palegold:'#E6BE8A'}; // any named colors we use
 
-  // nbviz.ELEMENTS : [
-  //   {
-  //     id:'full_exploration',
-  //     type:'chart',
-  //     story:{
-  //       title:'my_title',
-  //       comment:'my_comment',
-  //       sources:'my_sources'
-  //     }
-  //   }
-  // ]
-
   nbviz.STORY = {
-    title :'MY TITLE',
-    comment:'My comment',
-    sources : 'My sources',
+    title :'RETRO JO',
+    edito:'edito',
     project_name:'summer_olympics'//has to match the file name
   }
   
@@ -38,13 +25,22 @@
       {
         name:'fullData',
         source:'fullData.json',
-        getterFunction:nbviz.getDataFromJSON
+        getterFunction:nbviz.getDataFromJSON,
+        type:'local'
       }
     ,
       {
         name:'text',
         source:'text.csv',
-        getterFunction:nbviz.getDataFromCSV
+        getterFunction:nbviz.getDataFromCSV,
+        type:'global'
+      }
+    ,
+      {
+        name:'edito',
+        source:'text.csv',
+        getterFunction:nbviz.getDataFromCSV,
+        type:'global'
       }
     ]
   };
