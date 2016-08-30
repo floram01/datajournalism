@@ -49,12 +49,41 @@
         'stroke-width': '1.5px'
     });
 
+    var parseDate = d3.time.format("%Y").parse;
+    var tooltip = {};
+    tooltip.x = parseDate(String(1996))
+    data.forEach(function(d){
+        if(d.key=='United Kingdom'){
+            d.values.forEach(function(o){
+                var target = new Date(o.Edition); 
+                var temp = new Date(parseDate(String(1996)));
+                if(target.getTime() === temp.getTime()){
+                    tooltip.y = o.value;
+                };
+            });
+        };
+    });
+
+    graphContainer.circleTooltip = g.selectAll('.circleToolTip')
+    .data([tooltip]);
+
+    graphContainer.circleTooltip.enter()
+    .append('circle')
+    .attr({
+        'cx':graphContainer.scales.xScale(tooltip.x),
+        'cy':graphContainer.scales.yScale(tooltip.y),
+        'r':5,
+        'class':'circleTooltip'
+    });
+
     nbviz.updateLinechart(graphContainer)
 };
 
   nbviz.updateLinechart = function(graphContainer) {
     var data = graphContainer.dataGetter(graphContainer);
     var svg = graphContainer.svg;
+    g = svg.select('g.'+ graphContainer._class);
+    
     var dim = graphContainer.dim;
     var _value = graphContainer._value;
     // var groupID = graphContainer.groupID;
@@ -89,13 +118,19 @@
         };
     });
 
-    var circle = g.append('circle')
-    .attr({
-        'cx':graphContainer.scales.xScale(tooltip.x),
-        'cy':graphContainer.scales.yScale(tooltip.y),
-        'r':5,
-        'class':'circleTooltip'
-    })
+    graphContainer.circleTooltip.data([tooltip]);
+
+    graphContainer.circleTooltip
+    .exit()
+    .remove();
+    
+    graphContainer.circleTooltip
+    .enter()
+    .append('circle')
+    .attr('cx',function(d){return graphContainer.scales.xScale(d.x)})
+    .attr('cy',function(d){return graphContainer.scales.yScale(d.y)})
+    .attr('r',5)
+    .classed('circleTooltip',true);
     
     g.append('text')
     .attr({
@@ -114,7 +149,7 @@
         .classed('hidden',true);
 
 
-    circle.on("mouseover", function(d){
+    graphContainer.circleTooltip.on("mouseover", function(d){
         d3.select('#tooltip')
         .classed('hidden',false);
 
@@ -131,7 +166,7 @@
 
     });
 
-    circle.on("mouseout", function(d){
+    graphContainer.circleTooltip.on("mouseout", function(d){
         d3.select('#tooltip')
         .classed('hidden',true)
 

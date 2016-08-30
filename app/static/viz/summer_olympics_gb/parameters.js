@@ -30,13 +30,12 @@
         name:'main_linechart',
         source:'main_linechart.json',
         getterFunction:nbviz.getDataFromJSON,
-        parseDate:{format:'%Y', dimension:'Edition'}
+        parseDate:{format:'%Y', dimension:'Edition'},
+        type:'local'
       }
     ]
   };
 
-  nbviz.CHARTS = [
-  ];
 
   nbviz.CHARTS = [
   {

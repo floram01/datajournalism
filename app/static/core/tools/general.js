@@ -111,8 +111,10 @@
     d3.select('#article-title')
     .append('text')
     .text(nbviz.STORY.title);
-    d3.select('#article-edito').append('text')
-    .text(nbviz.DATASTORE[nbviz.STORY.edito]['0'].content);
+    if (nbviz.STORY.edito){
+      d3.select('#article-edito').append('text')
+      .text(nbviz.DATASTORE[nbviz.STORY.edito]['0'].content);
+    };
 
   };
 
