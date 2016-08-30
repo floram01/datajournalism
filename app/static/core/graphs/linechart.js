@@ -49,32 +49,29 @@
         'stroke-width': '1.5px'
     });
 
-    var parseDate = d3.time.format("%Y").parse;
-    var tooltip = {};
-    tooltip.x = parseDate(String(1996))
-    data.forEach(function(d){
-        if(d.key=='United Kingdom'){
-            d.values.forEach(function(o){
-                var target = new Date(o.Edition); 
-                var temp = new Date(parseDate(String(1996)));
-                if(target.getTime() === temp.getTime()){
-                    tooltip.y = o.value;
-                };
-            });
-        };
-    });
+    // var parseDate = d3.time.format("%Y").parse;
+    // var tooltip = {};
+    // tooltip.x = parseDate(String(1996))
+    // data.forEach(function(d){
+    //     if(d.key=='United Kingdom'){
+    //         d.values.forEach(function(o){
+    //             var target = new Date(o.Edition); 
+    //             var temp = new Date(parseDate(String(1996)));
+    //             if(target.getTime() === temp.getTime()){
+    //                 tooltip.y = o.value;
+    //             };
+    //         });
+    //     };
+    // });
 
-    graphContainer.circleTooltip = g.selectAll('.circleToolTip')
-    .data([tooltip]);
-
-    graphContainer.circleTooltip.enter()
-    .append('circle')
-    .attr({
-        'cx':graphContainer.scales.xScale(tooltip.x),
-        'cy':graphContainer.scales.yScale(tooltip.y),
-        'r':5,
-        'class':'circleTooltip'
-    });
+    // var circleToolTip = g.selectAll('.circleToolTip').data([tooltip], function(d){return d.x});
+    // circleToolTip
+    // .enter()
+    // .append('circle')
+    // .attr('cx',function(d){return graphContainer.scales.xScale(d.x)})
+    // .attr('cy',function(d){return graphContainer.scales.yScale(d.y)})
+    // .attr('r',5)
+    // .classed('.circleToolTip', true);
 
     nbviz.updateLinechart(graphContainer)
 };
@@ -118,19 +115,29 @@
         };
     });
 
-    graphContainer.circleTooltip.data([tooltip]);
-
-    graphContainer.circleTooltip
-    .exit()
-    .remove();
+    var circleToolTip = g.selectAll('.circleTooltip').data([tooltip], function(d){return d.x});
+    circleToolTip
+    .attr('cx',function(d){return graphContainer.scales.xScale(d.x)})
+    .attr('cy',function(d){return graphContainer.scales.yScale(d.y)})
+    .attr('r',5);
     
-    graphContainer.circleTooltip
+    circleToolTip
     .enter()
     .append('circle')
     .attr('cx',function(d){return graphContainer.scales.xScale(d.x)})
     .attr('cy',function(d){return graphContainer.scales.yScale(d.y)})
     .attr('r',5)
-    .classed('circleTooltip',true);
+    .classed('circleTooltip', true)
+
+    circleToolTip
+    .exit()
+    .remove();
+
+    //method brutale
+    // d3.select('.circleTooltip').data([tooltip])
+    // .attr('cx',function(d){return graphContainer.scales.xScale(d.x)})
+    // .attr('cy',function(d){return graphContainer.scales.yScale(d.y)})
+    // .attr('r',5);
     
     g.append('text')
     .attr({
@@ -149,7 +156,7 @@
         .classed('hidden',true);
 
 
-    graphContainer.circleTooltip.on("mouseover", function(d){
+    circleToolTip.on("mouseover", function(d){
         d3.select('#tooltip')
         .classed('hidden',false);
 
@@ -166,7 +173,7 @@
 
     });
 
-    graphContainer.circleTooltip.on("mouseout", function(d){
+    circleToolTip.on("mouseout", function(d){
         d3.select('#tooltip')
         .classed('hidden',true)
 
