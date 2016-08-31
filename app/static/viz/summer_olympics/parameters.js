@@ -112,7 +112,7 @@
       
       story:{
         title:'A votre tour de jouer',
-        comment:'En jouant avec les dimensions de genre, pays, période et % vs Nombre, à vous de plongez dans les données',
+        comment:'En jouant avec les dimensions de genre, pays, période et % vs Nombre, à vous de plonger dans les données',
         sources:'Sources : Wikipedia, The guardian Datablog',
       }
     }
