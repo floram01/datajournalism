@@ -112,15 +112,17 @@
     .append('text')
     .text(nbviz.STORY.title);
     if (nbviz.STORY.edito){
-      d3.select('#article-edito').append('text')
-      .text(nbviz.DATASTORE[nbviz.STORY.edito]['0'].content);
+      d3.select('#article-edito')
+      // .append('text')
+      // .text(nbviz.DATASTORE[nbviz.STORY.edito]['0'].content)
+      .html(nbviz.DATASTORE[nbviz.STORY.edito]['0'].content);
     };
 
   };
 
   nbviz.buildText = function(graphContainer){
     if(graphContainer.story.text){
-      d3.select('#' + graphContainer._id + 'main-text').append('text').text(nbviz.DATASTORE[graphContainer.story.text.domain]['0'].content);
+      d3.select('#' + graphContainer._id + 'main-text').html(nbviz.DATASTORE[graphContainer.story.text.domain]['0'].content);
     };
   };
 

@@ -34,17 +34,17 @@
             <img class="navbar-brand" alt="Toucan Toco" src="static/core/img/social-icons/toucan-icon.png" class='brand-img'>
           </a>
           <a class="navbar-brand" href="/">{{title}}</a>
-          <p class="navbar-text">My motto</p>
+          <p class="navbar-text">News from data jungle</p>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             {% if next_article %}
-              <li><a href="{{ next_article }}">Next article</a></li>
+              <li><a href="{{ next_article }}">Article suivant</a></li>
             {% endif %}
             {% if previous_article %}
-              <li><a href="{{ previous_article }}">Previous article</a></li>
+              <li><a href="{{ previous_article }}">Article précédent</a></li>
             {% endif %}
           </ul>
         </div><!-- /.navbar-collapse -->

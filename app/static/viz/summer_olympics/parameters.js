@@ -9,7 +9,7 @@
   nbviz.COLORS = {palegold:'#E6BE8A'}; // any named colors we use
 
   nbviz.STORY = {
-    title :'RETRO JO',
+    title :"La France a Rio : pouvait-on s'y attendre?",
     edito:'edito',
     project_name:'summer_olympics'//has to match the file name
   }
@@ -38,7 +38,7 @@
     ,
       {
         name:'edito',
-        source:'text.csv',
+        source:'edito.csv',
         getterFunction:nbviz.getDataFromCSV,
         type:'global'
       }
@@ -61,7 +61,7 @@
           _value:'value',
           _yKey:'Discipline',
           domain:'fullData',
-          title:'Graph info (period,etc.)',
+          title:'',
           dim:{height:'230px',width:"col-md-12"},
         }
       ],
@@ -76,7 +76,7 @@
       story:{
         title:'France (1992 - 2012)',
         comment:'Résultats tous genres et toutes médailles confondus',
-        sources:'Wikipedia, The guardian Datablog',
+        sources:'Sources : Wikipedia, The guardian Datablog',
         text:{
           'domain':'text'
         }
@@ -98,7 +98,7 @@
           _value:'value',
           _yKey:'Discipline',
           domain:'fullData',
-          title:'Graph info (period,etc.)',
+          title:'',
           dim:{height:'230px',width:"col-md-12"},
         }
       ],
@@ -111,9 +111,9 @@
       ],
       
       story:{
-        title:'Trouver votre histoire',
+        title:'A votre tour de jouer',
         comment:'En jouant avec les dimensions de genre, pays, période et % vs Nombre, à vous de plongez dans les données',
-        sources:'Wikipedia, The guardian Datablog'
+        sources:'Sources : Wikipedia, The guardian Datablog',
       }
     }
   ];

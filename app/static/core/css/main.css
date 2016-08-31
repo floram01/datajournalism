@@ -28,14 +28,14 @@
     font-family:'roboto';
     font-size: 22px;
     text-align: center;
-    color: #f2efef; 
+    color: white; 
 }
 
 .title-container text{
     font-family:'montserrat';
     font-size: 18px;
     text-align: center;
-    color: #f2efef; 
+    color: white; 
 }
 .graph-title,
 .comment-container text{
