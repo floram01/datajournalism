@@ -26,13 +26,15 @@ nbviz.TRANS_DURATION = 1500; // length in ms for our transitions
       {
         name:'nobelData',
         source:'full_data_records.json',
-        getterFunction:nbviz.getDataFromJSON
+        getterFunction:nbviz.getDataFromJSON,
+        type:'local'
       }
     ,
       {
         name:'heatmap',
         source:'data_heatmap.csv',
-        getterFunction:nbviz.getDataFromCSV
+        getterFunction:nbviz.getDataFromCSV,
+        type:'local'
       }
     // ,
     //   {

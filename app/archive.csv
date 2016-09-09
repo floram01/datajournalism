@@ -1,2 +1,4 @@
 project_name,template_name,previous_url,next_url
-summer_olympics,summer_olympics.html,,
+nobel,nobel.html,,summer_olympics
+summer_olympics,summer_olympics.html,nobel,summer_olympics_gb
+summer_olympics_gb,summer_olympics_gb.html,summer_olympics,
