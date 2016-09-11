@@ -17,22 +17,23 @@
   
   $EVE_API = 'http://localhost:5000/api/';//adress where the servor api is serving the database
   nbviz.DATA_PATH = 'static/viz/' + nbviz.STORY.project_name + '/data_sources/'
-  nbviz.FULL_DATA = 'fullData'
-
-  nbviz.FILTERS = [
-    {locationID:'gender-select select', name:'Gender', dimension:'Gender', defaultValue:'All', type:'Dropdown'},
-    {locationID:'country-select select', name:'Country', dimension:'country_name', defaultValue:'France', type:'Dropdown'},
-    {locationID:'period-select select', name:'Period', dimension:'period', defaultValue:'1992 - 2012', type:'Dropdown'},
-    {locationID:'value-select select', name:'Type de valeur', dimension:'value_filter', defaultValue:'%', type:'Radio'}
-  ];
+  nbviz.FULL_DATA = 'cholera'
 
   nbviz.DATA_PROVIDER= {
     getterFunction:nbviz.prepareDatasets,
     params:[
       {
-        name:'fullData',
-        source:'fullData.json',
-        getterFunction:nbviz.getDataFromJSON
+        name:'heatmap',
+        source:'data_heatmap.csv',
+        getterFunction:nbviz.getDataFromCSV,
+        type:'local'
+      }
+    ,
+      {
+        name:'cholera',
+        source:'cholera.csv',
+        getterFunction:nbviz.getDataFromCSV,
+        type:'local'
       }
     ,
       {
@@ -44,19 +45,74 @@
   };
 
   nbviz.CHARTS = [
+  //   {
+  //     _id:'test',
+      
+  //     chartsParams:[
+  //       {
+  //         _id:'heatmap',
+  //         _type:'Heatmap',
+  //         _key:'year',
+  //         _yKey:'country',
+  //         domain:'heatmap',
+  //         margins: {top:20, right:20, bottom:60, left:40},
+  //         padding: {interbar:.05, left:0, bottom:20, legend:0},
+  //         _value:'my_value',
+  //         xDimension:'year',
+  //         yDimension:'country',
+  //         xIndex:'x_index',
+  //         yIndex:'y_index',
+  //         dataGetter:nbviz.fullData,
+  //         dim:{height:'500px',width:"col-md-12"}
+  //       }
+  //     ],
+
+  //     filters : [
+  //     ],
+      
+  //     story:{
+  //       title:'Prix nobels par discipline (1992 - 2012)',
+  //       comment:'Résultats tous genres et toutes médailles confondus',
+  //       sources:'Wikipedia',
+  //       // text:{
+  //       //   'domain':'text'
+  //       // }
+  //     }
+  //   }
+  // ,
     {
-      _type:'HorizontalBarchart',
-      _id:'horizontalBarchartFrance',
-      margins: {top:30, right:20, bottom:0, left:72},
-      padding: {interbar:.1, left:5, bottom:0, legend:5},
-      dataGetter:nbviz.topFlop,
-      dataGetterParams:{top:true,top_num:10},
-      _label:'Discipline',
-      _value:'value',
-      _yKey:'Discipline',
-      domain:'fullData',
-      dim:{height:'230px',width:"col-md-12"},
-      title:'Graph info (period,etc.)'
+      _id:'cholera',
+      
+      chartsParams:[
+        {
+          _id:'cholera',
+          _type:'Heatmap',
+          _key:'pump',
+          _yKey:'location',
+          domain:'cholera',
+          margins: {top:20, right:20, bottom:60, left:40},
+          padding: {interbar:.05, left:0, bottom:20, legend:0},
+          _value:'distance',
+          xDimension:'pump',
+          yDimension:'location',
+          xIndex:'x_index',
+          yIndex:'y_index',
+          dataGetter:nbviz.fullData,
+          dim:{height:'1000px',width:"col-md-12"}
+        }
+      ],
+
+      filters : [
+      ],
+      
+      story:{
+        title:'Prix nobels par discipline (1992 - 2012)',
+        comment:'Résultats tous genres et toutes médailles confondus',
+        sources:'Wikipedia',
+        // text:{
+        //   'domain':'text'
+        // }
+      }
     }
   ];
 

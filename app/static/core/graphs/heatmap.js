@@ -28,8 +28,7 @@
 
     // nbviz.updateBarchart(graphContainer);
     var cards = svg.select('g.'+ graphContainer._class).selectAll(".cards")
-    .data(data, function(d) {return d.country+':'+d.year;});
-
+    .data(data, function(d) {return d.x_index+':'+d.y_index;});
     // cards.append("title");
     cards.enter().append("rect")
       .attr("x", function(d) { return graphContainer.scales.xScale( + d.x_index); })
@@ -37,8 +36,8 @@
       .attr("rx", 4)
       .attr("ry", 4)
       .attr("class", "cards")
-      .attr("width", graphContainer.scales.xScale.rangeBand())
-      .attr("height", graphContainer.scales.yScale.rangeBand())
+      .attr("width", function(d){return graphContainer.scales.xScale.rangeBand()})
+      .attr("height", function(d){return graphContainer.scales.yScale.rangeBand()})
       .style("fill", function(d){return graphContainer.scales.colorScale( + d[graphContainer._value]);});
 
     // cards.transition().duration(1000)
