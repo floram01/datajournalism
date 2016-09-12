@@ -87,7 +87,7 @@
         {
           _id:'cholera',
           _type:'Heatmap',
-          _key:'pump',
+          _xKey:'pump',
           _yKey:'location',
           domain:'cholera',
           margins: {top:20, right:20, bottom:60, left:40},
@@ -98,7 +98,11 @@
           xIndex:'x_index',
           yIndex:'y_index',
           dataGetter:nbviz.fullData,
-          dim:{height:'1000px',width:"col-md-12"}
+          dim:{height:'1000px',width:"col-md-12"},
+          hideYScale:true,
+          posXScale:'top',
+          orientXScale:'horizontal',
+          anchorXScale:'middle'
         }
       ],
 

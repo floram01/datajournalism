@@ -147,7 +147,11 @@
 
   nbviz.customYScale = function(data, graphContainer){
     // Update scale domains with new data, graphContainer i.e. for barchart: nbviz.barchart
-    graphContainer.scales.yScale.domain( data.map(function(d){ return d[graphContainer._yKey]; }) );
+    if(graphContainer.hideYScale){
+      graphContainer.scales.yScale.domain( data.map(function(d){ return ''; }) );
+    } else {
+      graphContainer.scales.yScale.domain( data.map(function(d){ return d[graphContainer._yKey]; }) );
+    }
   };
 
   nbviz.customGroupedYScale = function(data, graphContainer){

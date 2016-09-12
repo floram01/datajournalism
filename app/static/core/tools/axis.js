@@ -37,8 +37,12 @@
     var yAxisPadding = margin.left - padding.left//how to avoid this? more complex than it need to be
     graphContainer.axis.xAxis = d3.svg.axis().scale(graphContainer.scales.xScale).orient("bottom");
     graphContainer.axis.yAxis = d3.svg.axis().scale(graphContainer.scales.yScale).orient('left').ticks(10);
-
-    svg.select('g.'+ graphContainer._class).append('g').attr('class','x axis ' + graphContainer._class).attr("transform", "translate(" + 0 + "," + dim.height + ")"); 
+    
+    if(graphContainer.posXScale=='top'){
+      svg.select('g.'+ graphContainer._class).append('g').attr('class','x axis ' + graphContainer._class).attr("transform", "translate(" + 0 + "," + 0 + ")");
+    } else {
+      svg.select('g.'+ graphContainer._class).append('g').attr('class','x axis ' + graphContainer._class).attr("transform", "translate(" + 0 + "," + dim.height + ")"); 
+    };
     svg.select('g.'+ graphContainer._class).append('g').attr('class','y axis ' + graphContainer._class).attr("transform", "translate(" + yAxisPadding + "," + 0 + ")"); 
   };
 
@@ -57,15 +61,25 @@
 // prendre en compte une possiblité de personnalisation...
 // arriver à tt garder en une fonction ou passer à 2?
   nbviz.updateXAxis = function(data, graphContainer){
-
-    graphContainer.svg.select('.x.axis.'+ graphContainer._class)
+    var XAxis = graphContainer.svg.select('.x.axis.'+ graphContainer._class)
         .transition().duration(nbviz.TRANS_DURATION)
-        .call(graphContainer.axis.xAxis) 
+        .call(graphContainer.axis.xAxis);
+
+    XAxis     
         .selectAll("text") 
-        .style("text-anchor", "end")
-        .attr("dx", "-.8em")
-        .attr("dy", ".15em")
+        .style("text-anchor", graphContainer.anchorXScale?graphContainer.anchorXScale:'end')
+        // .attr("dx", "-.8em")
+        // .attr("dy", ".15em");
+
+    XAxis
+      .selectAll(".tick text")
+      .call(nbviz.wrapText, graphContainer.scales.xScale.rangeBand());
+
+    if (graphContainer.orientXScale!='horizontal'){
+        XAxis
+        .selectAll("text") 
         .attr("transform", "rotate(-20)");
+    };
   };
 
   nbviz.updateYAxis = function(data, graphContainer){

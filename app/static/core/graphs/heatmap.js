@@ -46,8 +46,9 @@
     // cards.select("title").text(function(d) { return d.value; });
 
     // cards.exit().remove();
-    nbviz.customGroupedYScale(data, graphContainer);
+    // nbviz.customGroupedYScale(data, graphContainer);
     nbviz.customXScale(data, graphContainer);
+    nbviz.customYScale(data, graphContainer);
     nbviz.updateYAxis(data, graphContainer);
     nbviz.updateXAxis(data, graphContainer);
   };
