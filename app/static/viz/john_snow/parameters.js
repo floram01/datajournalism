@@ -93,7 +93,8 @@
           hideYScale:true,
           posXScale:'top',
           orientXScale:'horizontal',
-          anchorXScale:'middle'
+          anchorXScale:'middle',
+          wrapXLegend:true
         }
       ],
 

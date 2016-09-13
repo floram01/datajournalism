@@ -71,9 +71,12 @@
         // .attr("dx", "-.8em")
         // .attr("dy", ".15em");
 
-    XAxis
-      .selectAll(".tick text")
-      .call(nbviz.wrapText, graphContainer.scales.xScale.rangeBand());
+    if(graphContainer.wrapXLegend){
+      debugger;
+      XAxis
+        .selectAll(".tick text")
+        .call(nbviz.wrapText, graphContainer.scales.xScale.rangeBand());
+    };
 
     if (graphContainer.orientXScale!='horizontal'){
         XAxis

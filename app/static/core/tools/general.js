@@ -45,9 +45,10 @@
     o.text=chart.text||{};
     o.hideYScale = chart.hideYScale||{};
     o.posXScale = chart.posXScale||{};
-    o.orientXScale = chart.orientXScale||{};
+    o.orientXScale = chart.orientXScale||null;
     o.anchorXScale = chart.anchorXScale||{};
     o.dim = chart.dim||{};
+    o.wrapXLegend = chart.wrapXLegend||null;
 
     chartsParams.charts.push(o);
     return o
