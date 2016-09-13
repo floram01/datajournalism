@@ -38,7 +38,7 @@
 
     var rangeBandGen = d3.scale.ordinal()
     .domain(_domain)
-    .rangeRoundBands([padding.bottom, dim.height], padding.interbar)
+    .rangeBands([padding.bottom, dim.height], padding.interbar)
     return rangeBandGen
   };
 

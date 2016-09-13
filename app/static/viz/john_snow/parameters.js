@@ -16,8 +16,9 @@
   }
   
   $EVE_API = 'http://localhost:5000/api/';//adress where the servor api is serving the database
-  nbviz.DATA_PATH = 'static/viz/' + nbviz.STORY.project_name + '/data_sources/'
-  nbviz.FULL_DATA = 'cholera'
+  nbviz.DATA_PATH = 'static/viz/' + nbviz.STORY.project_name + '/data_sources/';
+  nbviz.IMG_PATH = 'static/viz/' + nbviz.STORY.project_name + '/images/';
+  nbviz.FULL_DATA = 'cholera';
 
   nbviz.DATA_PROVIDER= {
     getterFunction:nbviz.prepareDatasets,
@@ -45,41 +46,31 @@
   };
 
   nbviz.CHARTS = [
-  //   {
-  //     _id:'test',
+    {
+      _id:'original_map',
       
-  //     chartsParams:[
-  //       {
-  //         _id:'heatmap',
-  //         _type:'Heatmap',
-  //         _key:'year',
-  //         _yKey:'country',
-  //         domain:'heatmap',
-  //         margins: {top:20, right:20, bottom:60, left:40},
-  //         padding: {interbar:.05, left:0, bottom:20, legend:0},
-  //         _value:'my_value',
-  //         xDimension:'year',
-  //         yDimension:'country',
-  //         xIndex:'x_index',
-  //         yIndex:'y_index',
-  //         dataGetter:nbviz.fullData,
-  //         dim:{height:'500px',width:"col-md-12"}
-  //       }
-  //     ],
+      chartsParams:[
+        {
+          _id:'map_img',
+          _type:'IMG',
+          domain:'Snow_cholera_map.jpg',
+          dim:{height:'500px',width:"col-md-12"}
+        }
+      ],
 
-  //     filters : [
-  //     ],
+      filters : [
+      ],
       
-  //     story:{
-  //       title:'Prix nobels par discipline (1992 - 2012)',
-  //       comment:'Résultats tous genres et toutes médailles confondus',
-  //       sources:'Wikipedia',
-  //       // text:{
-  //       //   'domain':'text'
-  //       // }
-  //     }
-  //   }
-  // ,
+      story:{
+        title:'Prix nobels par discipline (1992 - 2012)',
+        comment:'Résultats tous genres et toutes médailles confondus',
+        sources:'Wikipedia',
+        // text:{
+        //   'domain':'text'
+        // }
+      }
+    }
+  ,
     {
       _id:'cholera',
       
@@ -90,15 +81,15 @@
           _xKey:'pump',
           _yKey:'location',
           domain:'cholera',
-          margins: {top:20, right:20, bottom:60, left:40},
-          padding: {interbar:.05, left:0, bottom:20, legend:0},
+          margins: {top:10, right:10, bottom:10, left:10},
+          padding: {interbar:.05, left:0, bottom:50, legend:0},
           _value:'distance',
           xDimension:'pump',
           yDimension:'location',
           xIndex:'x_index',
           yIndex:'y_index',
           dataGetter:nbviz.fullData,
-          dim:{height:'1000px',width:"col-md-12"},
+          dim:{height:'500px',width:"col-md-12"},
           hideYScale:true,
           posXScale:'top',
           orientXScale:'horizontal',

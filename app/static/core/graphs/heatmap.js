@@ -30,11 +30,11 @@
     var cards = svg.select('g.'+ graphContainer._class).selectAll(".cards")
     .data(data, function(d) {return d.x_index+':'+d.y_index;});
     // cards.append("title");
-    cards.enter().append("rect")
+    var cards_detail = cards.enter().append("rect")
       .attr("x", function(d) { return graphContainer.scales.xScale( + d.x_index); })
       .attr("y", function(d) { return graphContainer.scales.yScale( + d.y_index); })
-      .attr("rx", 4)
-      .attr("ry", 4)
+      // .attr("rx", 4)
+      // .attr("ry", 4)
       .attr("class", "cards")
       .attr("width", function(d){return graphContainer.scales.xScale.rangeBand()})
       .attr("height", function(d){return graphContainer.scales.yScale.rangeBand()})

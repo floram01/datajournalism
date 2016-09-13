@@ -9,19 +9,19 @@
   nbviz.initGraphContainer = function(chart, chartsParams){
     chartsParams.charts = chartsParams.charts || [];
     var o = {};
-    o.margin = {top:chart.margins.top, right:chart.margins.right, left:chart.margins.left, bottom:chart.margins.bottom};
-    o.padding = {interbar : chart.padding.interbar, left : chart.padding.left, right : chart.padding.right, bottom : chart.padding.bottom, legend : chart.padding.legend};
-    o._id = chart._id;
-    o._class = chart._id;
-    o.divID = '#div' + chart._id;
-    o._key = chart._key;
-    o._yKey = chart._yKey;
-    o._xKey = chart._xKey;
+    o.margin = chart.margins?{top:chart.margins.top, right:chart.margins.right, left:chart.margins.left, bottom:chart.margins.bottom}:{};
+    o.padding = chart.padding?{interbar : chart.padding.interbar, left : chart.padding.left, right : chart.padding.right, bottom : chart.padding.bottom, legend : chart.padding.legend}:{};
+    o._id = chart._id||{};
+    o._class = chart._id||{};
+    o.divID = '#div' + chart._id||{};
+    o._key = chart._key||{};
+    o._yKey = chart._yKey||{};
+    o._xKey = chart._xKey||{};
     o.xTicksFreq = chart.xTicksFreq||1;
     o.timeID = chart.timeID||null;
     o.groupID = chart.groupID||null;
-    o._type = chart._type;
-    o.dataGetter = chart.dataGetter;
+    o._type = chart._type||{};
+    o.dataGetter = chart.dataGetter||{};
     o.dataGetterParams = chart.dataGetterParams||{};
     o.dataGetterParams = chart.dataGetterParams||{};
     o.tableTitle = chart.tableTitle||{};
@@ -32,21 +32,23 @@
     o.yDimension = chart.yDimension||{};
     o.xIndex = chart.xIndex||{};
     o.yIndex = chart.yIndex||{};
-    o.domain = chart.domain;
-    o.format = chart.format;
-    o.title = chart.title;
-    o.source = chart.source;
-    o.source = chart.source;
-    o.xStep = chart.xStep;
-    o.format = chart.format;
-    o.story = chart.story;
-    o.filters = chart.filters;
-    o.chartsParams = chartsParams;
-    o.text=chart.text;
-    o.hideYScale = chart.hideYScale;
-    o.posXScale = chart.posXScale;
-    o.orientXScale = chart.orientXScale;
-    o.anchorXScale = chart.anchorXScale;
+    o.domain = chart.domain||{};
+    o.format = chart.format||{};
+    o.title = chart.title||{};
+    o.source = chart.source||{};
+    o.source = chart.source||{};
+    o.xStep = chart.xStep||{};
+    o.format = chart.format||{};
+    o.story = chart.story||{};
+    o.filters = chart.filters||{};
+    o.chartsParams = chartsParams||{};
+    o.text=chart.text||{};
+    o.hideYScale = chart.hideYScale||{};
+    o.posXScale = chart.posXScale||{};
+    o.orientXScale = chart.orientXScale||{};
+    o.anchorXScale = chart.anchorXScale||{};
+    o.dim = chart.dim||{};
+
     chartsParams.charts.push(o);
     return o
   };
@@ -152,6 +154,17 @@
         }
       }
     });
+  };
+
+  nbviz.buildIMG =  function(chart){
+    d3.select(chart.divID)
+    .append('img')
+    .attr('src',nbviz.IMG_PATH + chart.domain)
+    // .style('width','inherit');
+    .style('height',chart.dim.height)
+    .style('display','block')
+    .style('margin-right','auto')
+    .style('margin-left','auto')
   };
   
 }(window.nbviz=window.nbviz || {}));
