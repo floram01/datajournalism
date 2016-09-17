@@ -88,6 +88,7 @@
           yDimension:'location',
           xIndex:'x_index',
           yIndex:'y_index',
+          dataGetterParams:{_sort:'desc',sortKey:'pump'},
           dataGetter:nbviz.fullData,
           dim:{height:'500px',width:"col-md-12"},
           hideYScale:true,

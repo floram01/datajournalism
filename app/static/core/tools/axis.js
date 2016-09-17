@@ -72,7 +72,6 @@
         // .attr("dy", ".15em");
 
     if(graphContainer.wrapXLegend){
-      debugger;
       XAxis
         .selectAll(".tick text")
         .call(nbviz.wrapText, graphContainer.scales.xScale.rangeBand());

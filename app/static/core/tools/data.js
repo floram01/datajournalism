@@ -72,11 +72,19 @@
 
   nbviz.fullData = function(graphContainer) {          
     var data = nbviz.DATASTORE[graphContainer.domain + graphContainer.chartsParams._id]
+    if(graphContainer.sort){
+      if(graphContainer._sort=='desc'){
+        data.sort(function(a,b){
+          return b.sortKey - a.sortKey;
+        })
+      }
+    }
     return data
   };
 
   // nest data (entries) sharing same dimension 'key'
   // build or update a data object in graphContainer containing the nested data and some parameters
+  
   nbviz.nestDataByKey = function(graphContainer) {          
     var _dim = graphContainer.dataGetterParams.dim;
     var entries = nbviz[graphContainer.chartsParams._id + _dim + 'Dim'].top(Infinity);
@@ -119,6 +127,7 @@
 };
 
 // add a case with no grouping i.e. if groupDim is null: just sort and filter
+  
   nbviz.allDataSortedByKey = function(graphContainer) {
     var _dim = graphContainer.dataGetterParams.dim;
     var data = nbviz[graphContainer.chartsParams._id + _dim + 'Dim'].top(Infinity).sort(function(a, b) {
