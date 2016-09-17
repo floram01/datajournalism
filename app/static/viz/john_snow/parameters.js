@@ -32,7 +32,7 @@
     ,
       {
         name:'cholera',
-        source:'cholera.csv',
+        source:'cholera_3.csv',
         getterFunction:nbviz.getDataFromCSV,
         type:'local'
       }
