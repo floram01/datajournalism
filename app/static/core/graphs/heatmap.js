@@ -21,7 +21,7 @@
     // add color scale
     graphContainer.scales.colorScale = d3.scale.linear()
     .domain([graphContainer.data.min, graphContainer.data.max])
-    .range(['white','black']);
+    .range(['black','white']);
 
     // create axis
     nbviz.genAxis(graphContainer);
@@ -38,7 +38,13 @@
       .attr("class", "cards")
       .attr("width", function(d){return graphContainer.scales.xScale.rangeBand()})
       .attr("height", function(d){return graphContainer.scales.yScale.rangeBand()})
-      .style("fill", function(d){return graphContainer.scales.colorScale( + d[graphContainer._value]);});
+      .style("fill", function(d){return graphContainer.scales.colorScale( + d[graphContainer._value]);})
+      .on('mouseover',function(d){
+        d3.select('#divLegendcholera')
+        .html(
+          'Pompe :' + d.pump + 'distance pompe-foyer :' + String(nbviz.formatPrecision(d.distance, 'distance',graphContainer)) + 'Nombre de victimes :' + String(nbviz.formatPrecision(d.my_value, 'my_value',graphContainer))
+        )
+      })
 
     // cards.transition().duration(1000)
     //   .style("fill", function(d) { return colorScale(d.value); });

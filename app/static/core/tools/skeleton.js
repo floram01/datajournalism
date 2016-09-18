@@ -63,6 +63,22 @@
 
 
     f.chartsParams.forEach(function(chart){
+
+      d3.select('#' + f._id + 'chart-holder')
+      .append('div')
+      .attr({
+        'class':chart.dim.width,
+      })
+      .append('div')
+      .attr({
+        'class':chart.dim.width,
+        'id':'divLegend' + chart._id
+      })
+      .style({
+        'position':'relative',
+        'height':'auto'
+      });
+
       d3.select('#' + f._id + 'chart-holder')
       .append('div')
       .attr({

@@ -48,6 +48,7 @@
     o.anchorXScale = chart.anchorXScale||{};
     o.dim = chart.dim||{};
     o.wrapXLegend = chart.wrapXLegend||null;
+    o.precision = chart.precision
 
     chartsParams.charts.push(o);
     return o

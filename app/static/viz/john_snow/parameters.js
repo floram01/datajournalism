@@ -32,7 +32,7 @@
     ,
       {
         name:'cholera',
-        source:'cholera_3.csv',
+        source:'cholera_6.csv',
         getterFunction:nbviz.getDataFromCSV,
         type:'local'
       }
@@ -95,7 +95,8 @@
           posXScale:'top',
           orientXScale:'horizontal',
           anchorXScale:'middle',
-          wrapXLegend:true
+          wrapXLegend:true,
+          precision:{'distance':',.1f', 'my_value':',.0f'}
         }
       ],
 

@@ -6,10 +6,10 @@
     return element
   };
 
-  nbviz.formatPrecision = function(element, graphContainer) {
-    var my_precision = element.precision || ',.0f';
+  nbviz.formatPrecision = function(value, element, graphContainer) {
+    var my_precision = graphContainer.precision[element] || ',.0f';
     var my_format = d3.format(my_precision);
-    return my_format(element[graphContainer._value])
-  };
+    return my_format(value)
+    };
 
 }(window.nbviz=window.nbviz || {}));
