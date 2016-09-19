@@ -44,7 +44,7 @@
         .classed('col-md-12',true)
         // .style('table-layout','fixed')
         .html(
-          '<span class=col-md-4>' + d.location +'</span><span class=col-md-4>A ' + String(nbviz.formatPrecision(d.distance, 'distance',graphContainer)) + ' m de la pompe</span><span class=col-md-4>' + String(nbviz.formatPrecision(d.my_value, 'my_value',graphContainer)) + ' victimes</span>'
+          '<span class=col-md-4>' + d.location +'</span><span class=col-md-4>A ' + String(nbviz.formatPrecision(d, 'distance',graphContainer)) + ' m de la pompe</span><span class=col-md-4>' + String(nbviz.formatPrecision(d, 'my_value',graphContainer)) + ' victimes</span>'
         )
       })
 

@@ -63,6 +63,7 @@
           domain:'fullData',
           title:'',
           dim:{height:'230px',width:"col-md-12"},
+          precision:{value:{precisionCol:'precision',type:'column'}}
         }
       ],
 
@@ -100,6 +101,7 @@
           domain:'fullData',
           title:'',
           dim:{height:'230px',width:"col-md-12"},
+          precision:{value:{precisionCol:'precision',type:'column'}}
         }
       ],
 

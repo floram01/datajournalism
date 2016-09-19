@@ -85,7 +85,7 @@
         },
         'vertical-align':'bottom'
     })  
-    .text(function(d){return nbviz.format(d, graphContainer)});
+    .text(function(d){return nbviz.formatPrecision(d, 'value', graphContainer)});
 
     legend.exit().remove();
 
