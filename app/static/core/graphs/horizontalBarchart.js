@@ -90,13 +90,13 @@
     legend.exit().remove();
 
     // add title
-    svg.append('text').attr({
-        'class':'graph-title',
-        'x':(graphContainer.dim.width + graphContainer.margin.left + graphContainer.margin.right)/2,
-        'y':graphContainer.margin.top/4*3,
-        'text-anchor':'middle'
-    })
-    .text(graphContainer.title)
+    // svg.append('text').attr({
+    //     'class':'graph-title',
+    //     'x':(graphContainer.dim.width + graphContainer.margin.left + graphContainer.margin.right)/2,
+    //     'y':graphContainer.margin.top/4*3,
+    //     'text-anchor':'middle'
+    // })
+    // .text(graphContainer.chartParams.title)
 
     nbviz.customYScale(data, graphContainer);
     nbviz.updateYAxis(data, graphContainer);

@@ -61,7 +61,7 @@
           _value:'value',
           _yKey:'Discipline',
           domain:'fullData',
-          title:'',
+          // title:'',
           dim:{height:'230px',width:"col-md-12"},
           precision:{value:{precisionCol:'precision',type:'column'}}
         }
@@ -77,7 +77,7 @@
       story:{
         title:'France (1992 - 2012)',
         comment:'Résultats tous genres et toutes médailles confondus',
-        sources:'Sources : Wikipedia, The guardian Datablog',
+        sources:'Wikipedia, The guardian Datablog',
         text:{
           'domain':'text'
         }
@@ -99,7 +99,7 @@
           _value:'value',
           _yKey:'Discipline',
           domain:'fullData',
-          title:'',
+          // title:'',
           dim:{height:'230px',width:"col-md-12"},
           precision:{value:{precisionCol:'precision',type:'column'}}
         }
@@ -115,7 +115,7 @@
       story:{
         title:'A votre tour de jouer',
         comment:'En jouant avec les dimensions de genre, pays, période et % vs Nombre, à vous de plonger dans les données',
-        sources:'Sources : Wikipedia, The guardian Datablog',
+        sources:'Wikipedia, The guardian Datablog',
       }
     }
   ];

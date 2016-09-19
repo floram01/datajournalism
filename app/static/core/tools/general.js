@@ -42,7 +42,7 @@
     o.filters = chart.filters||{};
     o.chartsParams = chartsParams||{};
     o.text=chart.text||{};
-    o.hideYScale = chart.hideYScale||{};
+    o.hideYScale = chart.hideYScale||null;
     o.posXScale = chart.posXScale||{};
     o.orientXScale = chart.orientXScale||null;
     o.anchorXScale = chart.anchorXScale||{};
