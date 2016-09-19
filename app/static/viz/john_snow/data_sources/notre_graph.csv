@@ -9,10 +9,10 @@ content
 <strong>Les +</strong>
 <ul>
 <li>La prise de décision est à notre avis encore plus rapide que sur la carte du Docteur Snow. On voit tout de suite que la pompe du John Snow de Marshall Street est une candidate idéale à la fermeture. On notera au passage que le nom des rues a changé et correspond aux noms actuels (nope, pas de Prêt à manger à Regent Place en 1854). Un <a href='http://www.timeout.com/london/bars-and-pubs/john-snow-pub'>pub</a> au nom de notre docteur a été construit à l'emplacement de l'ancienne pompe contaminée!</li>
-<li>L'analyse est centrée sur la distance entre les pompes suspectes et les foyers de victimes. Le nombre de victime est moins mis en évidence que sur la carte de John Snow. C'est une bonne chose car le nombre absolu de victime peut induire en erreur. La proportion de victime dans la population d'un foyer donné aurait été un meilleur indicateur. A défaut se concentrer sur la distance entre les pompes et les foyers de victime améliore plutôt la visualisation.<li>
+<li>L'analyse est centrée sur la distance entre les pompes suspectes et les foyers de victimes. Le nombre de victime est moins mis en évidence que sur la carte de John Snow. C'est une bonne chose car le nombre absolu de victime peut induire en erreur. La proportion de victime dans la population d'un foyer donné aurait été un meilleur indicateur. A défaut se concentrer sur la distance entre les pompes et les foyers de victime améliore plutôt l'analyse'.</li>
 </ul>
 <strong>Les -</strong>
 <ul>
-<li>L'analyse des anomalies de type 'proximité de la source mais faible mortalité' n'est pas possible. A notre décharge nous n'avons pas pu collecter l'information nécessaire pour intégrer cette analyse.</li>
-<li>La dimension géographique est perdue : on ne peut pas se repérer sur notre heatmap comme sur une carte de Londres</li>
+<li>L'analyse des anomalies de type 'proximité de la source mais faible mortalité' n'est pas possible. Nous n'avons pas pris le temps de collecter cette information.</li>
+<li>La dimension géographique est perdue : on ne peut pas se repérer sur notre heatmap comme sur une carte de Londres.</li>
 "

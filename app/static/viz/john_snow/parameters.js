@@ -9,7 +9,7 @@
   nbviz.COLORS = {palegold:'#E6BE8A'}; // any named colors we use
 
   nbviz.STORY = {
-    title :'Une (bonne) datavisualisation peut sauver des vies',
+    title :'La datavisualisation ralentit la chute des cheveux et sauve des vies',
     edito:'edito',
     project_name:'john_snow'//has to match the file name
   }
@@ -115,7 +115,7 @@
       ],
       
       story:{
-        title:'A nous',
+        title:"A nous d'essayer",
         comment:'Pas de triche, on reste sur du noir et blanc!',
         sources:'The Guardian Datablog, Visual Explanations, E.R.Tufte',
         text:{

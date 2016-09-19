@@ -109,7 +109,7 @@
     var story = chartsParams.story;
     d3.select('#' + _id + 'title-container').append('text').text(story.title)
     d3.select('#' + _id + 'comment-container').append('text').text(story.comment)
-    d3.select('#' + _id + 'sources-container').append('text').text(story.sources)
+    d3.select('#' + _id + 'sources-container').append('text').text('Sources : '+ story.sources)
   };
 
 // add the article title, comment and sources
