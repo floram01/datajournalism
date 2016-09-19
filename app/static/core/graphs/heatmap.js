@@ -41,8 +41,10 @@
       .style("fill", function(d){return graphContainer.scales.colorScale( + d[graphContainer._value]);})
       .on('mouseover',function(d){
         d3.select('#divLegendcholera')
+        .classed('col-md-12',true)
+        // .style('table-layout','fixed')
         .html(
-          'Pompe :' + d.pump + 'distance pompe-foyer :' + String(nbviz.formatPrecision(d.distance, 'distance',graphContainer)) + 'Nombre de victimes :' + String(nbviz.formatPrecision(d.my_value, 'my_value',graphContainer))
+          '<span class=col-md-4>' + d.location +'</span><span class=col-md-4>A :' + String(nbviz.formatPrecision(d.distance, 'distance',graphContainer)) + ' m de la pompe</span><span class=col-md-4>' + String(nbviz.formatPrecision(d.my_value, 'my_value',graphContainer)) + ' victimes</span>'
         )
       })
 

@@ -31,6 +31,17 @@
     color: white; 
 }
 
+div.legend {
+    font-family:'montserrat';
+    font-size: 14px;
+    text-align: center;
+    color: #F3C600 ; 
+}
+
+span{
+    display:'table-cell';
+}
+
 .title-container text{
     font-family:'montserrat';
     font-size: 18px;

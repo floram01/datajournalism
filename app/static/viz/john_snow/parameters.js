@@ -9,9 +9,8 @@
   nbviz.COLORS = {palegold:'#E6BE8A'}; // any named colors we use
 
   nbviz.STORY = {
-    title :'MY TITLE',
-    comment:'My comment',
-    sources : 'My sources',
+    title :'Une (bonne) datavisualisation peut sauver des vies',
+    edito:'edito',
     project_name:'john_snow'//has to match the file name
   }
   
@@ -38,8 +37,20 @@
       }
     ,
       {
-        name:'text',
-        source:'text.csv',
+        name:'edito',
+        source:'edito.csv',
+        getterFunction:nbviz.getDataFromCSV
+      }
+    ,
+      {
+        name:'histoire',
+        source:'histoire.csv',
+        getterFunction:nbviz.getDataFromCSV
+      }
+    ,
+      {
+        name:'notre_graph',
+        source:'notre_graph.csv',
         getterFunction:nbviz.getDataFromCSV
       }
     ]
@@ -62,12 +73,12 @@
       ],
       
       story:{
-        title:'Prix nobels par discipline (1992 - 2012)',
-        comment:'Résultats tous genres et toutes médailles confondus',
-        sources:'Wikipedia',
-        // text:{
-        //   'domain':'text'
-        // }
+        title:'John Snow vs Vibrio cholerae',
+        comment:"Pour une fois qu'une carte est utilisée à bon escient, parlons-en!",
+        sources:'The Guardian Datablog, Visual Explanations, E.R.Tufte',
+        text:{
+          'domain':'histoire'
+        }
       }
     }
   ,
@@ -82,7 +93,7 @@
           _yKey:'location',
           domain:'cholera',
           margins: {top:10, right:10, bottom:10, left:10},
-          padding: {interbar:.05, left:0, bottom:50, legend:0},
+          padding: {interbar:.05, left:0, bottom:65, legend:0},
           _value:'distance',
           xDimension:'pump',
           yDimension:'location',
@@ -104,17 +115,17 @@
       ],
       
       story:{
-        title:'Prix nobels par discipline (1992 - 2012)',
-        comment:'Résultats tous genres et toutes médailles confondus',
-        sources:'Wikipedia',
-        // text:{
-        //   'domain':'text'
-        // }
+        title:'A nous',
+        comment:'Pas de triche, on reste sur du noir et blanc!',
+        sources:'The Guardian Datablog, Visual Explanations, E.R.Tufte',
+        text:{
+          'domain':'notre_graph'
+        }
       }
     }
   ];
 
-  nbviz.TEXT = {'domain':'text'}
+  nbviz.TEXT = {'domain':'edito'}
 
 
 }(window.nbviz=window.nbviz || {}));
