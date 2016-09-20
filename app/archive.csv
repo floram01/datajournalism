@@ -1,3 +1,4 @@
 project_name,template_name,previous_url,next_url
 summer_olympics,summer_olympics.html,,john_snow
-john_snow,john_snow.html,summer_olympics,
+john_snow,john_snow.html,summer_olympics,napoleon
+napoleon,napoleon.html,john_snow,

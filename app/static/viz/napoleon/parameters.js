@@ -12,7 +12,7 @@
     title :'MY TITLE',
     comment:'My comment',
     sources : 'My sources',
-    project_name:'my_project_name'//has to match the file name
+    project_name:'napoleon'//has to match the file name
   }
   
   $EVE_API = 'http://localhost:5000/api/';//adress where the servor api is serving the database

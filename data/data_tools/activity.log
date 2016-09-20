@@ -252,3 +252,23 @@
 2016-08-28 08:57:19,283 :: INFO :: cleaning grant_information, with shape: (4105, 6)
 2016-08-28 08:57:19,479 :: INFO :: cleaning of grant_information successful, output shape: (4105, 6)
 2016-08-28 09:02:35,617 :: INFO :: requesting api: wb
+2016-09-20 15:47:27,252 :: INFO :: inserting static data
+2016-09-20 15:47:27,275 :: INFO :: No file my_excel_file.xlsx of type excel in project statics folder
+2016-09-20 15:48:26,923 :: INFO :: inserting static data
+2016-09-20 15:48:26,933 :: INFO :: inserting df with shape: (51, 1)
+2016-09-20 15:48:27,406 :: INFO :: insertion sucessful in dbnapoleon of collection: troops
+2016-09-20 15:51:56,583 :: INFO :: inserting static data
+2016-09-20 15:51:56,599 :: INFO :: inserting df with shape: (51, 1)
+2016-09-20 15:51:56,706 :: INFO :: insertion sucessful in dbnapoleon of collection: troops
+2016-09-20 15:53:38,601 :: INFO :: inserting static data
+2016-09-20 15:53:38,613 :: INFO :: inserting df with shape: (51, 5)
+2016-09-20 15:53:38,631 :: INFO :: insertion sucessful in dbnapoleon of collection: troops
+2016-09-20 15:54:35,062 :: INFO :: inserting static data
+2016-09-20 15:54:35,074 :: INFO :: inserting df with shape: (51, 5)
+2016-09-20 15:54:35,101 :: INFO :: insertion sucessful in dbnapoleon of collection: troops
+2016-09-20 15:54:35,102 :: INFO :: inserting static data
+2016-09-20 15:54:35,104 :: INFO :: inserting df with shape: (9, 5)
+2016-09-20 15:54:35,130 :: INFO :: insertion sucessful in dbnapoleon of collection: temps
+2016-09-20 15:54:35,131 :: INFO :: inserting static data
+2016-09-20 15:54:35,134 :: INFO :: inserting df with shape: (20, 3)
+2016-09-20 15:54:35,159 :: INFO :: insertion sucessful in dbnapoleon of collection: cities

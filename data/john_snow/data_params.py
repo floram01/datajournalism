@@ -33,18 +33,5 @@ STATIC=[
 #apis params
 APIs = [
     {
-        'api':'wb',#only one available for now
-        'collection_name':'my_extraction_name',
-        #see the wb site for full list of indicators available http://data.worldbank.org/indicator
-        'indicator' : ['NY.GDP.MKTP.CD','SP.POP.TOTL'],
-        ##see the wb site for full list of indicators available http://data.worldbank.org/country
-        'country' : ['all'],
-        'start' : 1960,
-        'end' : 2012,
-        #use this to rename the wb indicators column header into more friendly ones
-        'col_rename' : {
-            'NY.GDP.MKTP.CD':'GDP_cst_dollars',
-            'SP.POP.TOTL':'population'
-        }
     }
 ]

@@ -15,7 +15,7 @@ def insert_static_in_mongo():
         logger.info('inserting static data')
         if file['type'] == 'csv':
             try:
-                df = pd.read_csv(common_path + file['file'])
+                df = pd.read_csv(common_path + file['file'], sep=file['sep'])
             except:
                 logger.info('No file ' + file['file'] + ' of type ' + file['type'] + ' in project statics folder')
                 sys.exit()
