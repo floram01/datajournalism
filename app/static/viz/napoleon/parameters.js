@@ -19,20 +19,14 @@
   nbviz.DATA_PATH = 'static/viz/' + nbviz.STORY.project_name + '/data_sources/'
   nbviz.FULL_DATA = 'fullData'
 
-  nbviz.FILTERS = [
-    {locationID:'gender-select select', name:'Gender', dimension:'Gender', defaultValue:'All', type:'Dropdown'},
-    {locationID:'country-select select', name:'Country', dimension:'country_name', defaultValue:'France', type:'Dropdown'},
-    {locationID:'period-select select', name:'Period', dimension:'period', defaultValue:'1992 - 2012', type:'Dropdown'},
-    {locationID:'value-select select', name:'Type de valeur', dimension:'value_filter', defaultValue:'%', type:'Radio'}
-  ];
-
   nbviz.DATA_PROVIDER= {
     getterFunction:nbviz.prepareDatasets,
     params:[
       {
         name:'fullData',
-        source:'fullData.json',
-        getterFunction:nbviz.getDataFromJSON
+        source:'flare.json',
+        getterFunction:nbviz.getDataFromJSON,
+        type:'local'
       }
     ,
       {
@@ -45,15 +39,15 @@
 
   nbviz.CHARTS = [
     {
-      _id:'france',
+      _id:'my_bubbles',
       
       chartsParams:[
         {
           _id:'main_graph',
-          _type:'HorizontalBarchart',
+          _type:'Bubbles',
           margins: {top:30, right:20, bottom:0, left:72},
           padding: {interbar:.1, left:5, bottom:0, legend:10},
-          dataGetter:nbviz.topFlop,
+          dataGetter:nbviz.fullData,
           dataGetterParams:{top:true,top_num:10, dim:'Gender'},
           _label:'Discipline',
           _value:'value',
@@ -66,10 +60,6 @@
       ],
 
       filters : [
-        {locationID:'gender-select select', name:'Gender', dimension:'Gender', defaultValue:'All', type:'Hidden'},
-        {locationID:'country-select select', name:'Country', dimension:'country_name', defaultValue:'France', type:'Hidden'},
-        {locationID:'period-select select', name:'Period', dimension:'period', defaultValue:'1992 - 2012', type:'Hidden'},
-        {locationID:'value-select select', name:'Type de valeur', dimension:'value_filter', defaultValue:'%', type:'Radio'}
       ],
       
       story:{
