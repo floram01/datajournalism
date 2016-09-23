@@ -9,7 +9,7 @@
   nbviz.COLORS = {palegold:'#E6BE8A'}; // any named colors we use
 
   nbviz.STORY = {
-    title :'La datavisualisation ralentit la chute des cheveux et sauve des vies',
+    title :'La datavisualisation sauve des vies!',
     edito:'edito',
     project_name:'john_snow'//has to match the file name
   }
